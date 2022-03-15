@@ -6,15 +6,14 @@ const userChoseText = document.querySelector(".userText");
 const machineChoseText = document.querySelector(".machineText");
 const LOSTTEXT = document.querySelector(".Lost");
 const WINTEXT = document.querySelector(".Win");
+
 function handlePlayGame(event) {
   event.preventDefault();
   const maxNumberValue = parseInt(maxNumber.value);
   const randomNumber = Math.ceil(Math.random() * maxNumberValue);
-
   const guessNumberValue = parseInt(guessNumber.value);
-  console.log(randomNumber);
-  console.log(maxNumberValue);
-  console.log(guessNumberValue);
+  userChoseText.classList.remove("hidden");
+  machineChoseText.classList.remove("hidden");
 
   userChoseText.innerText = `you chose: ${guessNumberValue}`;
   machineChoseText.innerText = `machine chose: ${randomNumber}`;
