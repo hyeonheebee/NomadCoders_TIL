@@ -1,7 +1,7 @@
-const guessForm = document.querySelector("#guessnumberForm");
+const playForm = document.querySelector("#playGameForm");
 const playButton = document.querySelector("button");
-const maxNumber = document.querySelector("#maxnumberForm input");
-const guessNumber = document.querySelector("#guessnumberForm input");
+const maxNumber = document.querySelector("#playGameForm h2 input");
+const guessNumber = document.querySelector("#playGameForm h4 input");
 const userChoseText = document.querySelector(".userText");
 const machineChoseText = document.querySelector(".machineText");
 const LOSTTEXT = document.querySelector(".Lost");
@@ -28,7 +28,7 @@ function handlePlayGame(event) {
   }
 }
 
-guessForm.addEventListener("submit", handlePlayGame);
+playForm.addEventListener("submit", handlePlayGame);
 
 //CTRL + D : 같은 명령어 한꺼번에 수정
 // 커서를 올려놓고 CTRL + D ⇒ 같은 단어에 커서올라감
