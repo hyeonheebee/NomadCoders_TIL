@@ -15,8 +15,8 @@ function handlePlayGame(event) {
   userChoseText.classList.remove("hidden");
   machineChoseText.classList.remove("hidden");
 
-  userChoseText.innerText = `you chose: ${guessNumberValue}`;
-  machineChoseText.innerText = `machine chose: ${randomNumber}`;
+  userChoseText.innerText = `you chose: ${guessNumberValue},`;
+  machineChoseText.innerText = `machine chose: ${randomNumber}.`;
 
   if (randomNumber === guessNumberValue) {
     WINTEXT.classList.remove("hidden");
