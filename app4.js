@@ -1,4 +1,3 @@
-const test = document.querySelector("h3");
 const clock = document.querySelector("#clock");
 
 function countingXmas() {
