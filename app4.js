@@ -1,24 +1,29 @@
+const test = document.querySelector("h3");
 const clocktext = document.querySelector("#clock");
-const start = new Date();
-const end = new Date();
-const year = nowDate.getFullYear;
-const month = nowDate.getMonth;
-const date = nowDate.getDate;
-const hour = nowDate.getHours;
-const minute = nowDate.getMinutes;
-const second = nowDate.getSeconds;
 
 function countingXmas() {
-  const countYear = parseInt(2022 - year);
-  const countmonth = parseInt(12 - month);
-  const countdate = parseInt(25 - date);
-  const counthour = parseInt(00 - hour);
-  const countminute = parseInt(00 - minute);
-  const countsecond = parseInt(00 - second);
+  const start = new Date();
+  const end = new Date("december 25, 2022 00:00:00");
+  const elapsed = end - start;
+  const elapsedDate = elapsed / (60 * 60 * 24 * 1000);
+  const elapsedDateString = Math.floor(elapsedDate);
+  const elapsedhour = elapsed / (60 * 60 * 1000) - elapsedDateString * 24;
+  const elapsedhourString = Math.floor(elapsedhour);
+  const elapsedminute =
+    elapsed / (60 * 1000) -
+    (elapsedDateString * 24 * 60 + elapsedhourString * 60);
+  const elapsedminuteString = Math.floor(elapsedminute);
+  const elapsedsecond =
+    elapsed / 1000 -
+    (elapsedDateString * 24 * 60 + elapsedhourString * 60) * 60 -
+    elapsedminuteString * 60;
+  const elapsedsecondString = Math.floor(elapsedsecond);
 
-  clocktext.innerText = `${countYear}:${countmonth}:${countdate}:${counthour}:${countminute}:${countsecond}`;
+  clocktext.innerText = `${start.getDate()}d${start.getHours()}h${start.getMinutes()}m${start.getSeconds()}s`;
+  test.innerText = `${elapsedDateString}d ${elapsedhourString}h ${elapsedminuteString}m ${elapsedsecondString}s`;
 }
-setInterval(countingXmas, 5000);
+countingXmas();
+setInterval(countingXmas, 1000);
 //CTRL + D : 같은 명령어 한꺼번에 수정
 // 커서를 올려놓고 CTRL + D ⇒ 같은 단어에 커서올라감
 
