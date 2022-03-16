@@ -1,5 +1,5 @@
 const test = document.querySelector("h3");
-const clocktext = document.querySelector("#clock");
+const clock = document.querySelector("#clock");
 
 function countingXmas() {
   const start = new Date();
@@ -19,8 +19,7 @@ function countingXmas() {
     elapsedminuteString * 60;
   const elapsedsecondString = Math.floor(elapsedsecond);
 
-  clocktext.innerText = `${start.getDate()}d${start.getHours()}h${start.getMinutes()}m${start.getSeconds()}s`;
-  test.innerText = `${elapsedDateString}d ${elapsedhourString}h ${elapsedminuteString}m ${elapsedsecondString}s`;
+  clock.innerText = `${elapsedDateString}d ${elapsedhourString}h ${elapsedminuteString}m ${elapsedsecondString}s`;
 }
 countingXmas();
 setInterval(countingXmas, 1000);
