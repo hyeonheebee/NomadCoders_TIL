@@ -25,12 +25,7 @@ function getRandomColor() {
   const SecondRandomColor = colors[Math.floor(Math.random() * colors.length)];
   console.log(firstRandomColor);
   console.log(SecondRandomColor);
-  document.body.style.background =
-    "linear-gradient(to right, " +
-    firstRandomColor +
-    "," +
-    SecondRandomColor +
-    ")";
+  document.body.style.background = "linear-gradient(to right, "`${firstRandomColor},${SecondRandomColor})`;
 }
 getColor.addEventListener("click", getRandomColor);
 
