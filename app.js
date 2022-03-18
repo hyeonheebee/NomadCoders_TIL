@@ -6,7 +6,9 @@ const emailInput = document.querySelector(".email-form input");
 const emailSpan = document.querySelector(".email-form span");
 const pwForm = document.querySelector(".pw-form");
 const pwSpan = document.querySelector(".pw-form span");
-const pwText = document.querySelector("h4");
+const pwText = document.querySelector(".pw-form h4");
+const greeting = document.querySelector("h1");
+const loginButton = document.querySelector("#login-btn");
 const HIDDEN_CLASSNAME = "hidden";
 function inputNameSubmit(event) {
   const username = nameInput.value;
@@ -21,9 +23,12 @@ function inputNameSubmit(event) {
     emailForm.classList.add(HIDDEN_CLASSNAME);
     nameForm.classList.add(HIDDEN_CLASSNAME);
     pwForm.classList.remove(HIDDEN_CLASSNAME);
+    pwText.innerText = "PassWord need to be at least 8 characters long :)";
 
     function inputPwSubmit() {
-      pwText.innerText = "PassWord need to be at least 8 characters long :)";
+      greeting.innerText = "Nice to meet you :)";
+      pwForm.classList.add(HIDDEN_CLASSNAME);
+      loginButton.classList.add(HIDDEN_CLASSNAME);
     }
     inputForm.addEventListener("submit", inputPwSubmit);
   }
