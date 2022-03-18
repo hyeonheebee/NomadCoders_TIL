@@ -1,3 +1,4 @@
+const inputForm = document.querySelector("#input-form");
 const nameForm = document.querySelector(".name-form");
 const nameInput = document.querySelector(".name-form input");
 const emailForm = document.querySelector(".email-form");
@@ -24,9 +25,9 @@ function inputNameSubmit(event) {
     function inputPwSubmit() {
       pwText.innerText = "PassWord need to be at least 8 characters long :)";
     }
-    pwForm.addEventListener("submit", inputPwSubmit);
+    inputForm.addEventListener("submit", inputPwSubmit);
   }
-  emailForm.addEventListener("submit", inputEmailSubmit);
+  inputForm.addEventListener("submit", inputEmailSubmit);
 }
 
-nameForm.addEventListener("submit", inputNameSubmit);
+inputForm.addEventListener("submit", inputNameSubmit);
