@@ -10,14 +10,18 @@ const pwText = document.querySelector(".pw-form h4");
 const greeting = document.querySelector("h1");
 const loginButton = document.querySelector("#login-btn");
 const HIDDEN_CLASSNAME = "hidden";
+const USERNAME_KEY = "username";
 function inputNameSubmit(event) {
-  const username = nameInput.value;
-  emailSpan.innerText = `${username}, What is your email?`;
   event.preventDefault();
+  const username = nameInput.value;
+  localStorage.setItem(USERNAME_KEY, username);
+  emailSpan.innerText = `${username}, What is your email?`;
+
   nameForm.classList.add(HIDDEN_CLASSNAME);
   emailForm.classList.remove(HIDDEN_CLASSNAME);
 
   function inputEmailSubmit() {
+    event.preventDefault();
     const useremail = emailInput.value;
     pwSpan.innerText = `${useremail} is that True? Please choose a password`;
     emailForm.classList.add(HIDDEN_CLASSNAME);
@@ -26,7 +30,9 @@ function inputNameSubmit(event) {
     pwText.innerText = "PassWord need to be at least 8 characters long :)";
 
     function inputPwSubmit() {
-      greeting.innerText = "Nice to meet you :)";
+      event.preventDefault();
+      const savedusername = localStorage.getItem(USERNAME_KEY);
+      greeting.innerText = `${savedusername}, Nice to meet you :)`;
       pwForm.classList.add(HIDDEN_CLASSNAME);
       loginButton.classList.add(HIDDEN_CLASSNAME);
     }
