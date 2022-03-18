@@ -66,7 +66,6 @@ function inputNameSubmit(event) {
       }
     }
   }
-  inputForm.addEventListener("submit", inputEmailSubmit);
 }
 
 inputForm.addEventListener("submit", inputNameSubmit);
