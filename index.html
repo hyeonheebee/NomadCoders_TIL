@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="style.css" rel="stylesheet" />
+    <title>My momentum</title>
+  </head>
+  <body>
+    <form class="name-form">
+      <label for="name">What is your name?</label>
+      <input name="name" required id="name" type="text" />
+    </form>
+    <form class="hidden email-form">
+      <label for="email">What is your email?</label>
+      <input id="email" type="email" required />
+    </form>
+
+    <form class="hidden pw-form">
+      <label for="pw">Please choose a password</label>
+      <input id="pw" type="password" minlength="8" required />
+
+      <h4>PassWord need to be at least 8 characters long :)</h4>
+    </form>
+    <button type="submit">Continue</button>
+    <script src="app.js"></script>
+  </body>
+</html>

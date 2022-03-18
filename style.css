@@ -1,0 +1,7 @@
+.hidden {
+  display: none;
+  border: violet;
+}
+.color {
+  background-color: blue;
+}
