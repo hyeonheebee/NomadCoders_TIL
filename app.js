@@ -80,7 +80,13 @@ if (confirmname !== "") {
 
 function getClock() {
   const date = new Date();
-  mainClock.innerText = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+
+  mainClock.innerText = `${toString(hours).padStart(2, "0")}:${toString(
+    minutes
+  ).padStart(2, "0")}:${toString(seconds).padStart(2, "0")}`;
 }
 
 setInterval(getClock, 1000);
