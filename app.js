@@ -84,9 +84,9 @@ function getClock() {
   const minutes = date.getMinutes();
   const seconds = date.getSeconds();
 
-  mainClock.innerText = `${toString(hours).padStart(2, "0")}:${toString(
+  mainClock.innerText = `${String(hours).padStart(2, "0")}:${String(
     minutes
-  ).padStart(2, "0")}:${toString(seconds).padStart(2, "0")}`;
+  ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
 setInterval(getClock, 1000);
