@@ -8,24 +8,25 @@
     <title>My momentum</title>
   </head>
   <body>
-    <form id="input-form">
-      <div class="name-form">
-        <span>What is your name?</span>
-        <input type="text" />
-      </div>
-      <div class="hidden email-form">
-        <span></span>
-        <input type="email" />
-      </div>
-
-      <div class="hidden pw-form">
-        <span></span>
-        <input type="password" minlength="8" />
-
-        <h4></h4>
-      </div>
+    <form class="name-form">
+      <span>What is your name?</span>
+      <input type="text" />
       <input type="submit" value="Continue" />
     </form>
+    <form class="hidden email-form">
+      <span></span>
+      <input type="email" />
+      <input type="submit" value="Continue" />
+    </form>
+
+    <form class="hidden pw-form">
+      <span></span>
+      <input type="password" minlength="8" />
+
+      <h4></h4>
+      <input type="submit" value="Continue" />
+    </form>
+
     <script src="app.js"></script>
   </body>
 </html>
