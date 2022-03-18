@@ -1,7 +1,8 @@
 .hidden {
   display: none;
-  border: violet;
 }
-.color {
-  background-color: blue;
+.main {
+  background-color: thistle;
+  width: 800px;
+  height: 100px;
 }

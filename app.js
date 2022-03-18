@@ -14,7 +14,8 @@ const HIDDEN_CLASSNAME = "hidden";
 const USERNAME_KEY = "username";
 const USEREMAIL_KEY = "useremail";
 const USERPW_KEY = "userpw";
-
+const mainBox = document.querySelector(".main");
+const mainClock = document.querySelector(".main span");
 function inputNameSubmit(event) {
   event.preventDefault();
   const username = nameInput.value;
@@ -74,4 +75,12 @@ const confirmname = localStorage.getItem(USERNAME_KEY);
 if (confirmname !== "") {
   greeting.innerText = `${confirmname}, Nice to meet you :)`;
   inputForm.classList.add(HIDDEN_CLASSNAME);
+  mainBox.classList.remove(HIDDEN_CLASSNAME);
 }
+
+function getClock() {
+  const date = new Date();
+  mainClock.innerText = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+}
+
+setInterval(getClock, 1000);
