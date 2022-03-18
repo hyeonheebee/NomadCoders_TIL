@@ -8,22 +8,24 @@
     <title>My momentum</title>
   </head>
   <body>
-    <form class="name-form">
-      <label for="name">What is your name?</label>
-      <input name="name" required id="name" type="text" />
-    </form>
-    <form class="hidden email-form">
-      <label for="email">What is your email?</label>
-      <input id="email" type="email" required />
-    </form>
+    <form id="input-form">
+      <div class="name-form">
+        <span>What is your name?</span>
+        <input type="text" />
+      </div>
+      <div class="hidden email-form">
+        <span></span>
+        <input type="email" />
+      </div>
 
-    <form class="hidden pw-form">
-      <label for="pw">Please choose a password</label>
-      <input id="pw" type="password" minlength="8" required />
+      <div class="hidden pw-form">
+        <span></span>
+        <input type="password" minlength="8" />
 
-      <h4>PassWord need to be at least 8 characters long :)</h4>
+        <h4></h4>
+      </div>
+      <input type="submit" value="Continue" />
     </form>
-    <button type="submit">Continue</button>
     <script src="app.js"></script>
   </body>
 </html>
