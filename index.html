@@ -14,12 +14,24 @@
       </form>
       <span>00:00:00</span>
       <h1></h1>
+      <!-- finish log-out button and clock and greeting -->
+      <form id="todo-form">
+        <input
+          type="text"
+          required
+          placeholder="plaease write To-do and press enter"
+        />
+      </form>
+      <ul id="todo-list"></ul>
     </div>
+    <!-- main part of momentum -->
+    <!-- start login input form -->
     <form id="input-form">
       <div class="name-form">
         <span>What is your name?</span>
         <input type="text" />
       </div>
+
       <div class="hidden email-form">
         <span></span>
         <input type="email" />
@@ -34,6 +46,8 @@
       <input id="login-btn" type="submit" value="Continue" />
     </form>
 
-    <script src="app.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/clock.js"></script>
+    <script src="js/todo.js"></script>
   </body>
 </html>

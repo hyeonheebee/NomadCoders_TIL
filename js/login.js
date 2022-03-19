@@ -1,13 +1,13 @@
 const inputForm = document.querySelector("#input-form");
 const nameForm = document.querySelector(".name-form");
-const nameInput = document.querySelector(".name-form input");
+const nameInput = nameForm.querySelector("input");
 const emailForm = document.querySelector(".email-form");
-const emailInput = document.querySelector(".email-form input");
-const emailSpan = document.querySelector(".email-form span");
+const emailInput = emailForm.querySelector("input");
+const emailSpan = emailForm.querySelector("span");
 const pwForm = document.querySelector(".pw-form");
-const pwInput = document.querySelector(".pw-form input");
-const pwSpan = document.querySelector(".pw-form span");
-const pwText = document.querySelector(".pw-form h4");
+const pwInput = pwForm.querySelector("input");
+const pwSpan = pwForm.querySelector("span");
+const pwText = pwForm.querySelector("h4");
 const greeting = document.querySelector("h1");
 const loginButton = document.querySelector("#login-btn");
 const HIDDEN_CLASSNAME = "hidden";
@@ -15,7 +15,7 @@ const USERNAME_KEY = "username";
 const USEREMAIL_KEY = "useremail";
 const USERPW_KEY = "userpw";
 const mainBox = document.querySelector(".main");
-const mainClock = document.querySelector(".main span");
+const mainClock = mainBox.querySelector("span");
 const logOut = document.querySelector(".log-out");
 confirmname();
 function inputNameSubmit(event) {
@@ -44,18 +44,6 @@ function logoutMomentum() {
   inputNameSubmit();
 }
 logOut.addEventListener("submit", logoutMomentum);
-function getClock() {
-  const date = new Date();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
-
-  mainClock.innerText = `${String(hours).padStart(2, "0")}:${String(
-    minutes
-  ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-}
-getClock();
-setInterval(getClock, 1000);
 
 function inputEmailSubmit(event) {
   event.preventDefault();
