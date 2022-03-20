@@ -19,7 +19,6 @@ function paintTodo(usertodo) {
 function deleteTodoList(event) {
   const deleteTodo = event.target.parentElement;
   deleteTodo.remove();
-  console.log(typeof deleteTodo.id);
   todos = todos.filter(
     (userdelete) => userdelete.id !== parseInt(deleteTodo.id)
   );
