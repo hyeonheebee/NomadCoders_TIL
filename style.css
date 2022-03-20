@@ -15,13 +15,14 @@
 }
 body {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
+  position: relative;
   height: 100vh;
 }
 
 .main {
+  display: flex;
+  position: relative;
+  flex-direction: column;
   width: 100%;
   height: 100%;
 }
@@ -81,7 +82,7 @@ input:focus,
   background-color: var(--yellow);
 }
 #login-btn {
-  margin-top: 7px;
+  margin-top: 10px;
   border-radius: 10px;
   padding: 7px;
   font-size: 25px;
@@ -114,8 +115,10 @@ input:focus,
 }
 
 .main > span {
-  margin-top: 10px;
-  margin-left: 20px;
+  display: flex;
+  position: relative;
+  margin-top: 20px;
+  margin-left: 10px;
   color: var(--blue);
   font-size: 70px;
   font-family: "Pangolin", cursive;
@@ -131,18 +134,21 @@ input:focus,
   text-align: center;
   font-family: "Pangolin", cursive;
   font-weight: 600;
-  font-size: 50px;
+  font-size: 60px;
   color: var(--yellow);
   text-shadow: -2px -1px var(--blue), 2px -1px var(--blue), -2px 1px var(--blue),
     2px 1px var(--blue);
 }
 .random-box {
-  position: absolute;
-  margin: 200px 160px 40px 160px;
+  width: 100%;
+
   display: flex;
+  position: absolute;
+  margin-top: 680px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
 }
 .random-box span:first-child {
   font-family: "Pangolin", cursive;
@@ -154,7 +160,6 @@ input:focus,
   text-align: center;
 }
 .random-box span:last-child {
-  margin-top: 10px;
   font-family: "Pangolin", cursive;
   font-weight: 800;
   font-size: 16px;
@@ -167,9 +172,9 @@ input:focus,
   background: transparent;
   text-align: center;
   padding: 4px 4px;
-  font-size: 30px;
+  font-size: 40px;
   border-radius: 7px;
-  width: 400px;
+  width: 470px;
   border: none;
   font-weight: 800;
   border-bottom: 2px solid var(--green);
@@ -179,13 +184,15 @@ input:focus,
 }
 #todo-form input::placeholder {
   color: var(--green);
-  font-size: 30px;
+  font-size: 35px;
   text-shadow: -1px -1px var(--orange), 1px -1px var(--orange),
     -1px 1px var(--orange), 1px 1px var(--orange);
 }
 .todolist-box {
-  position: absolute;
-  margin: 0px 450px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 #todo-list li {
   display: flex;
@@ -210,4 +217,32 @@ input:focus,
   color: var(--orange);
   text-shadow: -0.5px -0.5px var(--green), 0.5px -0.5px var(--green),
     -0.5px 0.5px var(--green), 0.5px 0.5px var(--green);
+}
+#weather {
+  display: flex;
+  position: absolute;
+  margin-left: 1300px;
+  margin-top: 20px;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+#weather span:first-child {
+  font-weight: 900;
+  font-size: 30px;
+  font-family: "Pangolin", cursive;
+
+  color: var(--blue);
+  text-shadow: -2px -1px var(--yellow), 2px -1px var(--yellow),
+    -2px 1px var(--yellow), 2px 1px var(--yellow);
+}
+
+#weather span:last-child {
+  font-weight: 900;
+  font-size: 25px;
+  font-family: "Pangolin", cursive;
+  color: var(--yellow);
+  text-shadow: -2px -1px var(--blue), 2px -1px var(--blue), -2px 1px var(--blue),
+    2px 1px var(--blue);
 }
