@@ -8,59 +8,60 @@
     <title>My momentum</title>
   </head>
   <body>
-    <div class="hidden main">
-      <form class="log-out">
-        <button type="submit">log-out</button>
-      </form>
-      <span>00:00:00</span>
+    <div class="container">
+      <div class="main hidden">
+        <form class="log-out">
+          <button type="submit">log-out</button>
+        </form>
+        <span>00:00:00</span>
 
-      <div class="greeting-box">
-        <h1></h1>
+        <div class="greeting-box">
+          <h1></h1>
+        </div>
+        <!-- finish log-out button and clock and greeting -->
+        <div class="random-box">
+          <span></span>
+          <span></span>
+        </div>
+        <!-- quotes and background img -->
+        <form id="todo-form">
+          <input
+            type="text"
+            required
+            placeholder="🦊Write To-do and Press enter"
+          />
+        </form>
+        <div class="todolist-box">
+          <ul id="todo-list"></ul>
+        </div>
+        <div id="weather">
+          <span></span>
+          <span></span>
+        </div>
       </div>
-      <!-- finish log-out button and clock and greeting -->
-      <div class="random-box">
-        <span></span>
-        <span></span>
-      </div>
-      <!-- quotes and background img -->
-      <form id="todo-form">
-        <input
-          type="text"
-          required
-          placeholder="🦊Write To-do and Press enter"
-        />
+      <!-- main part of momentum -->
+      <!-- start login input form -->
+      <form id="input-form">
+        <div class="name-form">
+          <span>What is your name?</span>
+          <input type="text" />
+        </div>
+
+        <div class="hidden email-form">
+          <span></span>
+          <input type="email" />
+        </div>
+
+        <div class="hidden pw-form">
+          <span></span>
+          <input type="password" minlength="8" />
+
+          <h4></h4>
+        </div>
+
+        <input id="login-btn" type="submit" value="Continue" />
       </form>
-      <div class="todolist-box">
-        <ul id="todo-list"></ul>
-      </div>
-      <div id="weather">
-        <span></span>
-        <span></span>
-      </div>
     </div>
-    <!-- main part of momentum -->
-    <!-- start login input form -->
-    <form id="input-form">
-      <div class="name-form">
-        <span>What is your name?</span>
-        <input type="text" />
-      </div>
-
-      <div class="hidden email-form">
-        <span></span>
-        <input type="email" />
-      </div>
-
-      <div class="hidden pw-form">
-        <span></span>
-        <input type="password" minlength="8" />
-
-        <h4></h4>
-      </div>
-
-      <input id="login-btn" type="submit" value="Continue" />
-    </form>
-
     <script src="js/login.js"></script>
     <script src="js/clock.js"></script>
     <script src="js/todo.js"></script>
