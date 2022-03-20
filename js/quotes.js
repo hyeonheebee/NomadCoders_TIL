@@ -33,7 +33,7 @@ const quotes = [
   {
     quote:
       "We need to fail. We need to fail down here so we don't fail up there",
-    author: "Neil Armstrong, First man",
+    author: "Neil Armstrong",
   },
   {
     quote:
@@ -49,19 +49,18 @@ randomQuote.innerText = randomnumber.quote;
 randomAuthor.innerText = `- ${randomnumber.author}`;
 // random quotes
 
-const image = ["0.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"];
+const image = ["0.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"];
 
 const randomImage = image[Math.floor(Math.random() * image.length)];
+const userBgImage = document.querySelector("body");
+// const userimage = document.createElement("img");
+// userimage.src = `img/${randomImage}`;
+// document.body.appendChild(userimage);
+// document.body = document.querySelector("img");
 
-const bgImage = document.createElement("img");
+userBgImage.style.backgroundImage = `url(img/${randomImage}`;
+userBgImage.style.backgroundRepeat = "no-repeat";
+userBgImage.style.backgroundSize = "cover";
+userBgImage.style.backgroundPosition = "center";
 
-bgImage.src = `img/${randomImage}`;
-
-document.body.appendChild(bgImage);
-const userBgImg = document.querySelector("img");
-
-userBgImg.style.objectFit = "cover";
-userBgImg.style.width = "100%";
-userBgImg.style.height = "100%";
-userBgImg.style.backgroundRepeat = "100%";
-console.dir(userBgImg);
+console.dir(userBgImage.style);

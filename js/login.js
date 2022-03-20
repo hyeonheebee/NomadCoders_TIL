@@ -18,6 +18,7 @@ const mainBox = document.querySelector(".main");
 const mainClock = mainBox.querySelector("span");
 const logOut = document.querySelector(".log-out");
 confirmname();
+
 function inputNameSubmit(event) {
   event.preventDefault();
   const username = nameInput.value;
@@ -28,7 +29,7 @@ function inputNameSubmit(event) {
     inputForm.addEventListener("submit", inputNameSubmit);
     console.log("hi");
   } else {
-    emailSpan.innerText = `${savedusername}, What is your email?`;
+    emailSpan.innerText = `hi, ${savedusername}! What is your email?`;
     nameForm.classList.add(HIDDEN_CLASSNAME);
     emailForm.classList.remove(HIDDEN_CLASSNAME);
     inputForm.addEventListener("submit", inputEmailSubmit);
@@ -55,7 +56,7 @@ function inputEmailSubmit(event) {
     inputForm.addEventListener("submit", inputEmailSubmit);
     console.log("bye");
   } else {
-    pwSpan.innerText = `${saveduseremail} is that True? Please choose a password`;
+    pwSpan.innerText = "Please choose a password";
     emailForm.classList.add(HIDDEN_CLASSNAME);
     nameForm.classList.add(HIDDEN_CLASSNAME);
     pwForm.classList.remove(HIDDEN_CLASSNAME);
@@ -81,11 +82,23 @@ function inputPwSubmit(event) {
   }
 }
 function confirmname() {
+  //const saveduserpw = localStorage.getItem(USERPW_KEY);
+
   const confirmname = localStorage.getItem(USERNAME_KEY);
-  if (localStorage.length > 0) {
-    greeting.innerText = `${confirmname}, Nice to meet you :)`;
+  // if (localStorage.length > 0) {
+  // greeting.innerText = `${confirmname}, Nice to meet you :)`;
+  // inputForm.classList.add(HIDDEN_CLASSNAME);
+  // mainBox.classList.remove(HIDDEN_CLASSNAME);
+  // } else {
+  // inputForm.classList.remove(HIDDEN_CLASSNAME);
+  // mainBox.classList.add(HIDDEN_CLASSNAME);
+  // }
+
+  if (localStorage.length >= 3) {
+    greeting.innerText = `${confirmname}, Welcome back to PLANET ✨`;
     inputForm.classList.add(HIDDEN_CLASSNAME);
     mainBox.classList.remove(HIDDEN_CLASSNAME);
+    console.log(localStorage.length);
   } else {
     inputForm.classList.remove(HIDDEN_CLASSNAME);
     mainBox.classList.add(HIDDEN_CLASSNAME);

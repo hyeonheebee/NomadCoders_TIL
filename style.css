@@ -1,11 +1,10 @@
+@import "components/var.css";
+@import url("https://fonts.googleapis.com/css2?family=Pangolin&display=swap");
+
 .hidden {
   display: none;
 }
-.main {
-  background-color: thistle;
-  width: 800px;
-  height: 100px;
-}
+
 .log-out {
   width: 80px;
   height: 50px;
@@ -13,4 +12,202 @@
 .random-box {
   width: 800px;
   height: 60px;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: 100vh;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+}
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+span {
+  display: block;
+}
+form div {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  display: block;
+}
+form div span {
+  margin-bottom: 20px;
+  font-size: 70px;
+  font-family: "Pangolin", cursive;
+  color: var(--basic);
+}
+form div span:hover,
+h4:hover {
+  color: var(--yellow);
+}
+form div input:hover {
+  border-bottom: 4px solid var(--yellow);
+}
+form div input {
+  font-family: "Pangolin", cursive;
+  background: transparent;
+  text-align: center;
+  padding: 8px 4px;
+  font-size: 30px;
+  border-radius: 7px;
+  width: 350px;
+  border: none;
+  border-bottom: 4px solid var(--basic);
+  color: var(--yellow);
+}
+h4 {
+  font-family: "Pangolin", cursive;
+  font-size: 20px;
+  color: var(--basic);
+}
+input:focus,
+:active {
+  outline: none;
+}
+#login-btn:hover {
+  background-color: var(--yellow);
+}
+#login-btn {
+  margin-top: 7px;
+  border-radius: 10px;
+  padding: 7px;
+  font-size: 25px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  font-family: "Pangolin", cursive;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.6);
+  opacity: 0.5;
+  color: var(--basic);
+}
+#login-btn:active {
+  background-color: var(--blue);
+  color: var(--yellow);
+}
+.log-out button {
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 5px;
+  width: 100px;
+  margin-left: 50px;
+  font-family: "Pangolin", cursive;
+  font-size: 20px;
+
+  border-bottom: 5px solid rgba(0, 0, 0, 0.6);
+  background-color: var(--blue);
+  opacity: 0.8;
+  color: var(--yellow);
+}
+.log-out button:active {
+  color: var(--blue);
+}
+
+.main > span {
+  margin-top: 10px;
+  margin-left: 20px;
+  color: var(--blue);
+  font-size: 70px;
+  font-family: "Pangolin", cursive;
+  font-weight: 800;
+  text-shadow: -1px -1px var(--yellow), 1px -1px var(--yellow),
+    -1px 1px var(--yellow), 1px 1px var(--yellow);
+}
+.greeting-box {
+  display: flex;
+  justify-content: center;
+}
+.greeting-box > h1 {
+  text-align: center;
+  font-family: "Pangolin", cursive;
+  font-weight: 600;
+  font-size: 50px;
+  color: var(--yellow);
+  text-shadow: -2px -1px var(--blue), 2px -1px var(--blue), -2px 1px var(--blue),
+    2px 1px var(--blue);
+}
+.random-box {
+  position: absolute;
+  margin: 200px 160px 40px 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.random-box span:first-child {
+  font-family: "Pangolin", cursive;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--blue);
+  text-shadow: -0.5px -0.5px var(--yellow), 0.5px -0.5px var(--yellow),
+    -0.5px 0.5px var(--yellow), 0.5px 0.5px var(--yellow);
+  text-align: center;
+}
+.random-box span:last-child {
+  margin-top: 10px;
+  font-family: "Pangolin", cursive;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--blue);
+  text-shadow: -0.2px -0.2px var(--yellow), 0.2px -0.2px var(--yellow),
+    -0.2px 0.2px var(--yellow), 0.2px 0.2px var(--yellow);
+}
+#todo-form input {
+  font-family: "Pangolin", cursive;
+  background: transparent;
+  text-align: center;
+  padding: 4px 4px;
+  font-size: 30px;
+  border-radius: 7px;
+  width: 400px;
+  border: none;
+  font-weight: 800;
+  border-bottom: 2px solid var(--green);
+  color: var(--orange);
+  text-shadow: -1px -1px var(--green), 1px -1px var(--green),
+    -1px 1px var(--green), 1px 1px var(--green);
+}
+#todo-form input::placeholder {
+  color: var(--green);
+  font-size: 30px;
+  text-shadow: -1px -1px var(--orange), 1px -1px var(--orange),
+    -1px 1px var(--orange), 1px 1px var(--orange);
+}
+.todolist-box {
+  position: absolute;
+  margin: 0px 450px;
+}
+#todo-list li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+#todo-list button {
+  background-color: transparent;
+  border: none;
+  font-weight: 900;
+  font-family: "Pangolin", cursive;
+  color: var(--green);
+  text-shadow: -1px -2px var(--orange), 1px -2px var(--orange),
+    -1px 2px var(--orange), 1px 2px var(--orange);
+}
+#todo-list span {
+  background-color: transparent;
+  font-weight: 900;
+  font-size: 20px;
+  margin-left: 5px;
+  font-family: "Pangolin", cursive;
+  color: var(--orange);
+  text-shadow: -0.5px -0.5px var(--green), 0.5px -0.5px var(--green),
+    -0.5px 0.5px var(--green), 0.5px 0.5px var(--green);
 }

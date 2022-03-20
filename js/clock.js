@@ -10,3 +10,9 @@ function getClock() {
 }
 getClock();
 setInterval(getClock, 1000);
+
+// if (hours >= 12) {
+// greeting.innerText = `${confirmname}, goodevening :)`;
+// } else {
+// greeting.innerText = `${confirmname}, goodmorning :)`;
+// }
