@@ -44,6 +44,8 @@
   margin: var(--basic_margin);
 }
 #screen-input {
+  position: static;
+  top: 600px;
   height: 45px;
   display: flex;
   justify-content: space-between;
