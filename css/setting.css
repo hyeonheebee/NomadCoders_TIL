@@ -1,0 +1,44 @@
+@import "reset.css";
+@import "components/status-bar.css";
+@import url("https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap");
+@import "components/variable.css";
+@import "login.css";
+@import "components/friend.css";
+
+@import "components/headtitle.css";
+.my-display {
+  height: 60px;
+  margin: var(--basic_margin);
+  display: flex;
+}
+
+.my-display div:first-child img {
+  height: 100%;
+  width: 100%;
+}
+.my-display_content {
+  margin-left: 15px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.my-display_content div {
+  width: 285px;
+  background-color: none;
+  display: flex;
+  justify-content: space-between;
+}
+.my-display:nth-child(3) {
+  padding-bottom: 10px;
+  border-bottom: solid 1px var(--dbasic);
+}
+ul {
+  overflow: scroll;
+  display: block;
+  box-sizing: border-box;
+  height: 600px;
+}
+ul::-webkit-scrollbar {
+  display: none;
+}
