@@ -1,0 +1,21 @@
+.my-display {
+  height: 80px;
+  margin: var(--basic_margin);
+  display: flex;
+  align-items: center;
+}
+.my-display div {
+  height: 60px;
+  width: 60px;
+  border-radius: 30%;
+  background-color: var(--dbasic);
+}
+.my-display span {
+  margin-left: 10px;
+  font-size: var(--name_font);
+  font-weight: 800;
+}
+.my-display div img {
+  height: 100%;
+  width: 100%;
+}
