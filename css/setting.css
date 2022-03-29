@@ -37,7 +37,8 @@ ul {
   overflow: scroll;
   display: block;
   box-sizing: border-box;
-  height: 600px;
+  height: 575px;
+  /* 700-125 */
 }
 ul::-webkit-scrollbar {
   display: none;

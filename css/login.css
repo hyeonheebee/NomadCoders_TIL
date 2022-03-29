@@ -90,3 +90,7 @@ body {
   font-family: var(--font);
   opacity: 0.5;
 }
+a:link {
+  color: var(--purple);
+  text-decoration-line: none;
+}
