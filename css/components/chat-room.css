@@ -49,6 +49,7 @@
   top: 250px;
 }
 .message-row {
+  animation: FadeIn 0.3s linear;
   margin-top: 20px;
   width: 100%;
   display: flex;
@@ -114,3 +115,13 @@
   top: 0px;
   background-color: var(--pink);
 } */
+@keyframes FadeIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
