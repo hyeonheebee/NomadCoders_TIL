@@ -1,0 +1,18 @@
+.setting-screen {
+  position: relative;
+  padding-top: 140px;
+  box-sizing: border-box;
+  opacity: 0.7;
+}
+.setting-screen__list:first-child {
+  border-bottom: 1px solid var(--font1);
+}
+.setting-screen__list li {
+  padding: 40px 10px;
+  font-size: 30px;
+}
+.setting-screen__version {
+  position: absolute;
+  right: 20px;
+  font-size: 25px;
+}

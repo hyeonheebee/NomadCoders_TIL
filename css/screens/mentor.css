@@ -1,0 +1,15 @@
+.mentors-screen {
+  padding: 0px var(--horizontal-space);
+}
+
+.mentors-screen__channel {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border-top: 2px solid var(--dark);
+  padding: 10px 0px;
+  margin-bottom: 15px;
+}
+.mentors-screen__channel {
+  position: relative;
+}

@@ -1,0 +1,53 @@
+.chat-keyboard {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  z-index: 5;
+}
+.keyboard-reply__column {
+  width: 100%;
+  background: linear-gradient(
+    0.2turn,
+    var(--font1),
+    var(--white),
+    var(--font1)
+  );
+  /* background-color: white; */
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: space-around;
+  bottom: 0px;
+}
+.keyboard-reply__input {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid var(--main); */
+  padding: 3px 0px;
+  border-radius: 10px;
+  margin: 0px 5px;
+  box-sizing: border-box;
+}
+.keyboard-reply__input input {
+  width: 80%;
+  border: none;
+  padding: 0px 20px;
+  background: transparent;
+}
+.keyboard-reply__input input::placeholder {
+  font-size: 15px;
+}
+.message-form__submit {
+  border-radius: 50%;
+  border: none;
+  background-color: var(--font1);
+  margin-right: 10px;
+}
+/* .message-form__submit i {
+  margin: 1px;
+} */
+.keyboard-reply__column > i {
+  margin-left: 10px;
+}

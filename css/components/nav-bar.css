@@ -1,0 +1,31 @@
+.nav-bar {
+  z-index: 6;
+  background-color: var(--dark);
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px 20px;
+  position: fixed;
+  bottom: 0px;
+}
+/* ★어차피 list 안 icon이 있는것이므로 display flex를 하면
+정렬할수있다..? */
+
+.nav-bar__list {
+  display: flex;
+  justify-content: space-between;
+}
+.nav-bar__link {
+  color: var(--white);
+  position: relative;
+  /* transition: nav-bar 0.5s ease-in-out; */
+}
+/* @nav-bar {
+  -webkit-animation: jello-horizontal 0.9s both;
+  animation: jello-horizontal 0.9s both;
+} */
+.nav-bar__notice {
+  position: absolute;
+  /* top: 10px; */
+  left: 19px;
+  bottom: 17px;
+}

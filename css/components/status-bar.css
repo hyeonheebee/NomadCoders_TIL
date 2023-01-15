@@ -1,0 +1,13 @@
+.status-bar {
+  /* z-index: 1; */
+  z-index: 9;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+}

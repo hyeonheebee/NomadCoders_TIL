@@ -1,0 +1,86 @@
+.user-component__column {
+  z-index: 2;
+  position: relative;
+  display: flex;
+  /* ★여기서 margin을 하지말고 display link에서 margin bottom을 하는게
+  좋다 계속 바뀌는 component에는 특이사항을 넣지않는게 유리함 */
+  margin-bottom: 40px;
+  padding-left: 10px;
+  align-items: center;
+  box-sizing: border-box;
+}
+.user-component__lastcolumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.user-component__time {
+  margin-bottom: 7px;
+  opacity: 0.7;
+  font-size: 14px;
+}
+.user-component__text h3 {
+  /* display: inline-block; */
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 600;
+}
+.user-component__text h6 {
+  font-size: 16px;
+  opacity: 0.8;
+}
+.user-component__avartar {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  object-fit: cover;
+  /* 비율유지 */
+}
+
+.user-component__avartar__xs {
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+}
+.user-component__text__xs h3 {
+  font-size: 20px;
+}
+.user-component__text__xs h6 {
+  font-size: 16px;
+}
+.user-component__column__channel {
+  position: relative;
+  padding: 10px 10px;
+  /* overflow: scroll;
+  height: 300px; */
+}
+/* .user-component__column__channel::-webkit-scrollbar {
+  display: none;
+} */
+.user-component__column__channel::before {
+  /* background-color: var(--light); */
+  background: linear-gradient(
+    var(--main),
+    10%,
+    var(--light),
+    rgba(255, 255, 255, 0.1)
+  );
+  opacity: 0.7;
+  top: 10px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  position: absolute;
+  content: " ";
+  border-radius: 5px;
+}
+
+.user-component__text {
+  width: 100%;
+  padding: 0px 20px;
+}
+.mentors-screen__channel span {
+  font-weight: 800;
+  font-size: 18px;
+  opacity: 0.5;
+}

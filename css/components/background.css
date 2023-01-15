@@ -1,0 +1,20 @@
+body {
+  position: relative;
+}
+.background {
+  height: 120vh;
+  position: relative;
+}
+.background::before {
+  z-index: -1;
+  /* background-color: var(--light); */
+  background-image: url("file:///C:/Users/82103/Desktop/kokoa-clone-2023/Kokoaclone2023_FINAL/img/cherry.jpg");
+  opacity: 0.4;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-size: cover;
+  position: absolute;
+  content: " ";
+}

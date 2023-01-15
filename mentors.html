@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="background">
+      <div class="status-bar">
+        <div class="status-bar__column">
+          <span>On Service</span>
+          <i class="fas fa-wifi"></i>
+        </div>
+        <div class="status-bar__column">
+          <span>05:03</span>
+        </div>
+        <div class="status-bar__column">
+          <i class="fab fa-discord"></i>
+          <span>89%</span>
+          <i class="fas fa-battery-three-quarters"></i>
+          <i class="fas fa-bolt fa-xs"></i>
+        </div>
+      </div>
+      <header class="screen-header">
+        <h1 class="screen-header__title">Mentors</h1>
+        <div class="screen-header__icon">
+          <!-- youtube link icon  -->
+          <!-- book icon  -->
+          <!-- find out job icon  -->
+          <!-- ★icon은 span안에 집어넣어야 margin등 적용이 쉽다 -->
+          <span>
+            <a href="find.html"> <i class="fas fa-search"></i></a>
+          </span>
+          <span>
+            <a href="more.html">
+              <i class="fas fa-book"></i>
+            </a>
+          </span>
+          <span>
+            <a href="setting.html"> <i class="fas fa-cog"></i></a>
+          </span>
+        </div>
+      </header>
+      <a class="header-display-link" href="#">
+        <!-- icons -->
+        <span><i class="fas fa-info-circle fa-xl"></i></span>
+        Find Your Mentor
+        <span><i class="fas fa-chevron-right fa-xs"></i></span>
+
+        <!-- icons -->
+      </a>
+      <!-- ★한꺼번에 왼쪽으로 horizontal space가 설정되어있으므로 박스로 묶은다음 var설정의 space만큼
+    옆으로 밀어주는게 좋다 -->
+      <main class="mentors-screen">
+        <div class="user-component">
+          <!-- ★사진과 text를 한칼럼에 묶는다 -->
+          <div class="user-component__column">
+            <img class="user-component__avartar" src="img/dobby.jpg" />
+            <!-- ★text가 두줄이 필요하므로 각각 작성 후 div로 묶어놓기 
+        h1등의 태그사용하여 자동 굵기조절 -->
+            <div class="user-component__text">
+              <h3>Honey Bee</h3>
+              <h6>80% of the effects come from 20% of the causes</h6>
+              <!-- ★span p보다 h4나 h6을 쓰는게 좋은이유는 sementic tag
+          이기때문이다 -->
+            </div>
+          </div>
+          <div class="user-component__column__channel">
+            <div class="mentors-screen__channel">
+              <span class="mentors-screen__channel__column"> Mentors List</span>
+              <span class="mentors-screen__channel__column">
+                <i class="fas fa-chevron-down fa-xs"></i>
+              </span>
+            </div>
+
+            <div class="user-component__column">
+              <img
+                class="user-component__avartar user-component__avartar__xs"
+                src="img/leehyung.jpg"
+              />
+              <!-- avartar와 avatar__xs둘다 잡아줘야함 -->
+              <div class="user-component__text user-component__text__xs">
+                <h3>Lee Hyung</h3>
+                <h6>Time managing skill</h6>
+              </div>
+            </div>
+            <div class="user-component__column">
+              <img
+                class="user-component__avartar user-component__avartar__xs"
+                src="img/andrew.jpg"
+              />
+              <!-- avartar와 avatar__xs둘다 잡아줘야함 -->
+              <div class="user-component__text user-component__text__xs">
+                <h3>Draw Andrew</h3>
+                <h6>Personal Branding</h6>
+              </div>
+            </div>
+            <div class="user-component__column">
+              <img
+                class="user-component__avartar user-component__avartar__xs"
+                src="img/sethGodin.jpg"
+              />
+              <!-- avartar와 avatar__xs둘다 잡아줘야함 -->
+              <div class="user-component__text user-component__text__xs">
+                <h3>Seth Godin</h3>
+                <h6>Doing Marketing, being Remarkable</h6>
+              </div>
+            </div>
+            <div class="user-component__column">
+              <img
+                class="user-component__avartar user-component__avartar__xs"
+                src="img/ryanHoliday.jpg"
+              />
+              <!-- avartar와 avatar__xs둘다 잡아줘야함 -->
+              <div class="user-component__text user-component__text__xs">
+                <h3>Ryan Holiday</h3>
+                <h6>Ego is your enemy</h6>
+              </div>
+            </div>
+            <div class="user-component__column">
+              <img
+                class="user-component__avartar user-component__avartar__xs"
+                src="img/timFerriss.jpg"
+              />
+              <!-- avartar와 avatar__xs둘다 잡아줘야함 -->
+              <div class="user-component__text user-component__text__xs">
+                <h3>Tim Ferriss</h3>
+                <h6>Only four hour workweek</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <nav class="nav-bar">
+        <!-- ★navigation bar을 만들어줄때는 list 형태를 쓰고 li태그는 반드시
+      ul 이나 ol안에 있어야한다  -->
+        <!-- ★이때는 아이콘을 li태그로 한번 감쌌기 때문에 특별한경우아니면 이중으로 span으로
+      감싸줄 필요는 없다  -->
+        <ul class="nav-bar__list">
+          <li class="nav-bar__btn">
+            <a class="nav-bar__link" href="mentors.html">
+              <i class="fas fa-user fa-2x"></i>
+            </a>
+          </li>
+          <li class="nav-bar__btn">
+            <a class="nav-bar__link" href="chats.html">
+              <i class="fas fa-comments fa-2x"></i>
+              <span class="nav-bar__notice badge">5</span>
+            </a>
+          </li>
+          <li class="nav-bar__btn">
+            <a class="nav-bar__link" href="find.html">
+              <i class="fas fa-search fa-2x"></i
+            ></a>
+          </li>
+          <li class="nav-bar__btn">
+            <a class="nav-bar__link" href="more.html">
+              <i class="fas fa-ellipsis-h fa-2x"></i
+            ></a>
+          </li>
+        </ul>
+      </nav>
+      <!-- <div id="no-mobile">your screen is too big</div> -->
+    </div>
+  </body>
+
+  <script
+    src="https://kit.fontawesome.com/6478f529f2.js"
+    ;
+    crossorigin="anonymous"
+  ></script>
+</html>
