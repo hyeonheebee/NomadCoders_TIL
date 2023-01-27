@@ -82,7 +82,7 @@ function handleTodoSubmit(event) {
   const objTodoItems = { id: Date.now(), text: newTodoItem };
   arrTodo.push(objTodoItems);
   saveTodoList(arrTodo);
-  writeTodo(newTodoItem);
+  writeTodo(objTodoItems);
   // console.log(objTodoItems.text);
   // console.log(arrTodo);
 }
@@ -93,9 +93,12 @@ console.log(arrTodoItems);
 if (arrTodoItems !== null) {
   arrTodo = arrTodoItems;
   console.dir(arrTodo);
+  // arrTodo.forEach(
+  //   (element) => writeTodo(element.text)
   arrTodo.forEach(
-    (element) => writeTodo(element.text)
-    // {}
+    (element) => writeTodo(element)
+
+    // // {}
     // {}
     // {}
     // writeTodo
@@ -114,7 +117,7 @@ function writeTodo(todos) {
   const todoListInput = document.createElement("li");
   document.body.appendChild(todoListInput);
   // todoListInput.innerText = savedtodoList.todoitem;
-  todoListInput.innerText = todos;
+  todoListInput.innerText = todos.text;
   const todoListBtn = document.createElement("button");
   todoListInput.appendChild(todoListBtn);
   todoListBtn.innerHTML = "🥕";
@@ -123,10 +126,16 @@ function writeTodo(todos) {
   todoListBtn.addEventListener("click", handleTodoDelete);
 }
 function handleTodoDelete(event) {
-  console.dir(event.target);
+  // // console.dir(event);
   const li = event.target.parentElement;
-  console.log(event.target.text);
+
+  // arrTodo.forEach((element) => if(element.text === liText) );
+  // console.log(typeof arrTodoitems);
+  // // console.log(ob);
+
+  console.dir(li);
   li.remove();
+  // arrTodo = arrTodo.filter;
 
   // 내가 click한 버튼에 해당하는 id를 찾아서, 해당 id를 가진
   // object를 localStorage에 있는 array 에서 delete한다
