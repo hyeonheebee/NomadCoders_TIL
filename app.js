@@ -113,16 +113,19 @@ function saveTodoList(arrTodo) {
   // console.log(localStorage.getItem("todos"));
 }
 function writeTodo(todos) {
+  const newobjTodos = todos;
   // const savedtodoList = localStorage.getItem("todos");
   const todoListInput = document.createElement("li");
   document.body.appendChild(todoListInput);
+  todoListInput.id = newobjTodos.id;
   // todoListInput.innerText = savedtodoList.todoitem;
-  todoListInput.innerText = todos.text;
+  todoListInput.innerText = newobjTodos.text;
   const todoListBtn = document.createElement("button");
   todoListInput.appendChild(todoListBtn);
   todoListBtn.innerHTML = "🥕";
   // console.log(savedtodoList);
   // console.log(typeof savedtodoList.todoitem);
+
   todoListBtn.addEventListener("click", handleTodoDelete);
 }
 function handleTodoDelete(event) {
@@ -133,7 +136,7 @@ function handleTodoDelete(event) {
   // console.log(typeof arrTodoitems);
   // // console.log(ob);
 
-  console.dir(li);
+  console.log(li.id);
   li.remove();
   // arrTodo = arrTodo.filter;
 
