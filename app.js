@@ -92,7 +92,7 @@ const arrTodoItems = JSON.parse(localStorage.getItem("todos"));
 console.log(arrTodoItems);
 if (arrTodoItems !== null) {
   arrTodo = arrTodoItems;
-  console.dir(arrTodo);
+  // console.dir(arrTodo);
   // arrTodo.forEach(
   //   (element) => writeTodo(element.text)
   arrTodo.forEach(
@@ -135,9 +135,12 @@ function handleTodoDelete(event) {
   // arrTodo.forEach((element) => if(element.text === liText) );
   // console.log(typeof arrTodoitems);
   // // console.log(ob);
-
+  const items = arrTodo.forEach;
   console.log(li.id);
+  arrTodo = arrTodo.filter((items) => items.id !== parseInt(li.id));
+  console.log(arrTodo);
   li.remove();
+  saveTodoList(arrTodo);
   // arrTodo = arrTodo.filter;
 
   // 내가 click한 버튼에 해당하는 id를 찾아서, 해당 id를 가진
