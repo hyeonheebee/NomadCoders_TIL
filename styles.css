@@ -1,3 +1,96 @@
 .hidden {
-  display: none;
+  /* display: none; */
+  visibility: hidden;
+}
+.login-form {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 300px;
+  left: 100px;
+}
+.login-form input {
+  padding: 10px 2px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  margin-bottom: 3px;
+  color: white;
+  font-size: 18px;
+}
+.login-form {
+  opacity: 0.5;
+}
+.login-form input::placeholder {
+  font-size: 16px;
+  color: blueviolet;
+}
+.login-form input:focus-visible {
+  outline: 1px solid white;
+}
+.login-form input:focus {
+  background-color: blueviolet;
+}
+.login-form button {
+  color: rgba(138, 44, 226, 0.9);
+  padding: 10px 88px;
+  border: solid 1px beige;
+  border-radius: 10px;
+}
+.login-form button:hover {
+  color: white;
+  background-color: blueviolet;
+}
+.background-img {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+}
+ul {
+  position: absolute;
+  top: 300px;
+  right: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+li {
+  font-size: 24px;
+  padding-top: 5px;
+  list-style: none;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.clock-section {
+  position: absolute;
+  right: 100px;
+  top: 30px;
+}
+.weather-section {
+  position: absolute;
+  top: 0px;
+  right: 100px;
+}
+.todo-form {
+  position: absolute;
+  top: 40px;
+}
+.todo-form input {
+  opacity: 0.7;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 25px;
+}
+.todo-form input:focus-visible {
+  outline: none;
+  background-color: paleturquoise;
+  color: black;
 }

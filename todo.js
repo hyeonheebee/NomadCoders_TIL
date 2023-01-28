@@ -1,71 +1,7 @@
-const loginForm = document.querySelector(".login-form");
-const loginUsername = loginForm.querySelector("input:first-child");
-const loginPassword = loginForm.querySelector("input:nth-child(2)");
-const loginButton = loginForm.querySelector("button");
-const USERNAME = "username";
-const HIDDEN_CLASSNAME = "hidden";
 const todoForm = document.querySelector(".todo-form");
 const todoList = document.querySelector(".todo-list");
 const todoInput = todoForm.querySelector("input");
 // console.log(loginUsername, loginPassword, loginButton);
-
-// loginForm.classList.remove(HIDDEN_CLASSNAME);
-function handleLoginSubmit(event) {
-  event.preventDefault();
-  const userName = loginUsername.value;
-  const userPassword = loginPassword.value;
-  localStorage.setItem(USERNAME, userName);
-  localStorage.setItem("password", userPassword);
-  // console.dir(event);
-  // console.log(typeof localStorage.getItem("password"));
-  // const savedUsername = localStorage.getItem(USERNAME);
-  // console.log(typeof localStorage.getItem(USERNAME));
-  const savedUserName = localStorage.getItem(USERNAME);
-  // console.log(savedUserName);
-  writeSavedUsername(savedUserName);
-  loginForm.classList.add(HIDDEN_CLASSNAME);
-}
-const savedUserName = localStorage.getItem(USERNAME);
-
-if (savedUserName === null) {
-  loginForm.classList.remove(HIDDEN_CLASSNAME);
-  loginForm.addEventListener("submit", handleLoginSubmit);
-} else {
-  writeSavedUsername(savedUserName);
-}
-
-function writeSavedUsername(savedUserName) {
-  const userNameText = document.createElement("h1");
-  document.body.appendChild(userNameText);
-  userNameText.innerText = savedUserName;
-  userNameText.classList.add("userNameText");
-}
-
-function writeClock() {
-  const nowTime = new Date();
-  // console.log(typeof nowTime);
-  // console.log(nowTime);
-  // console.log(nowTime.getFullYear());
-  // console.log(nowTime.getDate());
-  const nowMonth = nowTime.getMonth();
-  const options = { month: "long" };
-  const optionsMonth = new Intl.DateTimeFormat("en-US", options).format(
-    nowTime
-  );
-  const nowDate = String(nowTime.getDate()).padStart(2, "0");
-  const nowHour = String(nowTime.getHours()).padStart(2, "0");
-  const nowMinute = String(nowTime.getMinutes()).padStart(2, "0");
-  const nowSecond = String(nowTime.getSeconds()).padStart(2, "0");
-  const now = `${optionsMonth} ${nowDate}, ${nowHour}:${nowMinute}:${nowSecond}`;
-  writtenTime.innerText = now;
-
-  // console.log(optionsMonth);
-}
-const writtenTime = document.createElement("h2");
-document.body.appendChild(writtenTime);
-writtenTime.classList.add("nowtime");
-writeClock();
-setInterval(writeClock, 1000);
 
 function handleTodoSubmit(event) {
   event.preventDefault();
@@ -116,13 +52,13 @@ function writeTodo(todos) {
   const newobjTodos = todos;
   // const savedtodoList = localStorage.getItem("todos");
   const todoListInput = document.createElement("li");
-  document.body.appendChild(todoListInput);
+  todoList.appendChild(todoListInput);
   todoListInput.id = newobjTodos.id;
   // todoListInput.innerText = savedtodoList.todoitem;
   todoListInput.innerText = newobjTodos.text;
   const todoListBtn = document.createElement("button");
   todoListInput.appendChild(todoListBtn);
-  todoListBtn.innerHTML = "🥕";
+  todoListBtn.innerText = ` 📌`;
   // console.log(savedtodoList);
   // console.log(typeof savedtodoList.todoitem);
 
