@@ -1,3 +1,13 @@
+@import "var.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+body {
+  font-family: "IBM Plex Mono", monospace;
+}
 .hidden {
   /* display: none; */
   visibility: hidden;
@@ -52,10 +62,19 @@
 ul {
   position: absolute;
   top: 300px;
-  right: 100px;
+  right: 110px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  z-index: 2;
+  border-radius: 20px;
+}
+.todo-section img {
+  width: 500px;
+  height: 600px;
+  top: 220px;
+  right: 30px;
+  position: absolute;
 }
 li {
   font-size: 24px;
@@ -66,16 +85,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.clock-section {
-  position: absolute;
-  right: 100px;
-  top: 30px;
-}
-.weather-section {
-  position: absolute;
-  top: 0px;
-  right: 100px;
 }
 .todo-form {
   position: absolute;
@@ -91,6 +100,85 @@ body {
 }
 .todo-form input:focus-visible {
   outline: none;
-  background-color: paleturquoise;
-  color: black;
+  background-color: #3d677d;
+  color: whitesmoke;
+}
+.username-section {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 50px;
+  top: 100px;
+}
+.username-section span:last-child {
+  color: #5d2c6b;
+  font-size: 80px;
+}
+.username-section span:first-child {
+  color: #5d2c6b;
+  font-size: 50px;
+}
+.pic-section {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 600px;
+  left: 100px;
+}
+.pic-section img {
+  width: auto;
+  height: 100%;
+}
+
+/* figure {
+  border: thin #c0c0c0 solid;
+  display: flex;
+  flex-flow: column;
+  padding: 5px;
+  max-width: 220px;
+  margin: auto;
+}
+figcaption {
+  background-color: #222;
+  color: #fff;
+  font: italic smaller sans-serif;
+  padding: 3px;
+  text-align: center;
+} */
+.clock-section {
+  position: absolute;
+  right: 100px;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.clock-section span:first-child {
+  font-size: 30px;
+}
+.clock-section span:last-child {
+  font-size: 50px;
+}
+.weather-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 20px;
+  position: absolute;
+  top: 0px;
+  right: 50px;
+}
+.todo-list li {
+  display: flex;
+  align-items: center;
+}
+.todo-list button {
+  background-color: transparent;
+  border: none;
+}
+.todo-list img {
+  width: 40px;
+}
+.todo-list img:hover {
+  cursor: pointer;
 }

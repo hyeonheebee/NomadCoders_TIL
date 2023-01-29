@@ -1,5 +1,6 @@
 const clockSection = document.querySelector(".clock-section");
-
+const TimeSection = clockSection.querySelector("span:last-child");
+const DaySection = clockSection.querySelector("span:first-child");
 function writeClock() {
   const nowTime = new Date();
   // console.log(typeof nowTime);
@@ -15,13 +16,12 @@ function writeClock() {
   const nowHour = String(nowTime.getHours()).padStart(2, "0");
   const nowMinute = String(nowTime.getMinutes()).padStart(2, "0");
   const nowSecond = String(nowTime.getSeconds()).padStart(2, "0");
-  const now = `${optionsMonth} ${nowDate}, ${nowHour}:${nowMinute}:${nowSecond}`;
-  writtenTime.innerText = now;
-
+  const nowDay = `${optionsMonth}, ${nowDate}`;
+  const nowClock = `${nowHour}:${nowMinute}:${nowSecond}`;
+  TimeSection.innerText = nowClock;
+  DaySection.innerText = nowDay;
   // console.log(optionsMonth);
 }
-const writtenTime = document.createElement("h2");
-clockSection.appendChild(writtenTime);
-writtenTime.classList.add("nowtime");
+
 writeClock();
 setInterval(writeClock, 1000);

@@ -58,7 +58,10 @@ function writeTodo(todos) {
   todoListInput.innerText = newobjTodos.text;
   const todoListBtn = document.createElement("button");
   todoListInput.appendChild(todoListBtn);
-  todoListBtn.innerText = ` 📌`;
+  const btnImage = document.createElement("img");
+  btnImage.src = `pic/2.png`;
+  todoListBtn.appendChild(btnImage);
+  // todoListBtn.innerText = `🐾`;
   // console.log(savedtodoList);
   // console.log(typeof savedtodoList.todoitem);
 
@@ -66,8 +69,9 @@ function writeTodo(todos) {
 }
 function handleTodoDelete(event) {
   // // console.dir(event);
-  const li = event.target.parentElement;
-
+  const btn = event.target.parentElement;
+  const li = btn.parentElement;
+  // console.dir(event.target);
   // arrTodo.forEach((element) => if(element.text === liText) );
   // console.log(typeof arrTodoitems);
   // // console.log(ob);

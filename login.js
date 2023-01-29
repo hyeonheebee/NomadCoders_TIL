@@ -5,7 +5,9 @@ const loginButton = loginForm.querySelector("button");
 const userNameSection = document.querySelector(".username-section");
 const USERNAME = "username";
 const HIDDEN_CLASSNAME = "hidden";
-
+const loginClockSection = document.querySelector(
+  ".clock-section span:last-child"
+);
 // loginForm.classList.remove(HIDDEN_CLASSNAME);
 function handleLoginSubmit(event) {
   event.preventDefault();
@@ -32,8 +34,22 @@ if (savedUserName === null) {
 }
 
 function writeSavedUsername(savedUserName) {
-  const userNameText = document.createElement("h1");
+  const userNameHi = document.createElement("span");
+  const userNameText = document.createElement("span");
+  userNameSection.appendChild(userNameHi);
   userNameSection.appendChild(userNameText);
-  userNameText.innerText = `Hello, ${savedUserName}`;
+  console.log(typeof loginClockSection.innerText);
+  const nowloginHour = loginClockSection.innerText.slice(0, 2);
+  if (parseInt(nowloginHour) < 12) {
+    userNameHi.innerText = `Good Morning`;
+    userNameText.innerText = `${savedUserName}`;
+  } else if (parseInt(nowloginHour) < 18) {
+    userNameHi.innerText = `Good Afternoon`;
+    userNameText.innerText = `${savedUserName}`;
+  } else if (parseInt(nowloginHour) <= 24 && parseInt(nowloginHour) > 5) {
+    userNameHi.innerText = `Good night`;
+    userNameText.innerText = `${savedUserName}`;
+  }
+
   userNameText.classList.add("userNameText");
 }

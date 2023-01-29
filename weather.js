@@ -12,12 +12,42 @@ function geoSuccess(position) {
       const weatherTemp = weatherSection.querySelector("span:nth-child(2)");
       const weatherDescript = weatherSection.querySelector("span:last-child");
       const name = data.name;
-      weatherCity.innerText = name;
+      weatherCity.innerText = `🚩${name}`;
       // const main = data.weather[0].main;
       const temp = data.main.temp;
       weatherTemp.innerText = `${temp}°C`;
+      const tempIcon = document.createElement("span");
+      weatherTemp.appendChild(tempIcon);
+      if (parseInt(temp) <= 0) {
+        tempIcon.innerText = "🤧";
+      } else if (parseInt(temp) >= 25) {
+        tempIcon.innerText = "😵";
+      } else {
+        tempIcon.innerText = "😉";
+      }
       const description = data.weather[0].description;
       weatherDescript.innerText = description;
+      const icon = document.createElement("span");
+      weatherDescript.appendChild(icon);
+      if (description.includes("clouds") === true) {
+        icon.innerText = "⛅";
+        console.log("cloud");
+      } else if (description.includes("clear") === true) {
+        console.log("clear sky");
+        icon.innerText = "🌞";
+      } else if (description.includes("rain") === true) {
+        icon.innerText = "☔";
+        console.log("rain");
+      } else if (description.includes("thunderstorm") === true) {
+        console.log("storm");
+        icon.innerText = "⚡";
+      } else if (description.includes("snow") === true) {
+        console.log("snow");
+        icon.innerText = "⛄";
+      } else if (description.includes("mist") == true) {
+        console.log("mist");
+        icon.innerText = "💧";
+      }
     });
 }
 function geoError() {
