@@ -1,4 +1,12 @@
-const arrBgImage = ["0.jpg", "1.jpg", "2.jpg", "3.jpg"];
+const arrBgImage = [
+  "0.jpg",
+  "1.jpg",
+  "2.jpg",
+  "3.jpg",
+  "4.jpg",
+  "7.jpg",
+  "8.jpg",
+];
 const chosenImage = arrBgImage[Math.floor(Math.random() * arrBgImage.length)];
 console.log(chosenImage);
 const bgImage = document.createElement("img");

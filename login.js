@@ -40,14 +40,14 @@ function writeSavedUsername(savedUserName) {
   userNameSection.appendChild(userNameText);
   console.log(typeof loginClockSection.innerText);
   const nowloginHour = loginClockSection.innerText.slice(0, 2);
-  if (parseInt(nowloginHour) < 12) {
-    userNameHi.innerText = `Good Morning`;
+  if (5 <= parseInt(nowloginHour) < 12) {
+    userNameHi.innerText = `Good Morning ☕`;
     userNameText.innerText = `${savedUserName}`;
   } else if (parseInt(nowloginHour) < 18) {
-    userNameHi.innerText = `Good Afternoon`;
+    userNameHi.innerText = `Good Afternoon 🌆 `;
     userNameText.innerText = `${savedUserName}`;
-  } else if (parseInt(nowloginHour) <= 24 && parseInt(nowloginHour) > 5) {
-    userNameHi.innerText = `Good night`;
+  } else if (parseInt(nowloginHour) <= 24 && parseInt(nowloginHour) < 5) {
+    userNameHi.innerText = `Good night 🌙`;
     userNameText.innerText = `${savedUserName}`;
   }
 

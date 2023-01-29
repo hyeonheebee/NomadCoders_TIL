@@ -25,3 +25,45 @@ function writeClock() {
 
 writeClock();
 setInterval(writeClock, 1000);
+
+const dDayInput = document.querySelector(".d-day-form input");
+const dDayBtn = document.querySelector(".d-day-form button");
+console.dir(dDayInput);
+const clockTitle = document.querySelector(".clockTitle");
+function handleCountDday(event) {
+  event.preventDefault();
+  console.log(dDayInput.value);
+  console.log(typeof dDayInput.value);
+  localStorage.setItem("timevalue", dDayInput.value);
+}
+
+dDayBtn.addEventListener("click", handleCountDday);
+
+function countDowndDay() {
+  const item = localStorage.getItem("timevalue");
+
+  const date = new Date();
+  const dDay = new Date(`${item}T00:00:00`);
+
+  // console.log(date);
+  // console.log(xMas);
+  const elapse = dDay - date;
+  // console.log(elapse);
+  const day = Math.floor(elapse / (60 * 60 * 24 * 1000));
+  const hour = String(
+    Math.floor(elapse / (60 * 60 * 1000)) - day * 24
+  ).padStart(2, "0");
+
+  clockTitle.innerText = `Dday : ${day}d ${hour}h`;
+  if (item !== null) {
+    clockTitle.classList.remove("hiddentitle");
+  } else {
+  }
+  // console.log(day);
+  // console.log(hour);
+  // console.log(minute);
+  // console.log(second);
+}
+
+countDowndDay();
+setInterval(countDowndDay, 1000);

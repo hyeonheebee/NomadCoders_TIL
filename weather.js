@@ -12,7 +12,7 @@ function geoSuccess(position) {
       const weatherTemp = weatherSection.querySelector("span:nth-child(2)");
       const weatherDescript = weatherSection.querySelector("span:last-child");
       const name = data.name;
-      weatherCity.innerText = `🚩${name}`;
+      weatherCity.innerText = `🚩 ${name}`;
       // const main = data.weather[0].main;
       const temp = data.main.temp;
       weatherTemp.innerText = `${temp}°C`;
