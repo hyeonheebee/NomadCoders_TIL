@@ -38,17 +38,18 @@ function writeSavedUsername(savedUserName) {
   const userNameText = document.createElement("span");
   userNameSection.appendChild(userNameHi);
   userNameSection.appendChild(userNameText);
-  console.log(typeof loginClockSection.innerText);
   const nowloginHour = loginClockSection.innerText.slice(0, 2);
-  if (5 <= parseInt(nowloginHour) < 12) {
-    userNameHi.innerText = `Good Morning ☕`;
-    userNameText.innerText = `${savedUserName}`;
-  } else if (parseInt(nowloginHour) < 18) {
-    userNameHi.innerText = `Good Afternoon 🌆 `;
-    userNameText.innerText = `${savedUserName}`;
-  } else if (parseInt(nowloginHour) <= 24 && parseInt(nowloginHour) < 5) {
+  console.log(nowloginHour);
+  userNameText.innerText = `${savedUserName}`;
+  if (parseInt(nowloginHour) <= 5) {
     userNameHi.innerText = `Good night 🌙`;
-    userNameText.innerText = `${savedUserName}`;
+  } else if (parseInt(nowloginHour) <= 12) {
+    userNameHi.innerText = `Good Morning ☕`;
+  } else if (parseInt(nowloginHour) <= 18) {
+    // console.log("hey");
+    userNameHi.innerText = `Good Afternoon 🌆`;
+  } else if (parseInt(nowloginHour) <= 24) {
+    userNameHi.innerText = `Good evening ⭐`;
   }
 
   userNameText.classList.add("userNameText");
