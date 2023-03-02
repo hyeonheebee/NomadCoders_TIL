@@ -1,0 +1,14 @@
+extends base
+block content 
+  if(errorMessage)
+    h1=errorMessage
+  form(method="POST")
+    input(name="name",placeholder="name" ,type = "text", required, value=loggedInUser.name)
+    input(name="email",placeholder="email" ,type = "email", required,value=loggedInUser.email)
+    input(name="username",placeholder="username" ,type = "text", required,value=loggedInUser.username)
+    input(name="location",placeholder="location", type = "text", required,value=loggedInUser.location)
+    input(type="submit",value="Upadate Profile")
+    if !loggedInUser.socialOnly 
+      hr
+      a(href="change-password") Change Password &rarr;
+      

@@ -1,0 +1,15 @@
+extends base.pug
+block content   
+  if(errorMessage)
+    h1=errorMessage
+  form(method="POST")
+    input(name="username",placeholder="username" ,type = "text", required)
+    input(name="password",placeholder="password", type = "password", required)
+    input(type="submit",value="Login")
+    br
+    a(href="/users/github/start") continue with GitHub &rarr;
+    //- https://github.com/login/oauth/authorize?client_id=b6f558f3cf99abbfa5db&allow_signup=false&scope=user:email read:user
+  hr
+  div  
+      span Don't you have an account? 
+      a(href="/join") Join now &rarr;
