@@ -9,8 +9,38 @@ export const home = async (req, res) => {
 
   return res.render("home", { pageTitle, videos });
 };
-export const search = (req, res) => {
+export const search = async (req, res) => {
+  const pageTitle = "Search Video";
   console.log(req.query);
+  // const { title } = req.query;
+  const { title, hashtags, genres } = req.query;
+  if (!title || !hashtags || !genres) {
+    const errorMessage = "please write your keyword";
+    return res.status(400).render("video/search", { pageTitle, errorMessage });
+  }
+  if (title) {
+    if (title) {
+      const videos = await Video.find({ title });
+      console.log(videos);
+      if (!videos) {
+        return res.redirect("/");
+      }
+      return res.render("video/search", { pageTitle, videos });
+    }
+
+    const errorMessage = "please write your keyword";
+    return res.status(400).render("video/search", { pageTitle, errorMessage });
+  }
+  if (hashtags) {
+    // const hashtag = hashFormatting(hashtags)
+    const videos = await Video.find({ hashtag });
+    return res.render("video/search", { pageTitle, videos });
+  }
+  if (genres) {
+    const videos = await Video.find({ genres });
+
+    return res.render("video/search", { pageTitle, videos });
+  }
   return res.render("video/search");
 };
 export const see = async (req, res) => {

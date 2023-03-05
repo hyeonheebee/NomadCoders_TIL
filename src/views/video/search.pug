@@ -1,8 +1,18 @@
 extends ../layout
+include ../mixins/video
+
 block content 
   form(method)
     label(for="video") Video Search
-    input(name="title", placeholder="Title of Video",type="text",required )
-    input(name="hashtags", placeholder="hashtags: divided by comma",type="text",required)
-    input(name="genres", placeholder="Genres: divided by comma",type="text",required)
+    input(name="title", placeholder="Title of Video",type="text" )
+    input(name="hashtags", placeholder="hashtags: divided by comma",type="text")
+    input(name="genres", placeholder="Genres: divided by comma",type="text")
     input(value="upload",type="submit")
+  if errorMessage 
+    span=errorMessage
+  if videos
+    ul
+      each video in videos  
+        +video(video)
+      else 
+        span No Result  

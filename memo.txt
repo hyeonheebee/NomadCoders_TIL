@@ -109,3 +109,41 @@ static 만드는 문법 어색했다. 이름을 제대로 붙여주지 않아서
 
 
 remove보다 delete 사용을 권장함 (롤백가능한 옵션)
+
+search page 단순 레더링후 req.qeury까지만 확인
+hashtag나 genre로도 솔팅하는 기능 넣으면 좋을듯(장르별 페이지를 따로 제공하거나)
+
+>>03.06
+
+findone을썼더니 id를 못찾겠다고 오류가 계속 났다 
+findone을 썼을때 => 
+{
+  _id: new ObjectId("64051b50f1842e905820032a"),
+  title: 'a',
+  summary: 'abcdef',
+  hashtags: [ '#fun', '#fantastic', '#thrill' ],
+  genres: [ 't', 'h', 'y', 'j' ],
+  views: '0',
+  createdDate: 2023-03-05T22:44:32.030Z,
+  __v: 0
+}
+
+find 를 썼을때 =>
+[
+  {
+    _id: new ObjectId("64051b50f1842e905820032a"),
+    title: 'a',
+    summary: 'abcdef',
+    hashtags: [ '#fun', '#fantastic', '#thrill' ],
+    genres: [ 't', 'h', 'y', 'j' ],
+    views: '0',
+    createdDate: 2023-03-05T22:44:32.030Z,
+    __v: 0
+  }
+]
+애초에 findOne은 array반환을 못해줘서 그렇다는 사실을 알게됨 
+
+hash랑 genres를 지웠을땐 구현이 되는데 만들면 구현이 안되고
+첫째 조건문을 넘지못하는 듯 하다 
+별개로 hashtag나 genres는 filter을 써봐야하나 생각 중 
+하고 comment쪽 구현하기 (~8강 + 15~16강)
