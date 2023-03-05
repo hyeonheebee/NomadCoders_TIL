@@ -11,6 +11,6 @@ block content
     //- required넣기
     input(name="title", value=video.title,placeholder="Title of Video",type="text",required )
     input(name="summary", value=video.summary, placeholder="Video Summary",type="text", required )
-    input(name="hashtags",value=video.hashtags, placeholder="hashtags: divided by comma",type="text",required)
-    input(name="genres", value=video.genres,placeholder="Genres: divided by comma",type="text",required)
+    input(name="hashtags",value=video.hashtags.join(), placeholder="hashtags: divided by comma",type="text",required)
+    input(name="genres", value=video.genres.join(),placeholder="Genres: divided by comma",type="text",required)
     input(value="upload",type="submit")
