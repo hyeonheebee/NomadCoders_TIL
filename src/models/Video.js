@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const videoSchema = new mongoose.Schema({
   title: { type: String, required: true, trim: true },
+  fileUrl: { type: String, required: true },
   //title:{type:String}도 같은표현임
   description: { type: String, required: true, trim: true, minLength: 10 },
   createdAt: { type: Date, required: true, default: Date.now },
@@ -9,8 +10,8 @@ const videoSchema = new mongoose.Schema({
   hashtags: [{ type: String, trim: true }],
   meta: {
     views: { type: Number, required: true, default: 0 },
-    rating: { type: Number, required: true, default: 0 },
   },
+  owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
 });
 
 // videoSchema.pre("save", async function () {

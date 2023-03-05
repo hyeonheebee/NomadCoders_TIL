@@ -1,0 +1,17 @@
+1. input에서 req.body와 req.session에서 password 정보들과 id를 받아올것
+2. 예전비밀번호가 로그인한 유저의 비밀번호와 맞는지 
+session(로그인 중인 유저)id로 데이터베이스에서 찾아서 
+입력값과 비교 : bcrpt.compare
+errorMessage, 404status 전달
+3. 바꾸려는 비밀번호가 confirm 비밀번호아 같은지 체크 
+errorMessage, 404status 전달
+4. pw 업데이트  
+- user.password에 입력한 값으로 업데이트 먼저 진행
+> 어떻게 해쉬 후 저장?
+
+- pre save middleware를 거친 후 User.create사용
+or
+- user.save() 
+*이때도 pre save middleware 작동함 
+5. session의 user.password에도 업데이트
+*user로 받아와서 user.password로 비교했다면 필요x

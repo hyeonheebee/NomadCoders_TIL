@@ -135,7 +135,7 @@ export const finishGithubLogin = async (req, res) => {
     return res.redirect("/login");
   }
 };
-export const logOut = (req, res) => {
+export const logout = (req, res) => {
   req.session.destroy();
   return res.redirect("/");
 };
@@ -146,10 +146,12 @@ export const postEdit = async (req, res) => {
   // const {id} = req.session.user
   const {
     session: {
-      user: { _id },
+      user: { _id, avatarUrl },
     },
     body: { name, email, username, location },
+    file,
   } = req;
+
   // const { name, email, username, location } = req.body;
   // const existUser = await User.findById(_id);
   // 지금 유저 session의 값과 내가 req.body에 입력한 값이 다를때
@@ -180,6 +182,7 @@ export const postEdit = async (req, res) => {
   const upadatedUser = await User.findByIdAndUpdate(
     _id,
     {
+      avatarUrl: file ? file.path : avatarUrl,
       name,
       email,
       username,
@@ -223,14 +226,25 @@ export const postChangePassword = async (req, res) => {
   }
   if (newPassword !== validPassword) {
     return res.status(400).render("users/change-password", {
-      pageTitle,
+      pageTitle: "Change Password",
       errorMessage: "New password doesn't match",
     });
   }
   user.password = newPassword;
+
   await user.save();
-  // console.log("finish hashing", user.password);
-  // req.session.user.password = user.password;
+
   return res.redirect("/users/logout");
 };
-export const see = (req, res) => res.send("see users id");
+export const see = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id).populate("videos");
+  console.log(user);
+  if (!user) {
+    return res.status(404).render("404");
+  }
+  return res.render("users/profile", {
+    pageTitle: `${user.name}'s Profile`,
+    user,
+  });
+};
