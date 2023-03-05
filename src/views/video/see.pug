@@ -4,6 +4,12 @@ include ../mixins/video
 block content
   h3 #{video.title}
   p #{video.summary}
+   ul
+    each genre in video.genres 
+     li=genre
+   ul
+    each tag in video.hashtags 
+      li=tag   
   br
   small #{video.views}/5
   br

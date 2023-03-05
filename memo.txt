@@ -75,3 +75,19 @@ try and catch 연습
 계속 url을 
 videoRouter.route("/:id([0-9a-f]{24})/edit") 이걸 
 상대경로를 통해서 edit만 추가해서 구현하려고 애썼다..
+
+stringStartwith기억안났음...검색해서 찾았다 
+
+자바스크립트 콘솔에서는 너무 잘 되는데 edit 컨트롤러에서 안먹힘
+
+apple.toString().split(",")
+(4) ['1', '2', '3', '4']
+apple.toString().split(",").map((x)=> x.startsWith("#")? x : "#"+x)
+(4) ['#1', '#2', '#3', '#4']
+const banana=["#2",1,2,3,"#a"]
+undefined
+banana.toString().split(",").map((x)=> x.startsWith("#")? x : "#"+x)
+(5) ['#2', '#1', '#2', '#3', '#a']
+
+이유 =-> join 함수를 제대로 쓸줄 몰랐기 때문이었다. 
+edit form 의 hashtag value에 join() 이 포함된 값을 넣어야했음 
