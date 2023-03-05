@@ -9,9 +9,9 @@ import {
 } from "../controllers/videoController";
 
 const videoRouter = express.Router();
+videoRouter.route("/upload").get(getUpload).post(postUpload);
 videoRouter.get("/:id", see);
 videoRouter.route("/edit").get(getEdit).post(postEdit);
-videoRouter.route("/upload").get(getUpload).post(postUpload);
 videoRouter.get("/delete", deleteVideo);
 
 export default videoRouter;

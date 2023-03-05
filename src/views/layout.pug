@@ -1,10 +1,15 @@
 doctype html 
 html(lang="ko")
   head 
-    title wetube
+    title HeeStory
     link(rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css")
   body 
+    header  
+      nav   
+        ul 
+          li
+            a(href="/videos/upload") Upload Video
     main 
       h1=pageTitle
-    block content
+      block content
   include partials/footer.pug

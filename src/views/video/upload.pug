@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+  form(method="POST",enctype="multipart/form-data")
+    label(for="video") Video Uploader
+    input(name="video", placeholder="put your video", type="file", id="video")
+    //- required넣기
+    input(name="title", placeholder="Title of Video",type="text", required )
+    input(name="summary", placeholder="Video Summary",type="text", required )
+    input(name="genres", placeholder="Genres: divided by comma",type="text", required )
+    input(value="upload",type="submit")

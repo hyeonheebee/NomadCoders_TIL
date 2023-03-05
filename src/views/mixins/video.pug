@@ -1,5 +1,5 @@
-//- ul
-//-   li #{video.title}
-//-   li #{video.description} summarize
-//-   li #{video.rating}/5
-//-   li #{video.views}/5
+mixin video(video)
+  ul
+    li #{video.title}
+    li #{video.summary} summarize
+    li #{video.views}/5

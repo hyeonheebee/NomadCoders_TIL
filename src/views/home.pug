@@ -1,7 +1,9 @@
-//- include mixins/video
 extends layout
+include mixins/video
+
 block content 
-  //- each video in videos  
-  //-   +video(video)
-  //- else 
-  //-   h4 sorry I can't find any video  
+  ul
+    each video in videos  
+      +video(video)
+    else 
+      h4 sorry I can't find any video  

@@ -1,0 +1,59 @@
+~mongoose설치까지
+##6.9시작하기 
++upload +id +see+ edit +Delete 등등
++user auth진행하기
+
+req.body를 위해서는 urlencoded가 필요함을 깜빡함..
+>해놧는데 이상...
+    this.$__.validationError = new ValidationError(this);
+                               ^
+
+ValidationError: Video validation failed: title: Path `title` is required., summary: Path `summary` is required.
+    at model.Document.invalidate (/home/hyeonhee/wetube_final/node_modules/mongoose/lib/document.js:3081:32)
+    at /home/hyeonhee/wetube_final/node_modules/mongoose/lib/document.js:2869:17
+    at /home/hyeonhee/wetube_final/node_modules/mongoose/lib/schematype.js:1350:9
+    at processTicksAndRejections (node:internal/process/task_queues:77:11) {
+  errors: {
+    title: ValidatorError: Path `title` is required.
+        at validate (/home/hyeonhee/wetube_final/node_modules/mongoose/lib/schematype.js:1347:13)
+        at SchemaString.SchemaType.doValidate (/home/hyeonhee/wetube_final/node_modules/mongoose/lib/schematype.js:1331:7)
+        at /home/hyeonhee/wetube_final/node_modules/mongoose/lib/document.js:2861:18
+        at processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: {
+        validator: [Function (anonymous)],
+        message: 'Path `title` is required.',
+        type: 'required',
+        path: 'title',
+        value: undefined
+      },
+      kind: 'required',
+      path: 'title',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    summary: ValidatorError: Path `summary` is required.
+    이런 에러가 자꾸 뜸.
+
+>createdAt 에서 오바해서 그런가 
+>계속 mongoose 가 동작을 안해서(req.params, req.body 모두 빈 object로 나옴) 코드를 따라가보니 
+init.js에서 
+
+import Video from "./models/Video";
+import User from "./models/User"; 
+
+이렇게 되어있음을 확인했다. 
+
+import "./models/Video";
+import "./models/User";
+이렇게 넣어줘야한다 (이유를 잘 모르겠음..)
+
+> req.body 가 {} 지속되어서 에러가 난다. 
+express.json()까지 app.use중인데도 해소가 안됨 
+>하지만 최신버전에서는 express가 body-parser를 포함하고 있기 때문에 별도로 bodyparser는 require를 할 필요가 없다고 한다
+
+
+sort()문법 까먹음 
+
+sort({createdAt:"desc"}) 임 
+
