@@ -25,6 +25,14 @@ const videoSchema = new mongoose.Schema({
   views: { type: String, required: true, default: 0 },
 });
 
+videoSchema.pre("save", async function () {
+  this.hashtags = this.hashtags[0]
+    .toString()
+    .split(",")
+    .map((x) => (x.startsWith("#") ? x : "#" + x));
+  this.genres = this.genres[0].toString().split(",");
+});
+
 const Video = mongoose.model("Video", videoSchema);
 
 export default Video;

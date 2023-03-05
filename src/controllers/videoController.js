@@ -36,8 +36,8 @@ export const getEdit = async (req, res) => {
 export const postEdit = async (req, res) => {
   const { title, summary, genres, hashtags } = req.body;
   const { id } = req.params;
-  const video = await Video.findById(id);
-  if (!video) {
+  const validation = await Video.exists({ _id: id });
+  if (!validation) {
     const errorMessage = "Sorry, we can't find any Video";
     return res
       .status(404)
@@ -46,13 +46,10 @@ export const postEdit = async (req, res) => {
   await Video.findByIdAndUpdate(id, {
     title,
     summary,
-    hashtags: hashtags
-      .toString()
-      .split(",")
-      .map((x) => (x.startsWith("#") ? x : "#" + x)),
-    genres: genres.toString().split(","),
+    hashtags,
+    genres,
   });
-  console.log(video);
+
   return res.redirect("/");
 };
 export const getUpload = (req, res) => {
@@ -66,11 +63,8 @@ export const postUpload = async (req, res) => {
     await Video.create({
       title,
       summary,
-      hashtags: hashtags
-        .toString()
-        .split(",")
-        .map((x) => (x.startsWith("#") ? x : "#" + x)),
-      genres: genres.toString().split(","),
+      hashtags,
+      genres,
     });
     return res.redirect("/");
   } catch (error) {
