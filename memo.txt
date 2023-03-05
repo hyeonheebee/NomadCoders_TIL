@@ -97,5 +97,15 @@ findbyID로 해줄필요 없을때(object 안쓸때)는 exist로 validation 판�
 
 this.hashtags부분이 어색했다. middleware로 만들어 사용하는 부분 
 
-middleware로 뺀 이후에 update가 잘 동작하지 않았다(#안만들어줌)
+middleware로 hash를 뺀 이후에 update가 잘 동작하지 않았다(#안만들어줌)
 findByIdAndUpdate는 save를 호출하지 않는걸 간과함. 
+
+
+video.sth을 만듦 => static
+https://mongoosejs.com/docs/guide.html#statics
+https://mongoosejs.com/docs/2.7.x/docs/methods-statics.html
+
+static 만드는 문법 어색했다. 이름을 제대로 붙여주지 않아서("" 없어서) 에러도 발생했었음
+
+
+remove보다 delete 사용을 권장함 (롤백가능한 옵션)
