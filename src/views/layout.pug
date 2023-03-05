@@ -5,11 +5,8 @@ html(lang="ko")
     link(rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css")
   body 
     header  
-      nav   
-        ul 
-          li
-            a(href="/videos/upload") Upload Video
-    main 
       h1=pageTitle
+    main 
+      include partials/nav.pug
       block content
   include partials/footer.pug

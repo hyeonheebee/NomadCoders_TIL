@@ -1,0 +1,15 @@
+extends ../layout
+include ../mixins/video
+
+block content
+  h3 #{video.title}
+  p #{video.summary}
+  br
+  small #{video.views}/5
+  br
+  small #{video.createdDate}
+  hr
+  a(href=`${video.id}/edit`) Edit Video &rarr;
+  br
+  a(href="delete") Delete Video &rarr;
+//-  comment

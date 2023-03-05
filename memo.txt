@@ -52,8 +52,26 @@ import "./models/User";
 express.json()까지 app.use중인데도 해소가 안됨 
 >하지만 최신버전에서는 express가 body-parser를 포함하고 있기 때문에 별도로 bodyparser는 require를 할 필요가 없다고 한다
 
+const videoSchema = new mongoose.Schema
+>new빼먹음.. 
+
+> req.body {} 의 이유는 ,enctype="multipart/form-data" 설정을
+form에 미리해둔것 때문임이 밝혀졌다. 기본기의 중요성..
+
 
 sort()문법 까먹음 
 
 sort({createdAt:"desc"}) 임 
 
+new Date로 시간 달..이런식으로 분류해보려고 했으나 실패 
+new Date() 이렇게 괄호로 당장 실행하는 기능때문에 파일이 저장되는 순간의
+시간이 떠서, 실 시간이랑 괴리가 있다. 
+
+정규식 어려웠지만 regex101에 연습하면서 익혔음 
+try and catch 연습
+
+화살표 &rarr; 인데 또 까먹었다..&잊음
+
+계속 url을 
+videoRouter.route("/:id([0-9a-f]{24})/edit") 이걸 
+상대경로를 통해서 edit만 추가해서 구현하려고 애썼다..

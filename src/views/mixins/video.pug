@@ -1,5 +1,10 @@
-mixin video(video)
-  ul
-    li #{video.title}
-    li #{video.summary} summarize
-    li #{video.views}/5
+mixin video(item)
+    a(href=`/videos/${item.id}`) #{item.title}
+    br
+    span #{item.summary} summarize
+    br
+    small #{item.views}/5
+    br
+    small #{item.createdDate}
+    //- small #{item.createdDate.year} #{item.createdDate.month} #{item.createdDate.day}, #{item.createdDate.hour}:#{item.createdDate.minute}:#{item.createdDate.second} 
+    hr
