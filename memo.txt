@@ -202,8 +202,48 @@ await 가 없었다.
 줘야했고, await를 써줘야했던것이다. 
 
 
+express-session에 있는 환경설정 코드를 그대로 보고 썼더니 쿠키가 안보여서 당황함
+app.use(
+  session({
+    secret: "topsecret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  })
+);
+cookie: { secure: true }
+ 즉 쿠키가 secure 처리되어서 안보였던것! 
+
++resave는 true 설정
+
+app.use((req, res, next) => {
+  console.log(req.headers);
+  next();
+});
+이렇게 헤더를 확인하거나 req만 써서 확인해볼것 
+나는 req.session으로만 봐서 더 많은 정보를 보기 어려웠다 
+
+res.locals 개념을 헷갈렸다. 그래서 유저의 정보를 저장하는데 애를 먹었음
+res.locals에 떡하니 유저인증에 쓰라고 써있다
+This property is useful for exposing request-level information such as the request path name, authenticated user, user settings, 
+and so on to templates rendered within the application. 
+
+
 
   $or: [{ username }, { email }] 
   난 요걸 안쓰고 구현했다(join페이지에 기존유저 있는지 확인하는 부분에서 email을 넣지않았는데..넣어야겠다)
 
   join 페이지에 있는 status 코드를 400으로 바꿔줌. 없는 데이터가 아니라 그런듯 
+
+
+  res.locals.loggedIn = req.session.loggedIn;
+  이렇게 두면 undefined나옴
+  Boolean으로 감싸서 type 을 확인해줘야한다 
+
+      if !loggedIn
+      li 
+        a(href="/join") Join
+      li 
+        a(href="/login") Login
+
+이게 아니고 if else로 구현할것 

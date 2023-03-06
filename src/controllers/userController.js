@@ -14,11 +14,9 @@ export const postJoin = async (req, res) => {
   const pageTitle = "Join";
   let { password } = req.body;
   const { username, nickname, email, validPassword } = req.body;
-  console.log(req.body);
   if (password !== validPassword) {
     const errorMessage = "please check the password again";
     return res.status(400).render("user/join", { pageTitle, errorMessage });
-    //비밀번호 일치안할때
   }
   const validation = await User.exists({ $or: [{ username }, { email }] });
   if (validation) {
@@ -26,10 +24,8 @@ export const postJoin = async (req, res) => {
     return res.status(400).render("user/join", { pageTitle, errorMessage });
     //이미 있는 유저와 유저네임이 겹칠때
   }
-  console.log(password);
   password = await User.hashingPw(password);
   await User.create({ username, email, nickname, password });
-  console.log(password);
   return res.redirect("/login");
 };
 export const getLogin = (req, res) => {
@@ -50,10 +46,14 @@ export const postLogin = async (req, res) => {
     const errorMessage = "Password doesn't match with Username";
     return res.status(404).render("user/login", { errorMessage });
   }
+  req.session.user = user;
+  req.session.loggedIn = true;
 
-  //비밀번호 비교 후 맞으면
   return res.redirect("/");
 };
-export const logout = (req, res) => {};
+export const logout = (req, res) => {
+  req.session.destroy();
+  return res.redirect("/");
+};
 export const edit = (req, res) => {};
 export const deleteUser = (req, res) => {};
