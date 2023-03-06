@@ -214,7 +214,7 @@ app.use(
 cookie: { secure: true }
  즉 쿠키가 secure 처리되어서 안보였던것! 
 
-+resave는 true 설정
++resave는 true 설정=> 나중에 변경함
 
 app.use((req, res, next) => {
   console.log(req.headers);
@@ -252,6 +252,7 @@ and so on to templates rendered within the application.
 
 mongostore기능이 connect mongo가 필요하다는걸 기억하기 
 깔끔한 문법으로 정리 
+=> 이부분만 해주면 세션은 이제 mongodb에 저장된다 (서버메모리 아닌)
 
 영어설명을 잘 읽자
 session id는 쿠키에 저장하지만 데이터 자체는 서버에 저장
@@ -260,3 +261,10 @@ saveUninitialized: true의 경우
 false로 해야함
 session의 개념에 대해 착각함 로그인한다고 session에 데이터가 쌓이는게 아니라
 브라우저가 새로고침(즉 백엔드에 요청이 들어올때마다)할때마다 세션에 데이터 쌓임 
+
+쿠키를 받을때 도메인주소를 받고, 그럼 그 쿠키는 자동으로 해당 도메인으로만 접근해서 쓰임
+
+env 파일을 읽으려면 dotenv가 필요하다 
+내가 저지른 실수 두가지 
+1. env 파일을 src안에 넣은것 => 밖에 있어야함
+2. env 설정은 내가 사용하려는 모든파일(init, db)에 모두 들어가 있어야함 
