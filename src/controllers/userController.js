@@ -3,6 +3,7 @@
 // globalRouter.route("/join").get(getJoin).post(postJoin)
 // globalRouter.route("/login").get(getLogin).post(postLogin)
 import User from "../models/User";
+import bcrypt from "bcrypt";
 
 export const see = (req, res) => {};
 export const getJoin = (req, res) => {
@@ -11,7 +12,8 @@ export const getJoin = (req, res) => {
 };
 export const postJoin = async (req, res) => {
   const pageTitle = "Join";
-  const { username, password, nickname, email, validPassword } = req.body;
+  let { password } = req.body;
+  const { username, nickname, email, validPassword } = req.body;
   console.log(req.body);
   if (password !== validPassword) {
     const errorMessage = "please check the password again";
@@ -24,11 +26,32 @@ export const postJoin = async (req, res) => {
     return res.status(404).render("user/join", { pageTitle, errorMessage });
     //이미 있는 유저와 유저네임이 겹칠때
   }
+  console.log(password);
+  password = await User.hashingPw(password);
   await User.create({ username, email, nickname, password });
-  return res.redirect("login");
+  console.log(password);
+  return res.redirect("/login");
 };
-export const getLogin = (req, res) => {};
-export const postLogin = (req, res) => {};
+export const getLogin = (req, res) => {
+  return res.render("user/login");
+};
+export const postLogin = async (req, res) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
+  if (!user) {
+    return res.status(404).render("404");
+  }
+  bcrypt.compare(password, user.password, function (err, validation) {
+    return validation;
+  });
+  if (!validation) {
+    const errorMessage = "Password doesn't match with Username";
+    return res.status(404).render("user/login", { errorMessage });
+  }
+
+  //비밀번호 비교 후 맞으면
+  return res.redirect("/");
+};
 export const logout = (req, res) => {};
 export const edit = (req, res) => {};
 export const deleteUser = (req, res) => {};

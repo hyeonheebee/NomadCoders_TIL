@@ -162,5 +162,17 @@ hash랑 genres를 지웠을땐 구현이 되는데 만들면 구현이 안되고
 
 
  user db 에는 저장이 되는데 , redirect  가 안되고 있음 
+=> login 페이지랑 컨트롤러를 아예안만들었으니 당연했다..
 
- 
+
+bcrypt쓰는게 너무 어색했다. 
+pre,save 문법을 먼 저 쓴 후에 bcrypt문서를 참조해서 함수를 쓰는게 나았다. 
+err,hash를 괜히 넣으려고 했음 
+
+ userSchema.pre("save", async function () {
+  this.password = await bcrypt.hash(this.password, 5);
+});
+
+
+Parameter "filter" to findOne() must be an object,
+메소드는 오브젝트가 필수이거늘..
