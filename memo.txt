@@ -176,3 +176,34 @@ err,hash를 괜히 넣으려고 했음
 
 Parameter "filter" to findOne() must be an object,
 메소드는 오브젝트가 필수이거늘..
+
+
+compare 함수를 잘 못쓰겠다...
+  bcrypt.compare(password, user.password, function (err, validation) {
+    return validation;
+  });
+  if (!validation) {
+    const errorMessage = "Password doesn't match with Username";
+    return res.status(404).render("user/login", { errorMessage });
+  }
+
+  안돌아감 
+
+const validation = bcrypt.compare(password, user.password);
+이게 끝이었다. 황당...
+문서를 잘 보는 연습을 해보자 
+https://www.npmjs.com/package/bcrypt
+
+여전히 계속 true 같이 나와서 확인해보니 
+await 가 없었다.
+힌트는 console.log(validation)을 했을때 Promise { <pending> }
+이렇게 나온 부분이었다.
+즉 아직 pending 중이니, await를 이용해서 작업이 다 끝나기를 기다려
+줘야했고, await를 써줘야했던것이다. 
+
+
+
+  $or: [{ username }, { email }] 
+  난 요걸 안쓰고 구현했다(join페이지에 기존유저 있는지 확인하는 부분에서 email을 넣지않았는데..넣어야겠다)
+
+  join 페이지에 있는 status 코드를 400으로 바꿔줌. 없는 데이터가 아니라 그런듯 

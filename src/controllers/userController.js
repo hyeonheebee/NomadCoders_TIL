@@ -17,13 +17,13 @@ export const postJoin = async (req, res) => {
   console.log(req.body);
   if (password !== validPassword) {
     const errorMessage = "please check the password again";
-    return res.status(404).render("user/join", { pageTitle, errorMessage });
+    return res.status(400).render("user/join", { pageTitle, errorMessage });
     //비밀번호 일치안할때
   }
-  const validation = await User.exists({ username });
+  const validation = await User.exists({ $or: [{ username }, { email }] });
   if (validation) {
-    const errorMessage = "please wirte down diffrent username";
-    return res.status(404).render("user/join", { pageTitle, errorMessage });
+    const errorMessage = "Please Wirte Down diffrent Username or Email";
+    return res.status(400).render("user/join", { pageTitle, errorMessage });
     //이미 있는 유저와 유저네임이 겹칠때
   }
   console.log(password);
@@ -37,13 +37,15 @@ export const getLogin = (req, res) => {
 };
 export const postLogin = async (req, res) => {
   const { username, password } = req.body;
+  console.log(password);
   const user = await User.findOne({ username });
+  console.log(user.password);
   if (!user) {
-    return res.status(404).render("404");
+    const errorMessage = "That account doens't exist";
+    return res.status(404).render("user/login", { errorMessage });
   }
-  bcrypt.compare(password, user.password, function (err, validation) {
-    return validation;
-  });
+  const validation = await bcrypt.compare(password, user.password);
+  console.log(validation);
   if (!validation) {
     const errorMessage = "Password doesn't match with Username";
     return res.status(404).render("user/login", { errorMessage });
