@@ -14,35 +14,69 @@ export const search = async (req, res) => {
   console.log(req.query);
   // const { title } = req.query;
   const { title, hashtags, genres } = req.query;
-  if (!title || !hashtags || !genres) {
+  console.log(typeof hashtags);
+  console.log(hashtags);
+
+  if (!title && !hashtags && !genres) {
     const errorMessage = "please write your keyword";
     return res.status(400).render("video/search", { pageTitle, errorMessage });
   }
   if (title) {
-    if (title) {
-      const videos = await Video.find({ title });
-      console.log(videos);
-      if (!videos) {
-        return res.redirect("/");
-      }
-      return res.render("video/search", { pageTitle, videos });
+    const videos = await Video.find({
+      title: {
+        $regex: new RegExp(title, i),
+      },
+    });
+    if (!videos) {
+      return res.status(404).redirect("/");
     }
-
-    const errorMessage = "please write your keyword";
-    return res.status(400).render("video/search", { pageTitle, errorMessage });
+    return res.render("video/search", { pageTitle, videos });
   }
   if (hashtags) {
-    // const hashtag = hashFormatting(hashtags)
-    const videos = await Video.find({ hashtag });
+    const hashtag = hashtags.startsWith("#") ? hashtags : "#" + hashtags;
+    console.log(hashtag);
+    const videos = await Video.find({
+      hashtags,
+    }).in(hashtag, [hashtags]);
+    if (!videos) {
+      return res.status(404).redirect("/");
+    }
     return res.render("video/search", { pageTitle, videos });
   }
   if (genres) {
-    const videos = await Video.find({ genres });
-
+    const videos = await Video.find({
+      genres: {
+        $gex: new RegExp("$genres", "i"),
+      },
+    });
+    if (!videos) {
+      return res.status(404).redirect("/");
+    }
     return res.render("video/search", { pageTitle, videos });
   }
-  return res.render("video/search");
+
+  //   const errorMessage = "please write your keyword";
+  //   return res.status(400).render("video/search", { pageTitle, errorMessage });
+  // }
+  // if (hashtags) {
+  //   const hashtag = Video.hashFormatting(hashtags);
+  //   console.log(hashtag);
+  //   // const videos = await Video.find({ hashtags });
+  //   // return res.render("video/search", { pageTitle, videos });
+  // }
+  // if (genres) {
+  //   const genreArray = Video.genreFormatting(genres);
+  //   const genre = genreArray.forEach();
+  //   console.log(genre);
+  //   const videos = await Video.find({});
+  //   videos.genres.
+  //   console.log(video);
+  //   // const videos = await Video.find({ genres });
+  //   // return res.render("video/search", { pageTitle, videos });
+  // }
+  return res.render("video/search", { pageTitle });
 };
+
 export const see = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id);
