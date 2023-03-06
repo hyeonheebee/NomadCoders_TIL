@@ -247,3 +247,16 @@ and so on to templates rendered within the application.
         a(href="/login") Login
 
 이게 아니고 if else로 구현할것 
+
+>>03.07
+
+mongostore기능이 connect mongo가 필요하다는걸 기억하기 
+깔끔한 문법으로 정리 
+
+영어설명을 잘 읽자
+session id는 쿠키에 저장하지만 데이터 자체는 서버에 저장
+saveUninitialized: true의 경우 
+수정이 없어도 계속 session을 비우고 다시 저장한다 (초기화)
+false로 해야함
+session의 개념에 대해 착각함 로그인한다고 session에 데이터가 쌓이는게 아니라
+브라우저가 새로고침(즉 백엔드에 요청이 들어올때마다)할때마다 세션에 데이터 쌓임 

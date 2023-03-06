@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-mongoose.connect("mongodb://127.0.0.1:27017/heestory");
+mongoose.connect(process.env.DB_URL);
 // mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.7.1
 
 const db = mongoose.connection;
