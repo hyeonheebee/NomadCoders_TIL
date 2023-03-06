@@ -152,4 +152,15 @@ hash랑 genres를 지웠을땐 구현이 되는데 만들면 구현이 안되고
  $regex : new RegExp('$title',)
  이런 간단한 정규식으로 가능했다. 
  즉 string에서 포함하는 것 골라내기 의 개념이었던 것이다 
+
+ 제대로된 공식문서를 봐야한다. 쓸수있는 flag가 한정되어있는걸 모르고 계속
+ [] 를 시도했따. 포함되는 문자열을 찾고싶어서 
+ https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/RegExp/RegExp
+
+ in이라는 query까지 찾았으나 결국 포기 
+ 시간아깝다...
+
+
+ user db 에는 저장이 되는데 , redirect  가 안되고 있음 
+
  

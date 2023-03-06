@@ -11,71 +11,65 @@ export const home = async (req, res) => {
 };
 export const search = async (req, res) => {
   const pageTitle = "Search Video";
-  console.log(req.query);
   // const { title } = req.query;
-  const { title, hashtags, genres } = req.query;
-  console.log(typeof hashtags);
-  console.log(hashtags);
-
-  if (!title && !hashtags && !genres) {
+  const { title } = req.query;
+  if (!title) {
     const errorMessage = "please write your keyword";
     return res.status(400).render("video/search", { pageTitle, errorMessage });
   }
-  if (title) {
-    const videos = await Video.find({
-      title: {
-        $regex: new RegExp(title, i),
-      },
-    });
-    if (!videos) {
-      return res.status(404).redirect("/");
-    }
-    return res.render("video/search", { pageTitle, videos });
+  const videos = await Video.find({
+    title: {
+      $regex: new RegExp(title, "i"),
+    },
+  });
+  if (!videos) {
+    return res.status(404).redirect("/");
   }
-  if (hashtags) {
-    const hashtag = hashtags.startsWith("#") ? hashtags : "#" + hashtags;
-    console.log(hashtag);
-    const videos = await Video.find({
-      hashtags,
-    }).in(hashtag, [hashtags]);
-    if (!videos) {
-      return res.status(404).redirect("/");
-    }
-    return res.render("video/search", { pageTitle, videos });
-  }
-  if (genres) {
-    const videos = await Video.find({
-      genres: {
-        $gex: new RegExp("$genres", "i"),
-      },
-    });
-    if (!videos) {
-      return res.status(404).redirect("/");
-    }
-    return res.render("video/search", { pageTitle, videos });
-  }
-
-  //   const errorMessage = "please write your keyword";
-  //   return res.status(400).render("video/search", { pageTitle, errorMessage });
-  // }
-  // if (hashtags) {
-  //   const hashtag = Video.hashFormatting(hashtags);
-  //   console.log(hashtag);
-  //   // const videos = await Video.find({ hashtags });
-  //   // return res.render("video/search", { pageTitle, videos });
-  // }
-  // if (genres) {
-  //   const genreArray = Video.genreFormatting(genres);
-  //   const genre = genreArray.forEach();
-  //   console.log(genre);
-  //   const videos = await Video.find({});
-  //   videos.genres.
-  //   console.log(video);
-  //   // const videos = await Video.find({ genres });
-  //   // return res.render("video/search", { pageTitle, videos });
-  // }
-  return res.render("video/search", { pageTitle });
+  return res.render("video/search", { pageTitle, videos });
 };
+
+// if (hashtags) {
+//   const hashtag = hashtags.startsWith("#") ? hashtags : "#" + hashtags;
+//   console.log(hashtag);
+//   const videos = await Video.find({
+//     hashtags,
+//   }).in(hashtag, [hashtags]);
+//   if (!videos) {
+//     return res.status(404).redirect("/");
+//   }
+//   return res.render("video/search", { pageTitle, videos });
+// }
+// if (genres) {
+//   const videos = await Video.find({
+//     genres: {
+//       $gex: new RegExp("$genres", "i"),
+//     },
+//   });
+//   if (!videos) {
+//     return res.status(404).redirect("/");
+//   }
+//   return res.render("video/search", { pageTitle, videos });
+// }
+
+//   const errorMessage = "please write your keyword";
+//   return res.status(400).render("video/search", { pageTitle, errorMessage });
+// }
+// if (hashtags) {
+//   const hashtag = Video.hashFormatting(hashtags);
+//   console.log(hashtag);
+//   // const videos = await Video.find({ hashtags });
+//   // return res.render("video/search", { pageTitle, videos });
+// }
+// if (genres) {
+//   const genreArray = Video.genreFormatting(genres);
+//   const genre = genreArray.forEach();
+//   console.log(genre);
+//   const videos = await Video.find({});
+//   videos.genres.
+//   console.log(video);
+//   // const videos = await Video.find({ genres });
+//   // return res.render("video/search", { pageTitle, videos });
+// }
 
 export const see = async (req, res) => {
   const { id } = req.params;
