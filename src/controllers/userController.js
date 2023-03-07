@@ -94,12 +94,29 @@ export const gitfinish = async (req, res) => {
       headers: { Authorization: `bearer ${access_token}` },
     })
   ).json();
-  const authEmail = await (
-    await fetch(`${authFinalURL}/email/visibility`, {
+  const authEmailArray = await (
+    await fetch(`${authFinalURL}/emails`, {
+      primary: true,
+      verified: true,
       headers: { Authorization: `bearer ${access_token}` },
     })
   ).json();
+  const authEmail = authEmailArray.filter(
+    (x) => x.primary === true && x.verified === true
+  );
   console.log(authUser);
   console.log(authEmail);
+  const { login, name, avatar_url } = authUser;
+  const { email } = authEmail;
+  const user = await User.create({
+    username: login,
+    avatarUrl: avatar_url,
+    password: "",
+    nickname: name,
+    email,
+    socialLogin: true,
+  });
+  req.session.user = user;
+  req.session.loggedIn = true;
   return res.redirect("/");
 };
