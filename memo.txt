@@ -268,3 +268,84 @@ env 파일을 읽으려면 dotenv가 필요하다
 내가 저지른 실수 두가지 
 1. env 파일을 src안에 넣은것 => 밖에 있어야함
 2. env 설정은 내가 사용하려는 모든파일(init, db)에 모두 들어가 있어야함 
+github 에서 이미 내가 만든 development부분을 찾는다고 조금 헤맸다 ㅠ 
+ //만약 github login 버튼을 누르면 바로 redirect로
+  //   https://github.com/login/oauth/authorize?client_id=9574da7f78fbbb933186
+  // 갈수있도록
+세션, 환경설정에 시간이 오래걸렸음 ㅠ 
+
+흠...2단계 받아오는게 안된다 
+post를 어떻게 해야하는지? 모르겠음 
+
+내가 정리한 노트를 보고 fetch 힌트를 얻었다
+공식문서를 보고 문법작성을 시행했는데 es6로 response에 대한 팁을 받기가 어려웠음
+
+  const dataObj = await fetch(finalURL, {
+    method: "post",
+    headers: { Accept: "*/*" },
+  });
+  console.log(dataObj);
+  obj가 봐지기는 하는데 어떻게 데이터를 가져올까? 고민 
+
+
+공식문서대로 해보았다 
+ const dataObj = await fetch(finalURL, {
+    method: "post",
+    headers: { Accept: "*/*" },
+  });
+  const data = await dataObj.json();
+  console.log(data);
+  에러가 다음과 같이 발생
+
+  Cookies must be enabled to use GitHub.
+^
+
+SyntaxError: Unexpected token C in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at packageData (node:internal/deps/undici/undici:6403:23)
+    at specConsumeBody (node:internal/deps/undici/undici:6381:14)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+Node.js v18.14.0
+[nodemon] app crashed - waiting for file changes before starting...
+ 
+ 다시 공식문서대로 해봄
+ const dataObj = await fetch(finalURL, {
+    method: "post",
+    headers: { Accept: application/json },
+  });
+  const data = await dataObj.json();
+  console.log(data);
+
+  "application/json" 이어야했다
+
+  원래 썼던 코드가 맞았다 다만 아직도 
+  
+Cookies must be enabled to use GitHub.
+^
+
+SyntaxError: Unexpected token C in JSON at position 0
+이런 에러가 뜨고 있다.
+코드자체는 니꼬쌤 코드와 같은데..흠...
+물론 니꼬쌤은 URLSearchParms로 더 깔끔하게 정리하심. 
+공식문서에 URLSearchParms가 권장되어있었는데 난 보고도 어찌할줄 몰랐고
+그냥 쓰셨었는데 정확히 기억안난다..싶었는데 이렇게 쓰는구나 싶었다
+
+오버플로우를 토대로 확인했다 
+export const gitfinish = async (req, res) => {
+  const baseURL = "https://github.com/login/oauth";
+
+주소가 잘못되어있었다!! 
+baseURL뒤에 oauth 뒤에 start handler처럼 authorize가 있었음..와
+
+공식문서에 
+3. Use the access token to access the API
+The access token allows you to make requests to the API on a behalf of a user.
+
+Authorization: Bearer OAUTH-TOKEN
+GET https://api.github.com/user
+
+이말인 즉슨 헤더에 Authorization 이 조건을 넣으라는 뜻이었다. 
+
+headers: { Authorization: `bearer ${token}` },
+이렇게 해도 같은 동작으로 잘 일어난다 

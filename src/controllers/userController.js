@@ -4,6 +4,7 @@
 // globalRouter.route("/login").get(getLogin).post(postLogin)
 import User from "../models/User";
 import bcrypt from "bcrypt";
+import { response } from "express";
 
 export const see = (req, res) => {};
 export const getJoin = (req, res) => {
@@ -29,6 +30,8 @@ export const postJoin = async (req, res) => {
   return res.redirect("/login");
 };
 export const getLogin = (req, res) => {
+  //   https://github.com/login/oauth/authorize?client_id=9574da7f78fbbb933186
+  // 갈수있도록
   return res.render("user/login");
 };
 export const postLogin = async (req, res) => {
@@ -57,3 +60,41 @@ export const logout = (req, res) => {
 };
 export const edit = (req, res) => {};
 export const deleteUser = (req, res) => {};
+export const gitLogin = (req, res) => {
+  const baseURL = "https://github.com/login/oauth/authorize";
+  const client_id = `${process.env.CLIENT_ID}`;
+  const scope1 = "read:user";
+  const scope2 = "user:email";
+  const finalURL = `${baseURL}?client_id=${client_id}&scope=${scope1}%20${scope2}`;
+  console.log(finalURL);
+  // https://github.com/login/oauth/authorize?client_id=9574da7f78fbbb933186&scope=read:user%20user:email
+  //만약 github login 버튼을 누르면 바로 redirect로
+  //   https://github.com/login/oauth/authorize?client_id=9574da7f78fbbb933186
+  // 갈수있도록
+  return res.redirect(finalURL);
+};
+export const gitfinish = async (req, res) => {
+  const baseURL = "https://github.com/login/oauth";
+  const { code } = req.query;
+  const client_id = `${process.env.CLIENT_ID}`;
+  const client_secret = `${process.env.CLIENT_SECRET}`;
+  const finalURL = `${baseURL}/access_token?client_id=${client_id}&client_secret=${client_secret}&code=${code}`;
+
+  const authData = await (
+    await fetch(finalURL, {
+      method: "post",
+      headers: { Accept: "application/json" },
+    })
+  ).json();
+  const token = authData.access_token;
+  const apiBaseURL = "https://api.github.com";
+  const authFinalURL = `${apiBaseURL}/user`;
+  const authUser = await (
+    await fetch(authFinalURL, {
+      // visibility: "private",
+      headers: { Authorization: `bearer ${token}` },
+    })
+  ).json();
+
+  return res.redirect("/");
+};
