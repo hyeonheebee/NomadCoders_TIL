@@ -4,7 +4,6 @@
 // globalRouter.route("/login").get(getLogin).post(postLogin)
 import User from "../models/User";
 import bcrypt from "bcrypt";
-import { response } from "express";
 
 export const see = (req, res) => {};
 export const getJoin = (req, res) => {
@@ -36,18 +35,15 @@ export const getLogin = (req, res) => {
 };
 export const postLogin = async (req, res) => {
   const { username, password } = req.body;
-  console.log(password);
-  const user = await User.findOne({ username });
-  console.log(user.password);
-  if (user.socialOnly === true) {
-    console.log("you have to login with github");
-  }
+  const user = await User.findOne({ username, socialOnly: false });
+  // if (user.socialOnly === true) {
+  //   console.log("you have to login with github");
+  // }
   if (!user) {
     const errorMessage = "That account doens't exist";
     return res.status(404).render("user/login", { errorMessage });
   }
   const validation = await bcrypt.compare(password, user.password);
-  console.log(validation);
   if (!validation) {
     const errorMessage = "Password doesn't match with Username";
     return res.status(404).render("user/login", { errorMessage });
@@ -106,7 +102,6 @@ export const gitfinish = async (req, res) => {
   const authEmail = authEmailArray.find(
     (x) => x.primary === true && x.verified === true
   );
-  console.log(authEmail);
   if (!authEmail) {
     return res.redirect("/login");
   }
@@ -121,7 +116,7 @@ export const gitfinish = async (req, res) => {
       username: login,
       avatarUrl: avatar_url,
       password: "",
-      nickname: name,
+      nickname: existUser.name ? existUser.name : "BLANK NAME",
       email,
       socialLogin: true,
     });
