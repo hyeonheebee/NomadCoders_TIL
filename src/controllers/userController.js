@@ -86,15 +86,20 @@ export const gitfinish = async (req, res) => {
       headers: { Accept: "application/json" },
     })
   ).json();
-  const token = authData.access_token;
+  const { access_token } = authData;
   const apiBaseURL = "https://api.github.com";
   const authFinalURL = `${apiBaseURL}/user`;
   const authUser = await (
     await fetch(authFinalURL, {
-      // visibility: "private",
-      headers: { Authorization: `bearer ${token}` },
+      headers: { Authorization: `bearer ${access_token}` },
     })
   ).json();
-
+  const authEmail = await (
+    await fetch(`${authFinalURL}/email/visibility`, {
+      headers: { Authorization: `bearer ${access_token}` },
+    })
+  ).json();
+  console.log(authUser);
+  console.log(authEmail);
   return res.redirect("/");
 };
