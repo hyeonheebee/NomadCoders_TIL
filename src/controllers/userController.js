@@ -39,6 +39,9 @@ export const postLogin = async (req, res) => {
   console.log(password);
   const user = await User.findOne({ username });
   console.log(user.password);
+  if (user.socialOnly === true) {
+    console.log("you have to login with github");
+  }
   if (!user) {
     const errorMessage = "That account doens't exist";
     return res.status(404).render("user/login", { errorMessage });
@@ -67,10 +70,9 @@ export const gitLogin = (req, res) => {
   const scope2 = "user:email";
   const finalURL = `${baseURL}?client_id=${client_id}&scope=${scope1}%20${scope2}`;
   console.log(finalURL);
+  //URLsearchParams 도 사용가능함
   // https://github.com/login/oauth/authorize?client_id=9574da7f78fbbb933186&scope=read:user%20user:email
   //만약 github login 버튼을 누르면 바로 redirect로
-  //   https://github.com/login/oauth/authorize?client_id=9574da7f78fbbb933186
-  // 갈수있도록
   return res.redirect(finalURL);
 };
 export const gitfinish = async (req, res) => {
@@ -101,22 +103,31 @@ export const gitfinish = async (req, res) => {
       headers: { Authorization: `bearer ${access_token}` },
     })
   ).json();
-  const authEmail = authEmailArray.filter(
+  const authEmail = authEmailArray.find(
     (x) => x.primary === true && x.verified === true
   );
-  console.log(authUser);
   console.log(authEmail);
+  if (!authEmail) {
+    return res.redirect("/login");
+  }
   const { login, name, avatar_url } = authUser;
   const { email } = authEmail;
-  const user = await User.create({
-    username: login,
-    avatarUrl: avatar_url,
-    password: "",
-    nickname: name,
-    email,
-    socialLogin: true,
-  });
-  req.session.user = user;
-  req.session.loggedIn = true;
-  return res.redirect("/");
+  const existUser = await User.findOne({ email });
+  if (existUser) {
+    req.session.user = existUser;
+    req.session.loggedIn = true;
+  } else {
+    const user = await User.create({
+      username: login,
+      avatarUrl: avatar_url,
+      password: "",
+      nickname: name,
+      email,
+      socialLogin: true,
+    });
+
+    req.session.user = user;
+    req.session.loggedIn = true;
+    return res.redirect("/");
+  }
 };
