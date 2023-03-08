@@ -1,18 +1,32 @@
 import express from "express";
 import {
   see,
-  edit,
+  getEdit,
+  postEdit,
   deleteUser,
   logout,
+  getChangePW,
+  postChangePW,
   gitfinish,
 } from "../controllers/userController";
+import { unlogProtectMiddleware } from "../middlewares";
 const userRouter = express.Router();
 
-userRouter.get("/:id", see);
-userRouter.get("/edit-profile", edit);
-userRouter.get("/delete", deleteUser);
-userRouter.get("/logout", logout);
+userRouter.get("/:id([0-9a-f]{24})", unlogProtectMiddleware, see);
+userRouter
+  .route("/:id([0-9a-f]{24})/edit")
+  .all(unlogProtectMiddleware)
+  .get(getEdit)
+  .post(postEdit);
+userRouter.get("/delete", unlogProtectMiddleware, deleteUser);
+userRouter.get("/logout", unlogProtectMiddleware, logout);
+userRouter
+  .route("/changePW")
+  .all(unlogProtectMiddleware)
+  .get(getChangePW)
+  .post(postChangePW);
 userRouter.get("/github/finish", gitfinish);
+
 export default userRouter;
 
 // 6. users/:id  (see users)

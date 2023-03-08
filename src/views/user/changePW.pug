@@ -1,0 +1,11 @@
+extends ../layout
+block content 
+  if errorMessage 
+    h2 Please put your password Again
+    h3 ERROR | #{errorMessage} 
+
+  form(method="POST")
+    input(name="nowPassword",placeholder="current password",type="password")
+    input(name="newPassword",placeholder="new password",type="password")
+    input(name="validPassword",placeholder="new password again",type="password")
+    input(type="submit",value="Update")  

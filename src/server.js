@@ -2,7 +2,11 @@ require("dotenv").config();
 import express from "express";
 import morgan from "morgan";
 import session from "express-session";
-import { localMiddleware } from "./middlewares";
+import {
+  localMiddleware,
+  unlogProtectMiddleware,
+  loggedAllowMiddleware,
+} from "./middlewares";
 import MongoStore from "connect-mongo";
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";

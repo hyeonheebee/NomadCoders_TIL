@@ -1,0 +1,12 @@
+extends ../layout
+block content
+
+  div 
+    img(src=`${loggeduser.avatarUrl}`)
+  nav  
+    ul  
+      li=loggeduser.username 
+      li=loggeduser.nickname 
+      hr
+      a(href=`/users/${loggeduser._id}/edit`) &rarr; Edit your Profile 
+  img(src=`${test}`)

@@ -5,7 +5,33 @@
 import User from "../models/User";
 import bcrypt from "bcrypt";
 
-export const see = (req, res) => {};
+export const see = async (req, res) => {
+  return res.render("user/see");
+};
+export const getEdit = async (req, res) => {
+  return res.render("user/edit");
+};
+export const postEdit = async (req, res) => {
+  const { _id } = req.session.user;
+  const { nickname, avatarUrl } = req.body;
+  console.log(avatarUrl);
+  if (!avatarUrl) {
+    const user = await User.findByIdAndUpdate(_id, { nickname }, { new: true });
+    req.session.user = user;
+    return res.redirect(`/users/${_id}`);
+  } else {
+    const user = await User.findByIdAndUpdate(
+      _id,
+      {
+        nickname,
+        avatarUrl,
+      },
+      { new: true }
+    );
+    req.session.user = user;
+    return res.redirect(`/users/${_id}`);
+  }
+};
 export const getJoin = (req, res) => {
   const pageTitle = "Join";
   return res.render("user/join", { pageTitle });
@@ -35,7 +61,7 @@ export const getLogin = (req, res) => {
 };
 export const postLogin = async (req, res) => {
   const { username, password } = req.body;
-  const user = await User.findOne({ username, socialOnly: false });
+  const user = await User.findOne({ username, socialLogin: false });
   // if (user.socialOnly === true) {
   //   console.log("you have to login with github");
   // }
@@ -57,27 +83,23 @@ export const logout = (req, res) => {
   req.session.destroy();
   return res.redirect("/");
 };
-export const edit = (req, res) => {};
 export const deleteUser = (req, res) => {};
 export const gitLogin = (req, res) => {
   const baseURL = "https://github.com/login/oauth/authorize";
   const client_id = `${process.env.CLIENT_ID}`;
   const scope1 = "read:user";
   const scope2 = "user:email";
-  const finalURL = `${baseURL}?client_id=${client_id}&scope=${scope1}%20${scope2}`;
-  console.log(finalURL);
+  const finalURL = `${baseURL}?client_id=${client_id}&allow_signup=false&scope=${scope1}%20${scope2}`;
   //URLsearchParams 도 사용가능함
-  // https://github.com/login/oauth/authorize?client_id=9574da7f78fbbb933186&scope=read:user%20user:email
-  //만약 github login 버튼을 누르면 바로 redirect로
   return res.redirect(finalURL);
 };
 export const gitfinish = async (req, res) => {
-  const baseURL = "https://github.com/login/oauth";
+  const baseURL = "https://github.com/login/oauth/access_token";
   const { code } = req.query;
   const client_id = `${process.env.CLIENT_ID}`;
   const client_secret = `${process.env.CLIENT_SECRET}`;
-  const finalURL = `${baseURL}/access_token?client_id=${client_id}&client_secret=${client_secret}&code=${code}`;
-
+  const finalURL = `${baseURL}?client_id=${client_id}&client_secret=${client_secret}&code=${code}`;
+  console.log(finalURL);
   const authData = await (
     await fetch(finalURL, {
       method: "post",
@@ -85,44 +107,76 @@ export const gitfinish = async (req, res) => {
     })
   ).json();
   const { access_token } = authData;
-  const apiBaseURL = "https://api.github.com";
-  const authFinalURL = `${apiBaseURL}/user`;
-  const authUser = await (
-    await fetch(authFinalURL, {
-      headers: { Authorization: `bearer ${access_token}` },
-    })
-  ).json();
-  const authEmailArray = await (
-    await fetch(`${authFinalURL}/emails`, {
-      primary: true,
-      verified: true,
-      headers: { Authorization: `bearer ${access_token}` },
-    })
-  ).json();
-  const authEmail = authEmailArray.find(
-    (x) => x.primary === true && x.verified === true
-  );
-  if (!authEmail) {
-    return res.redirect("/login");
-  }
-  const { login, name, avatar_url } = authUser;
-  const { email } = authEmail;
-  const existUser = await User.findOne({ email });
-  if (existUser) {
-    req.session.user = existUser;
-    req.session.loggedIn = true;
+  if (access_token) {
+    const apiBaseURL = "https://api.github.com";
+    const authFinalURL = `${apiBaseURL}/user`;
+    const authUser = await (
+      await fetch(authFinalURL, {
+        headers: { Authorization: `bearer ${access_token}` },
+      })
+    ).json();
+    const authEmailArray = await (
+      await fetch(`${authFinalURL}/emails`, {
+        primary: true,
+        verified: true,
+        headers: { Authorization: `bearer ${access_token}` },
+      })
+    ).json();
+    const authEmail = authEmailArray.find(
+      (x) => x.primary === true && x.verified === true
+    );
+    if (!authEmail) {
+      return res.redirect("/login");
+    }
+    const { login, name, avatar_url } = authUser;
+    const { email } = authEmail;
+    const existUser = await User.findOne({ email });
+    if (existUser) {
+      req.session.user = existUser;
+      req.session.loggedIn = true;
+    } else {
+      const user = await User.create({
+        username: login,
+        avatarUrl: avatar_url,
+        password: "",
+        nickname: name ? name : "BLANK NAME",
+        email,
+        socialLogin: true,
+      });
+      req.session.user = user;
+      req.session.loggedIn = true;
+      return res.redirect("/");
+    }
   } else {
-    const user = await User.create({
-      username: login,
-      avatarUrl: avatar_url,
-      password: "",
-      nickname: existUser.name ? existUser.name : "BLANK NAME",
-      email,
-      socialLogin: true,
-    });
+    return res.status(400).redirect("/login");
+  }
+};
 
+export const getChangePW = (req, res) => {
+  return res.render("user/changePW");
+};
+export const postChangePW = async (req, res) => {
+  const { _id } = req.session.user;
+  let { newPassword } = req.body;
+  const { nowPassword, validPassword } = req.body;
+  const user = await User.findById(_id);
+  console.log(user);
+  const validation = await bcrypt.compare(nowPassword, user.password);
+  if (!validation) {
+    const errorMessage = "Current password doesn't correct";
+    return res.status(404).render("user/changePW", { errorMessage });
+  } else {
+    if (newPassword !== validPassword) {
+      const errorMessage = "please check new password again";
+      return res.status(400).render("user/changePW", { errorMessage });
+    }
+    newPassword = await User.hashingPw(newPassword);
+    const user = await User.findByIdAndUpdate(
+      _id,
+      { password: newPassword },
+      { new: true }
+    );
     req.session.user = user;
-    req.session.loggedIn = true;
-    return res.redirect("/");
+    return res.redirect("changePW");
   }
 };
