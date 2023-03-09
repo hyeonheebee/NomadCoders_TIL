@@ -72,8 +72,8 @@ export const search = async (req, res) => {
 
 export const see = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id);
-  const user = await User.findById(video.owner);
+  const video = await Video.findById(id).populate("owner");
+  // const user = await User.findById(id).populate("video");
   console.log(video);
   if (!video) {
     const errorMessage = "Sorry, we can't find any Video";
@@ -81,7 +81,7 @@ export const see = async (req, res) => {
       .status(404)
       .render("404", { pageTitle: "404 ERROR", errorMessage });
   }
-  return res.render("video/see", { pageTitle: video.title, video, user });
+  return res.render("video/see", { pageTitle: video.title, video });
 };
 export const getEdit = async (req, res) => {
   const { id } = req.params;
@@ -121,7 +121,7 @@ export const postUpload = async (req, res) => {
   const { path } = req.file;
   const { _id } = req.session.user;
   try {
-    await Video.create({
+    const uploadedVideo = await Video.create({
       title,
       summary,
       hashtags: Video.hashFormatting(hashtags),
@@ -129,6 +129,11 @@ export const postUpload = async (req, res) => {
       fileUrl: path,
       owner: _id,
     });
+    const user = await User.findById(_id);
+    user.videos.push(uploadedVideo);
+    user.save();
+
+    //유저에게도 해당비디오를 넣어줌
     return res.redirect("/");
   } catch (error) {
     console.log(error);

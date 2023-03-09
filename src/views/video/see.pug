@@ -12,13 +12,14 @@ block content
     each tag in video.hashtags 
       li=tag   
   br
-  small #{user.username}
+  small Creator | #{String(video.owner.username)} / #{String(video.owner.nickname)}
   br
   small #{video.views}/5
   br
   small #{video.createdDate}
   hr
-  a(href=`${video.id}/edit`) Edit Video &rarr;
-  br
-  a(href=`${video.id}/delete`) Delete Video &rarr;
-//-  comment
+  if loggeduser._id  === String(video.owner.id)
+    a(href=`${video.id}/edit`) Edit Video &rarr;
+    br
+    a(href=`${video.id}/delete`) Delete Video &rarr;
+  //-  comment

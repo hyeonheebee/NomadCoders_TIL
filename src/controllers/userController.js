@@ -4,11 +4,12 @@
 // globalRouter.route("/login").get(getLogin).post(postLogin)
 import User from "../models/User";
 import bcrypt from "bcrypt";
+import Video from "../models/Video";
 
 export const see = async (req, res) => {
   // return res.render("user/see");
   const { id } = req.params;
-  const user = await User.findById(id);
+  const user = await User.findById(id).populate("videos");
   if (!user) {
     const errorMessage = "Sorry, we can't find your profile";
     return res
@@ -141,10 +142,7 @@ export const gitfinish = async (req, res) => {
     }
     const { login, name, avatar_url } = authUser;
     const { email } = authEmail;
-    console.log(email);
-    console.log("hi");
     let existUser = await User.findOne({ email: authEmail.email });
-    console.log(existUser);
     if (!existUser) {
       existUser = await User.create({
         username: login,
@@ -157,7 +155,6 @@ export const gitfinish = async (req, res) => {
     }
     req.session.user = existUser;
     req.session.loggedIn = true;
-    console.log("helloo?");
     return res.redirect("/");
   } else {
     return res.status(400).redirect("/login");

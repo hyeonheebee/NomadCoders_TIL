@@ -1,4 +1,5 @@
 extends ../layout
+include ../mixins/video
 block content
 
   div 
@@ -9,3 +10,8 @@ block content
       li=user.nickname 
       hr
       a(href=`/users/${user._id}/edit`) &rarr; Edit your Profile 
+      hr
+  each video in user.videos 
+    +video(video)
+  else
+   h3 sorry you don't have any video
