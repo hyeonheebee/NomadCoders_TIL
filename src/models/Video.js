@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 const videoSchema = new mongoose.Schema({
   title: { type: String, required: true, minLenght: 5 },
-  // FileUrl: { type: String, required: true },
+  fileUrl: { type: String, required: true },
   summary: { type: String, required: true, minLenght: 10 },
-  // owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
+  owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
   hashtags: [{ type: String, required: true, trim: true }],
   genres: [{ type: String, required: true, trim: true }],
   createdDate: {

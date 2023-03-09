@@ -1,9 +1,9 @@
 extends ../layout
 block content 
-  form(method="POST")
+  form(method="POST",enctype="multipart/form-data")
       input(name="nickname",value=loggeduser.nickname,placeholder="nick-name",type="text")
       label(for="avatar")
-      input(id="avatar", name="avatarUrl",placeholder="avatar",type="file")
+      input(id="avatar", name="avatarUrl",placeholder="avatar",type="file", accept="image/*")
       input(type="submit",value="Update")
       hr
       a(href="/users/changePW") &rarr; Change Password 

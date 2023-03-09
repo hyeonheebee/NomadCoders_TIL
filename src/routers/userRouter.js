@@ -9,7 +9,7 @@ import {
   postChangePW,
   gitfinish,
 } from "../controllers/userController";
-import { unlogProtectMiddleware } from "../middlewares";
+import { unlogProtectMiddleware, avatarMiddleware } from "../middlewares";
 const userRouter = express.Router();
 
 userRouter.get("/:id([0-9a-f]{24})", unlogProtectMiddleware, see);
@@ -17,7 +17,7 @@ userRouter
   .route("/:id([0-9a-f]{24})/edit")
   .all(unlogProtectMiddleware)
   .get(getEdit)
-  .post(postEdit);
+  .post(avatarMiddleware.single("avatarUrl"), postEdit);
 userRouter.get("/delete", unlogProtectMiddleware, deleteUser);
 userRouter.get("/logout", unlogProtectMiddleware, logout);
 userRouter

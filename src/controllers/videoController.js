@@ -2,16 +2,15 @@
 //search, home, see, edit, upload, deleteVideo,
 //comments, comments/delete
 import Video from "../models/Video";
+import User from "../models/User";
 
 export const home = async (req, res) => {
   const videos = await Video.find({}).sort({ createdDate: "desc" });
   const pageTitle = "home";
-
   return res.render("home", { pageTitle, videos });
 };
 export const search = async (req, res) => {
   const pageTitle = "Search Video";
-  // const { title } = req.query;
   const { title } = req.query;
   if (!title) {
     const errorMessage = "please write your keyword";
@@ -74,14 +73,15 @@ export const search = async (req, res) => {
 export const see = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id);
+  const user = await User.findById(video.owner);
+  console.log(video);
   if (!video) {
     const errorMessage = "Sorry, we can't find any Video";
     return res
       .status(404)
       .render("404", { pageTitle: "404 ERROR", errorMessage });
   }
-  console.log(video);
-  return res.render("video/see", { pageTitle: video.title, video });
+  return res.render("video/see", { pageTitle: video.title, video, user });
 };
 export const getEdit = async (req, res) => {
   const { id } = req.params;
@@ -110,7 +110,6 @@ export const postEdit = async (req, res) => {
     hashtags: Video.hashFormatting(hashtags),
     genres: Video.genreFormatting(genres),
   });
-
   return res.redirect("/");
 };
 export const getUpload = (req, res) => {
@@ -119,13 +118,16 @@ export const getUpload = (req, res) => {
 export const postUpload = async (req, res) => {
   const pageTitle = "Upload Video";
   const { title, summary, genres, hashtags } = req.body;
-
+  const { path } = req.file;
+  const { _id } = req.session.user;
   try {
     await Video.create({
       title,
       summary,
       hashtags: Video.hashFormatting(hashtags),
       genres: Video.genreFormatting(genres),
+      fileUrl: path,
+      owner: _id,
     });
     return res.redirect("/");
   } catch (error) {

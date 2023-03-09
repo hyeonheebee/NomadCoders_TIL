@@ -6,32 +6,39 @@ import User from "../models/User";
 import bcrypt from "bcrypt";
 
 export const see = async (req, res) => {
-  return res.render("user/see");
+  // return res.render("user/see");
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    const errorMessage = "Sorry, we can't find your profile";
+    return res
+      .status(404)
+      .render("404", { pageTitle: "404 ERROR", errorMessage });
+  }
+  return res.render(`user/see`, { pageTitle: user.name, user });
+  // 이렇게도 할수있는데 내 방식이랑 차이가 뭘까?
 };
 export const getEdit = async (req, res) => {
   return res.render("user/edit");
 };
 export const postEdit = async (req, res) => {
   const { _id } = req.session.user;
-  const { nickname, avatarUrl } = req.body;
-  console.log(avatarUrl);
-  if (!avatarUrl) {
-    const user = await User.findByIdAndUpdate(_id, { nickname }, { new: true });
-    req.session.user = user;
-    return res.redirect(`/users/${_id}`);
-  } else {
-    const user = await User.findByIdAndUpdate(
-      _id,
-      {
-        nickname,
-        avatarUrl,
-      },
-      { new: true }
-    );
-    req.session.user = user;
-    return res.redirect(`/users/${_id}`);
-  }
+  let { file } = req;
+  const { nickname } = req.body;
+  console.log("this is", file);
+  // path = req.session.user.avatarUrl;
+  const user = await User.findByIdAndUpdate(
+    _id,
+    {
+      nickname,
+      avatarUrl: file ? file.path : req.session.user.avatarUrl,
+    },
+    { new: true }
+  );
+  req.session.user = user;
+  return res.redirect(`/users/${_id}`);
 };
+
 export const getJoin = (req, res) => {
   const pageTitle = "Join";
   return res.render("user/join", { pageTitle });
@@ -86,11 +93,17 @@ export const logout = (req, res) => {
 export const deleteUser = (req, res) => {};
 export const gitLogin = (req, res) => {
   const baseURL = "https://github.com/login/oauth/authorize";
+  // const params = {
+  //   client_id: process.env.CLIENT_ID,
+  //   scope: "read:user user:email",
+  //   allow_signup: false,
+  // };
+  // const gitLoginParams = new URLSearchParams(params).toString();
+  // const finalURL = `${baseURL}?${gitLoginParams}`;
   const client_id = `${process.env.CLIENT_ID}`;
   const scope1 = "read:user";
   const scope2 = "user:email";
   const finalURL = `${baseURL}?client_id=${client_id}&allow_signup=false&scope=${scope1}%20${scope2}`;
-  //URLsearchParams 도 사용가능함
   return res.redirect(finalURL);
 };
 export const gitfinish = async (req, res) => {
@@ -99,7 +112,6 @@ export const gitfinish = async (req, res) => {
   const client_id = `${process.env.CLIENT_ID}`;
   const client_secret = `${process.env.CLIENT_SECRET}`;
   const finalURL = `${baseURL}?client_id=${client_id}&client_secret=${client_secret}&code=${code}`;
-  console.log(finalURL);
   const authData = await (
     await fetch(finalURL, {
       method: "post",
@@ -107,7 +119,7 @@ export const gitfinish = async (req, res) => {
     })
   ).json();
   const { access_token } = authData;
-  if (access_token) {
+  if (access_token in authData) {
     const apiBaseURL = "https://api.github.com";
     const authFinalURL = `${apiBaseURL}/user`;
     const authUser = await (
@@ -160,7 +172,6 @@ export const postChangePW = async (req, res) => {
   let { newPassword } = req.body;
   const { nowPassword, validPassword } = req.body;
   const user = await User.findById(_id);
-  console.log(user);
   const validation = await bcrypt.compare(nowPassword, user.password);
   if (!validation) {
     const errorMessage = "Current password doesn't correct";
@@ -176,7 +187,7 @@ export const postChangePW = async (req, res) => {
       { password: newPassword },
       { new: true }
     );
-    req.session.user = user;
-    return res.redirect("changePW");
+    req.session.destroy();
+    return res.redirect("/login");
   }
 };

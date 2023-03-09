@@ -2,11 +2,10 @@ extends ../layout
 block content
 
   div 
-    img(src=`${loggeduser.avatarUrl}`)
+    img(src=`/${user.avatarUrl}`,width=200,height=200)
   nav  
     ul  
-      li=loggeduser.username 
-      li=loggeduser.nickname 
+      li=user.username 
+      li=user.nickname 
       hr
-      a(href=`/users/${loggeduser._id}/edit`) &rarr; Edit your Profile 
-  img(src=`${test}`)
+      a(href=`/users/${user._id}/edit`) &rarr; Edit your Profile 

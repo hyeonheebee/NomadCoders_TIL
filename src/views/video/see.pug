@@ -4,12 +4,15 @@ extends ../layout
 block content
   h3 #{video.title}
   p #{video.summary}
+  video(src=`/${video.fileUrl}`,controls,width=400,height=400)
    ul
     each genre in video.genres 
      li=genre
    ul
     each tag in video.hashtags 
       li=tag   
+  br
+  small #{user.username}
   br
   small #{video.views}/5
   br
