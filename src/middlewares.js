@@ -2,7 +2,6 @@ import multer from "multer";
 export const localMiddleware = (req, res, next) => {
   // Make `user` and `authenticated` available in templates
   res.locals.loggeduser = req.session.user;
-  console.log("this is loggeduser", res.locals.loggeduser);
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   next();
 };
