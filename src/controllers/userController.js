@@ -93,17 +93,18 @@ export const logout = (req, res) => {
 export const deleteUser = (req, res) => {};
 export const gitLogin = (req, res) => {
   const baseURL = "https://github.com/login/oauth/authorize";
-  // const params = {
-  //   client_id: process.env.CLIENT_ID,
-  //   scope: "read:user user:email",
-  //   allow_signup: false,
-  // };
-  // const gitLoginParams = new URLSearchParams(params).toString();
-  // const finalURL = `${baseURL}?${gitLoginParams}`;
-  const client_id = `${process.env.CLIENT_ID}`;
-  const scope1 = "read:user";
-  const scope2 = "user:email";
-  const finalURL = `${baseURL}?client_id=${client_id}&allow_signup=false&scope=${scope1}%20${scope2}`;
+  const params = {
+    client_id: process.env.CLIENT_ID,
+    scope: "read:user user:email",
+    allow_signup: false,
+  };
+  const gitLoginParams = new URLSearchParams(params).toString();
+  const finalURL = `${baseURL}?${gitLoginParams}`;
+  // const client_id = `${process.env.CLIENT_ID}`;
+  // const scope1 = "read:user";
+  // const scope2 = "user:email";
+  // const finalURL = `${baseURL}?client_id=${client_id}&allow_signup=false&scope=${scope1}%20${scope2}`;
+  console.log("bye");
   return res.redirect(finalURL);
 };
 export const gitfinish = async (req, res) => {
@@ -118,8 +119,8 @@ export const gitfinish = async (req, res) => {
       headers: { Accept: "application/json" },
     })
   ).json();
-  const { access_token } = authData;
-  if (access_token in authData) {
+  if ("access_token" in authData) {
+    const { access_token } = authData;
     const apiBaseURL = "https://api.github.com";
     const authFinalURL = `${apiBaseURL}/user`;
     const authUser = await (
@@ -129,8 +130,6 @@ export const gitfinish = async (req, res) => {
     ).json();
     const authEmailArray = await (
       await fetch(`${authFinalURL}/emails`, {
-        primary: true,
-        verified: true,
         headers: { Authorization: `bearer ${access_token}` },
       })
     ).json();
@@ -142,12 +141,12 @@ export const gitfinish = async (req, res) => {
     }
     const { login, name, avatar_url } = authUser;
     const { email } = authEmail;
-    const existUser = await User.findOne({ email });
-    if (existUser) {
-      req.session.user = existUser;
-      req.session.loggedIn = true;
-    } else {
-      const user = await User.create({
+    console.log(email);
+    console.log("hi");
+    let existUser = await User.findOne({ email: authEmail.email });
+    console.log(existUser);
+    if (!existUser) {
+      existUser = await User.create({
         username: login,
         avatarUrl: avatar_url,
         password: "",
@@ -155,10 +154,11 @@ export const gitfinish = async (req, res) => {
         email,
         socialLogin: true,
       });
-      req.session.user = user;
-      req.session.loggedIn = true;
-      return res.redirect("/");
     }
+    req.session.user = existUser;
+    req.session.loggedIn = true;
+    console.log("helloo?");
+    return res.redirect("/");
   } else {
     return res.status(400).redirect("/login");
   }
