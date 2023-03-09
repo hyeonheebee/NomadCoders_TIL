@@ -46,8 +46,8 @@ export const getJoin = (req, res) => {
 };
 export const postJoin = async (req, res) => {
   const pageTitle = "Join";
-  let { password } = req.body;
-  const { username, nickname, email, validPassword } = req.body;
+  // let { password } = req.body;
+  const { username, nickname, email, validPassword, password } = req.body;
   if (password !== validPassword) {
     const errorMessage = "please check the password again";
     return res.status(400).render("user/join", { pageTitle, errorMessage });
@@ -58,7 +58,7 @@ export const postJoin = async (req, res) => {
     return res.status(400).render("user/join", { pageTitle, errorMessage });
     //이미 있는 유저와 유저네임이 겹칠때
   }
-  password = await User.hashingPw(password);
+  // password = await User.hashingPw(password);
   await User.create({ username, email, nickname, password });
   return res.redirect("/login");
 };

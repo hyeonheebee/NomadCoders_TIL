@@ -12,10 +12,15 @@ const userSchema = new mongoose.Schema({
   blog: String,
 });
 
-userSchema.static("hashingPw", async function (password) {
-  password = await bcrypt.hash(password, 5);
-  return password;
+userSchema.pre("save", async function () {
+  if (this.isModifed("password")) {
+    this.password = await bcrypt.hash(password, 5);
+  }
 });
+// userSchema.static("hashingPw", async function (password) {
+//   password = await bcrypt.hash(password, 5);
+//   return password;
+// });
 
 // userSchema.pre("save", async function () {
 //   this.password = await bcrypt.hash(this.password, 5);

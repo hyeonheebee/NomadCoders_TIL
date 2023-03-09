@@ -81,6 +81,7 @@ export const see = async (req, res) => {
       .status(404)
       .render("404", { pageTitle: "404 ERROR", errorMessage });
   }
+
   return res.render("video/see", { pageTitle: video.title, video });
 };
 export const getEdit = async (req, res) => {
