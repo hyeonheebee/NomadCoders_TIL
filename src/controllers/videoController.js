@@ -85,6 +85,7 @@ export const see = async (req, res) => {
   return res.render("video/see", { pageTitle: video.title, video });
 };
 export const getEdit = async (req, res) => {
+  const { _id } = req.session.user;
   const { id } = req.params;
   const video = await Video.findById(id);
   if (!video) {
@@ -93,17 +94,25 @@ export const getEdit = async (req, res) => {
       .status(404)
       .render("404", { pageTitle: "404 ERROR", errorMessage });
   }
+  if (String(video.owner) !== String(_id)) {
+    return res.status(403).redirect("/");
+  }
+
   return res.render("video/edit", { pageTitle: "Edit Video", video });
 };
 export const postEdit = async (req, res) => {
+  const { _id } = req.session.user;
   const { title, summary, genres, hashtags } = req.body;
   const { id } = req.params;
-  const validation = await Video.exists({ _id: id });
-  if (!validation) {
+  const video = await Video.findById(id);
+  if (!video) {
     const errorMessage = "Sorry, we can't find any Video";
     return res
       .status(404)
       .render("404", { pageTitle: "404 ERROR", errorMessage });
+  }
+  if (String(video.owner) !== String(_id)) {
+    return res.status(403).redirect("/");
   }
   await Video.findByIdAndUpdate(id, {
     title,
@@ -111,7 +120,8 @@ export const postEdit = async (req, res) => {
     hashtags: Video.hashFormatting(hashtags),
     genres: Video.genreFormatting(genres),
   });
-  return res.redirect("/");
+
+  return res.redirect(`/videos/${id}`);
 };
 export const getUpload = (req, res) => {
   return res.render("video/upload", { pageTitle: "upload" });
@@ -144,6 +154,11 @@ export const postUpload = async (req, res) => {
 };
 export const deleteVideo = async (req, res) => {
   const { id } = req.params;
+  const { _id } = req.session.user;
+  const video = await Video.findById(id);
+  if (String(video.owner) !== String(_id)) {
+    return res.status(403).redirect("/");
+  }
   await Video.findOneAndDelete({ _id: id });
   return res.redirect("/");
 };
