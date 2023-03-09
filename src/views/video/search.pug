@@ -2,10 +2,11 @@ extends ../layout
 include ../mixins/video
 
 block content 
-  form(method)
+  form(method).search__form
     label(for="title") Video Search | title
     input(id="title", name="title", placeholder="Write the Title of Video",type="text" )
-    input(value="upload",type="submit")
+    button
+      i.fas.fa-search
   //- form(method)
   //-   label(for="hashtags") Video Search | hashtags
   //-   input(id="hashtags",name="hashtags", placeholder="hashtags: divided by comma",type="text")
@@ -18,8 +19,8 @@ block content
   if errorMessage 
     span=errorMessage
   if videos
-    ul
+    div.video-grid
       each video in videos  
         +video(video)
       else 
-        span No Result  
+        span.empty__message  No Result  

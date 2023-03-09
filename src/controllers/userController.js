@@ -9,7 +9,13 @@ import Video from "../models/Video";
 export const see = async (req, res) => {
   // return res.render("user/see");
   const { id } = req.params;
-  const user = await User.findById(id).populate("videos");
+  const user = await User.findById(id).populate({
+    path: "videos",
+    populate: {
+      path: "owner",
+      model: "User",
+    },
+  });
   if (!user) {
     const errorMessage = "Sorry, we can't find your profile";
     return res
@@ -32,7 +38,7 @@ export const postEdit = async (req, res) => {
     _id,
     {
       nickname,
-      avatarUrl: file ? file.path : req.session.user.avatarUrl,
+      avatarUrl: file ? `/${file.path}` : req.session.user.avatarUrl,
     },
     { new: true }
   );
@@ -178,12 +184,14 @@ export const postChangePW = async (req, res) => {
       const errorMessage = "please check new password again";
       return res.status(400).render("user/changePW", { errorMessage });
     }
-    newPassword = await User.hashingPw(newPassword);
-    const user = await User.findByIdAndUpdate(
-      _id,
-      { password: newPassword },
-      { new: true }
-    );
+    // newPassword = await User.hashingPw(newPassword);
+    // const user = await User.findByIdAndUpdate(
+    //   _id,
+    //   { password: newPassword },
+    //   { new: true }
+    // );
+    user.password = newPassword;
+    await user.save();
     req.session.destroy();
     return res.redirect("/login");
   }

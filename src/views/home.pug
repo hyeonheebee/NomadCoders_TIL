@@ -2,8 +2,8 @@ extends layout
 include mixins/video
 
 block content 
-  ul
-    each video in videos  
-      +video(video)
-    else 
-      span sorry I can't find any video  
+    div.video-grid
+      each video in videos  
+        +video(video)
+      else 
+        spa.empty__message sorry I can't find any video  

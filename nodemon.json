@@ -1,4 +1,9 @@
 {
-  "ignore": ["webpack.config.js", "src/frontend/*", "assets/*"],
+  "ignore": [
+    "webpack.config.js",
+    "src/frontend/js/*",
+    "src/frontend/scss/*",
+    "assets/*"
+  ],
   "exec": "babel-node src/init.js"
 }

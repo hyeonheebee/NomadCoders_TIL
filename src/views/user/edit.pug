@@ -1,9 +1,10 @@
 extends ../layout
 block content 
-  form(method="POST",enctype="multipart/form-data")
+  form(method="POST",enctype="multipart/form-data").edit-profile__form
       input(name="nickname",value=loggeduser.nickname,placeholder="nick-name",type="text")
       label(for="avatar")
       input(id="avatar", name="avatarUrl",placeholder="avatar",type="file", accept="image/*")
       input(type="submit",value="Update")
-      hr
-      a(href="/users/changePW") &rarr; Change Password 
+      if !loggeduser.socialLogin
+        div.edit-profile__password
+          a(href="/users/changePW") &rarr; Change Password 

@@ -5,7 +5,9 @@ import Video from "../models/Video";
 import User from "../models/User";
 
 export const home = async (req, res) => {
-  const videos = await Video.find({}).sort({ createdDate: "desc" });
+  const videos = await Video.find({})
+    .sort({ createdDate: "desc" })
+    .populate("owner");
   const pageTitle = "home";
   return res.render("home", { pageTitle, videos });
 };
@@ -20,7 +22,7 @@ export const search = async (req, res) => {
     title: {
       $regex: new RegExp(title, "i"),
     },
-  });
+  }).populate("owner");
   if (!videos) {
     return res.status(404).redirect("/");
   }

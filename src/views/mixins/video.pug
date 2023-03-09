@@ -1,10 +1,14 @@
 mixin video(item)
-    a(href=`/videos/${item.id}`) #{item.title}
-    br
-    span  summary | #{item.summary}
-    br
-    small #{item.views} /5
-    br
-    small #{item.createdDate}
-  
-    hr
+    a(href=`/videos/${item.id}`).video-mixin
+        div.video-mixin__thumb
+        div.video-mixin__data
+            span.video-mixin__title=item.title
+            div.video-mixin__meta
+                span  summary | #{item.summary}
+                br
+                small #{item.createdDate}
+                br
+                if item.owner
+                    span #{item.owner.nickname} • 
+                span #{item.views} 회
+
