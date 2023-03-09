@@ -74,7 +74,6 @@ export const see = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner");
   // const user = await User.findById(id).populate("video");
-  console.log(video);
   if (!video) {
     const errorMessage = "Sorry, we can't find any Video";
     return res

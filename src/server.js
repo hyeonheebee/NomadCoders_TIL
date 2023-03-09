@@ -29,6 +29,7 @@ app.use(
 app.use(localMiddleware);
 app.use("/uploads", express.static("uploads"));
 app.use("/avatars", express.static("avatars"));
+app.use("/static", express.static("assets"));
 
 app.use("/", globalRouter);
 app.use("/users", userRouter);
