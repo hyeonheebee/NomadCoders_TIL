@@ -11,10 +11,22 @@ const videoControls = document.querySelector("#videoControls");
 const playBtnIcon = playBtn.querySelector("i");
 const muteBtnIcon = muteBtn.querySelector("i");
 const fullScreenIcon = fullScreenBtn.querySelector("i");
-
+const test = document.querySelector("#test");
 let videoVolume = 0.5;
 let startTimeoutId = null;
 let finishTimeoutId = null;
+const handleKeyDown = (event) => {
+  console.log(event);
+};
+
+const handleVideoPause = (event) => {
+  if (video.paused) {
+    video.play();
+  } else {
+    video.pause();
+  }
+  playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
+};
 const handlePlayBtn = (event) => {
   if (video.paused) {
     video.play();
@@ -112,3 +124,5 @@ timeLine.addEventListener("input", handleTimeLine);
 fullScreenBtn.addEventListener("click", handleFullScreen);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
+video.addEventListener("click", handleVideoPause);
+test.addEventListener("keypress", handleKeyDown);
