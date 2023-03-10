@@ -16,13 +16,12 @@ const handlePlayBtn = (event) => {
 };
 
 const handleMuteBtn = (event) => {
-  if (!video.muted) {
-    muteBtn.innerText = "Mute";
-    video.muted = true;
-  } else {
+  if (video.muted) {
     video.muted = false;
-    muteBtn.innerText = "unMute";
+  } else {
+    video.muted = true;
   }
+  muteBtn.innerText = video.muted ? "unMute" : "Mute";
   volumeRange.value = video.muted ? "0" : videoVolume;
 };
 const handleVolumeRange = (event) => {
@@ -31,7 +30,9 @@ const handleVolumeRange = (event) => {
   } = event;
   if (video.muted) {
     video.muted = false;
+    muteBtn.innerText = "Mute";
   }
+  muteBtn.innerText = volumeRange.value == "0" ? "unMute" : "Mute";
   video.volume = value;
   videoVolume = video.volume;
 };
@@ -40,6 +41,8 @@ const handleLoadedmeta = () => {
   currentTime.innerText = video.currentTime;
   wholeTime.innerText = Math.floor(video.duration);
 };
+
+setInterval(handleLoadedmeta);
 
 playBtn.addEventListener("click", handlePlayBtn);
 muteBtn.addEventListener("click", handleMuteBtn);
