@@ -11,13 +11,18 @@ const videoControls = document.querySelector("#videoControls");
 const playBtnIcon = playBtn.querySelector("i");
 const muteBtnIcon = muteBtn.querySelector("i");
 const fullScreenIcon = fullScreenBtn.querySelector("i");
-const test = document.querySelector("#test");
 let videoVolume = 0.5;
 let startTimeoutId = null;
 let finishTimeoutId = null;
 
+const commentForm = document.querySelector("#commentForm");
+const commentArea = commentForm.querySelector("textarea");
+
 const handleKeyDown = (event) => {
-  if (event.code === "Space") {
+  let validation = commentArea.textLength;
+
+  if (!validation && event.code === "Space") {
+    console.log("hi");
     if (video.paused) {
       video.play();
     } else {
@@ -63,7 +68,7 @@ const handleVolumeRange = (event) => {
   } = event;
   if (video.muted) {
     video.muted = false;
-    muteBtn.innerText = "Mute";
+    muteBtnIcon.classList = "fas fa-volume-mute";
   }
   muteBtnIcon.classList =
     volumeRange.value == "0" ? "fas fa-volume-mute" : "fas fa-volume-up";

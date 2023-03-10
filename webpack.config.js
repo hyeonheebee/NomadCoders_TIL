@@ -1,11 +1,12 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
+const JS_BASEURL = "./src/frontend/js/";
 module.exports = {
   mode: "development",
   entry: {
-    main: "./src/frontend/js/main.js",
-    videoPlayer: "./src/frontend/js/videoPlayer.js",
+    main: JS_BASEURL + "main.js",
+    videoPlayer: JS_BASEURL + "videoPlayer.js",
+    comment: JS_BASEURL + "comment.js",
   },
   watch: true,
   plugins: [

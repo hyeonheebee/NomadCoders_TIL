@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   nickname: { type: String, required: true, uniqud: true },
   socialLogin: { type: Boolean, default: false },
   videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   avatarUrl: { type: String, default: "" },
   blog: String,
 });
