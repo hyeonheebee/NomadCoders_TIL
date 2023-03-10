@@ -168,6 +168,13 @@ header .header__avatar {
   border-radius: 50%;
 }
 
+footer {
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.8;
+  margin-top: 50px;
+}
+
 .video-mixin .video-mixin__thumb {
   height: 140px;
   border-radius: 7px;
@@ -198,7 +205,7 @@ form:not(.search__form) {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-input {
+input:not(#volume) {
   all: unset;
   padding: 15px 20px;
   border-radius: 5px;
@@ -209,7 +216,7 @@ input {
   color: white;
   width: 90%;
 }
-input::placeholder {
+input:not(#volume)::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
 
@@ -315,6 +322,27 @@ form label {
 }
 .profile__data h3 {
   font-size: 18px;
+}
+
+.video__data {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.video__data .video__title {
+  font-size: 26px;
+  margin-bottom: 5px;
+}
+.video__data .video__createdAt {
+  font-size: 12px;
+}
+.video__data .video__owner {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+.video__data .video__owner a {
+  color: cornflowerblue;
+  text-decoration: underline;
 }
 
 body {

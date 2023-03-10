@@ -14,8 +14,8 @@ block content
        span 😀
     else  
        img(src=user.avatarUrl).avatar
-       //- username 넣기 
-       h3=user.nickname
+    h3=user.username
+    h1=user.nickname
   div.video-grid
     each video in user.videos 
       +video(video)

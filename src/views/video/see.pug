@@ -4,11 +4,14 @@ extends ../layout
 block content
   h3 #{video.title}
   p #{video.summary}
-  video(src=`/${video.fileUrl}`,controls,width=400,height=400)
+  video(src=`/${video.fileUrl}`,controls)
   div 
     button#play Play 
     button#mute Mute 
-    span#time 00:00/00:00
+    div
+      span#currentTime 0:00 
+      span / 
+      span#wholeTime 0:00
     input(type="range",value="0.5", min="0",max="1",step="0.01")#volume
   if loggeduser._id  === String(video.owner.id)
     a(href=`${video.id}/edit`) Edit Video &rarr;

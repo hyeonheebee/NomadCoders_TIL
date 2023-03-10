@@ -13,8 +13,6 @@ header
           li
           a(href=`/users/${loggeduser._id}`) #{loggeduser.nickname}'s Profile
           li
-          a(href="/users/logout") Logout
-          li
             a(href="/videos/upload") Upload Video
         else
           li 
@@ -22,4 +20,7 @@ header
           li 
             a(href="/login") Login
         li
-          a(href="/search") Search Video
+          a(href="/search") Search Video |  
+            i.fas.fa-search
+        li
+          a(href="/users/logout") Logout

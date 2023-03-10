@@ -1,10 +1,11 @@
 const video = document.querySelector("video");
 const playBtn = document.querySelector("#play");
 const muteBtn = document.querySelector("#mute");
-const time = document.querySelector("#time");
+const currentTime = document.querySelector("#currentTime");
+const wholeTime = document.querySelector("#wholeTime");
 const volumeRange = document.querySelector("#volume");
-let volumeValue = 0.5;
-video.volume = volumeValue;
+let videoVolume = 0.5;
+
 const handlePlayBtn = (event) => {
   if (video.paused) {
     video.play();
@@ -13,14 +14,16 @@ const handlePlayBtn = (event) => {
   }
   playBtn.innerText = video.paused ? "Play" : "Paused";
 };
-const handleMuteBtn = (e) => {
-  if (video.muted) {
-    video.muted = false;
-  } else {
+
+const handleMuteBtn = (event) => {
+  if (!video.muted) {
+    muteBtn.innerText = "Mute";
     video.muted = true;
+  } else {
+    video.muted = false;
+    muteBtn.innerText = "unMute";
   }
-  muteBtn.innerText = video.muted ? "unMute" : "Mute";
-  volumeRange.value = video.muted ? "0" : volumeValue;
+  volumeRange.value = video.muted ? "0" : videoVolume;
 };
 const handleVolumeRange = (event) => {
   const {
@@ -28,11 +31,17 @@ const handleVolumeRange = (event) => {
   } = event;
   if (video.muted) {
     video.muted = false;
-    muteBtn.innerText = "Mute";
   }
-  volumeValue = value;
   video.volume = value;
+  videoVolume = video.volume;
 };
+
+const handleLoadedmeta = () => {
+  currentTime.innerText = video.currentTime;
+  wholeTime.innerText = Math.floor(video.duration);
+};
+
 playBtn.addEventListener("click", handlePlayBtn);
 muteBtn.addEventListener("click", handleMuteBtn);
 volumeRange.addEventListener("input", handleVolumeRange);
+video.addEventListener("loadedmetadata", handleLoadedmeta);

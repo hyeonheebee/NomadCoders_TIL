@@ -156,10 +156,20 @@ export const postUpload = async (req, res) => {
 export const deleteVideo = async (req, res) => {
   const { id } = req.params;
   const { _id } = req.session.user;
-  const video = await Video.findById(id);
-  if (String(video.owner) !== String(_id)) {
+  const video = await Video.findById(id).populate({
+    path: "owner",
+    populate: {
+      path: "videos",
+      model: "Video",
+    },
+  });
+  console.log("hi", video);
+
+  if (String(video.owner.id) !== String(_id)) {
     return res.status(403).redirect("/");
   }
   await Video.findOneAndDelete({ _id: id });
+  // video.owner.videos.splice(video.owner.videos.indexOf(id), 0);
+  // video.owner.save();
   return res.redirect("/");
 };
