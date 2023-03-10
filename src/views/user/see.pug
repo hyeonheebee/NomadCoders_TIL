@@ -11,15 +11,16 @@ block content
 
   div.profile__data
     if loggeduser.avatarUrl === ""
-       span 😀
+       span 
+          i.fas.fa-smile.fa-5x
     else  
        img(src=user.avatarUrl).avatar
-    h3=user.username
-    h1=user.nickname
+    span=user.username
+    span=user.nickname
+    a(href=`/users/${user._id}/edit`) &rarr; Edit your Profile 
   div.video-grid
     each video in user.videos 
       +video(video)
     else
       span.empty__message sorry you don't have any video
       
-  a(href=`/users/${user._id}/edit`) &rarr; Edit your Profile 

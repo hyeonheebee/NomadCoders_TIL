@@ -24,6 +24,7 @@ export const search = async (req, res) => {
     },
   }).populate("owner");
   if (!videos) {
+    req.flash("error", "No Video ⏳");
     return res.status(404).redirect("/");
   }
   return res.render("video/search", { pageTitle, videos });
@@ -96,6 +97,7 @@ export const getEdit = async (req, res) => {
       .render("404", { pageTitle: "404 ERROR", errorMessage });
   }
   if (String(video.owner) !== String(_id)) {
+    req.flash("error", "Authorized User Only Allows");
     return res.status(403).redirect("/");
   }
 
@@ -113,6 +115,7 @@ export const postEdit = async (req, res) => {
       .render("404", { pageTitle: "404 ERROR", errorMessage });
   }
   if (String(video.owner) !== String(_id)) {
+    req.flash("error", "Authorized User Only Allows");
     return res.status(403).redirect("/");
   }
   await Video.findByIdAndUpdate(id, {
@@ -121,7 +124,7 @@ export const postEdit = async (req, res) => {
     hashtags: Video.hashFormatting(hashtags),
     genres: Video.genreFormatting(genres),
   });
-
+  req.flash("success", "Your Video's Updated✨");
   return res.redirect(`/videos/${id}`);
 };
 export const getUpload = (req, res) => {
@@ -144,7 +147,7 @@ export const postUpload = async (req, res) => {
     const user = await User.findById(_id);
     user.videos.push(uploadedVideo);
     user.save();
-
+    req.flash("success", "Your Video's Uploaded! 🌠");
     //유저에게도 해당비디오를 넣어줌
     return res.redirect("/");
   } catch (error) {
@@ -166,10 +169,21 @@ export const deleteVideo = async (req, res) => {
   console.log("hi", video);
 
   if (String(video.owner.id) !== String(_id)) {
+    req.flash("error", "Authorized User Only Allows");
     return res.status(403).redirect("/");
   }
   await Video.findOneAndDelete({ _id: id });
   // video.owner.videos.splice(video.owner.videos.indexOf(id), 0);
   // video.owner.save();
   return res.redirect("/");
+};
+export const postView = async (req, res) => {
+  const { id } = req.params;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.sendStatus(404);
+  }
+  video.views = video.views + 1;
+  await video.save();
+  return res.sendStatus(200);
 };

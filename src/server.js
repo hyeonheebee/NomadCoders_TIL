@@ -7,6 +7,8 @@ import MongoStore from "connect-mongo";
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+import apiRouter from "./routers/apiRouter";
+import flash from "express-flash";
 const app = express();
 
 const loggerMiddleware = morgan("dev");
@@ -27,6 +29,8 @@ app.use(
   })
 );
 app.use(localMiddleware);
+app.use(flash());
+
 app.use("/uploads", express.static("uploads"));
 app.use("/avatars", express.static("avatars"));
 app.use("/static", express.static("assets"));
@@ -34,5 +38,5 @@ app.use("/static", express.static("assets"));
 app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
-
+app.use("/api", apiRouter);
 export default app;

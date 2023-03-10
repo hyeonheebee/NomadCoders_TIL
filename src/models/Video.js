@@ -22,7 +22,7 @@ const videoSchema = new mongoose.Schema({
     // },
     // `${new Date().getFullYear()}. ${new Date().getMonth()}. ${new Date().getDate()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`,
   },
-  views: { type: String, required: true, default: 0 },
+  views: { type: Number, required: true, default: 0 },
 });
 
 videoSchema.static("hashFormatting", function (hashtags) {

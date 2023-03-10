@@ -7,7 +7,8 @@ header
           li
             a(href=`/users/${loggeduser._id}`)
                 if loggeduser.avatarUrl === ""
-                    span 😀
+                    span 
+                      i.fas.fa-smile.fa-2x
                 else
                     img.header__avatar(src=loggeduser.avatarUrl)
           li

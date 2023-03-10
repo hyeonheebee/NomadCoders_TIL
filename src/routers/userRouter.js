@@ -3,7 +3,6 @@ import {
   see,
   getEdit,
   postEdit,
-  deleteUser,
   logout,
   getChangePW,
   postChangePW,
@@ -18,7 +17,6 @@ userRouter
   .all(unlogProtectMiddleware)
   .get(getEdit)
   .post(avatarMiddleware.single("avatarUrl"), postEdit);
-userRouter.get("/delete", unlogProtectMiddleware, deleteUser);
 userRouter.get("/logout", unlogProtectMiddleware, logout);
 userRouter
   .route("/changePW")

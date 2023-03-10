@@ -43,6 +43,7 @@ export const postEdit = async (req, res) => {
     { new: true }
   );
   req.session.user = user;
+  req.flash("success", "Your Profile's Updated✨");
   return res.redirect(`/users/${_id}`);
 };
 
@@ -66,6 +67,7 @@ export const postJoin = async (req, res) => {
   }
   // password = await User.hashingPw(password);
   await User.create({ username, email, nickname, password });
+  req.flash("info", "Welcome💗");
   return res.redirect("/login");
 };
 export const getLogin = (req, res) => {
@@ -90,14 +92,15 @@ export const postLogin = async (req, res) => {
   }
   req.session.user = user;
   req.session.loggedIn = true;
-
+  req.flash("info", "Good to see you again!💗");
   return res.redirect("/");
 };
 export const logout = (req, res) => {
+  req.flash("info", "See you next time 🖐");
   req.session.destroy();
   return res.redirect("/");
 };
-export const deleteUser = (req, res) => {};
+
 export const gitLogin = (req, res) => {
   const baseURL = "https://github.com/login/oauth/authorize";
   const params = {
@@ -161,6 +164,7 @@ export const gitfinish = async (req, res) => {
     }
     req.session.user = existUser;
     req.session.loggedIn = true;
+    req.flash("info", "Welcome💗");
     return res.redirect("/");
   } else {
     return res.status(400).redirect("/login");
@@ -192,6 +196,7 @@ export const postChangePW = async (req, res) => {
     // );
     user.password = newPassword;
     await user.save();
+    req.flash("info", "🔑Please login New Password");
     req.session.destroy();
     return res.redirect("/login");
   }

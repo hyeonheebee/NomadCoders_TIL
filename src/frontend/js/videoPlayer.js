@@ -15,8 +15,18 @@ const test = document.querySelector("#test");
 let videoVolume = 0.5;
 let startTimeoutId = null;
 let finishTimeoutId = null;
+
 const handleKeyDown = (event) => {
-  console.log(event);
+  if (event.code === "Space") {
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+    playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
+  } else {
+    return;
+  }
 };
 
 const handleVideoPause = (event) => {
@@ -55,7 +65,8 @@ const handleVolumeRange = (event) => {
     video.muted = false;
     muteBtn.innerText = "Mute";
   }
-  muteBtn.innerText = volumeRange.value == "0" ? "unMute" : "Mute";
+  muteBtnIcon.classList =
+    volumeRange.value == "0" ? "fas fa-volume-mute" : "fas fa-volume-up";
   video.volume = value;
   videoVolume = video.volume;
 };
@@ -106,6 +117,13 @@ const handleMouseMove = () => {
 const handleMouseLeave = () => {
   startTimeoutId = setTimeout(removeControls, 2000);
 };
+const handlePostView = () => {
+  const { id } = videoContainer.dataset;
+  fetch(`/api/videos/${id}/view`, {
+    method: "POST",
+  });
+  playBtnIcon.classList = "fas fa-play";
+};
 // const handleTimeUpdate = () => {
 //   const data = video.currentTime;
 //   const time = new Date(data * 1000);
@@ -125,4 +143,5 @@ fullScreenBtn.addEventListener("click", handleFullScreen);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 video.addEventListener("click", handleVideoPause);
-test.addEventListener("keypress", handleKeyDown);
+document.addEventListener("keydown", handleKeyDown);
+video.addEventListener("ended", handlePostView);
