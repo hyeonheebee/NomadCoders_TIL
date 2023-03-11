@@ -41,26 +41,14 @@ const postRealtimeComment = (text, commentId) => {
   commentsContainer.prepend(commentBubble);
   commentBubble.dataset.id = commentId;
 };
-// const handleDeleteFakeComment = (commentId) => {
-//   if (commentBubble.dataset.id === commentId) {
-//     const commentBubbleIcon = commentBubble.querySelector("i");
-//     const commentOwner = commentBubbleIcon.dataset.owner;
-//     const commentUser = commentForm.dataset.user;
-//     // console.log("작성자입니다", commentOwner);
-//     if (commentUser._id === commentOwner) {
-//       commentBubble.remove();
-//     }
-//   }
-// };
+
 const handleDeleteComment = async (event) => {
-  console.dir(event.target);
-  console.log(event.target.parentElement);
   const commentBubble = event.target.parentElement;
   const commentId = commentBubble.dataset.id;
   await fetch(`/api/comments/${commentId}`, {
     method: "DELETE",
   });
-  // handleDeleteFakeComment(commentId);
+
   commentBubble.remove();
 };
 //내가 클릭한 요소가 뭔지 찾지못하는 문제

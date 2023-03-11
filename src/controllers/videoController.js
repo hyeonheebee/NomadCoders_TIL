@@ -78,13 +78,13 @@ export const see = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner").populate("comments");
   // const user = await User.findById(id).populate("video");
+  console.log(video);
   if (!video) {
     const errorMessage = "Sorry, we can't find any Video";
     return res
       .status(404)
       .render("404", { pageTitle: "404 ERROR", errorMessage });
   }
-  console.log(video);
   return res.render("video/see", { pageTitle: video.title, video });
 };
 export const getEdit = async (req, res) => {
@@ -218,12 +218,26 @@ export const postComment = async (req, res) => {
 export const deleteComment = async (req, res) => {
   const { id } = req.params;
   const { user } = req.session;
-  const comment = await Comment.findById(id);
-  if (String(user._id) !== String(comment.owner)) {
+  const comment = await Comment.findById(id)
+    .populate("owner")
+    .populate("videos");
+  console.log(comment);
+  if (String(user._id) !== String(comment.owner._id)) {
     req.flash("error", "Denied ❌");
     return res.sendStatus(403);
     // 세션유저와 작성자 다를때 삭제불가능
+    //owner > comments [] : id
+    //videos > comments [] : id
   }
+
+  // video.owner.videos.splice(video.owner.videos.indexOf(id), 0);
+  // video.owner.save();
+
+  comment.owner.comments.splice(comment.owner.comments.indexOf(id), 1);
+  comment.owner.save();
+  comment.videos.comments.splice(comment.videos.comments.indexOf(id), 1);
+  comment.videos.save();
+  // const video = await Video.findById();
   await Comment.findOneAndDelete({ _id: id });
   // userArray.save();
   // videoArray.save();
