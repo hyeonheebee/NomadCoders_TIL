@@ -2,8 +2,6 @@ extends ../layout
 
 
 block content
-  h3 #{video.title}
-  p #{video.summary}
 
   div#videoContainer(data-id=video._id )
     video(src=`/${video.fileUrl}`)
@@ -23,20 +21,34 @@ block content
       div 
         sapn#fullScreen 
             i.fas.fa-expand
-  ul
-    each genre in video.genres 
-     span #{genre} 
-  ul
-    each tag in video.hashtags 
-      span #{tag}    
-  br
-  small Creator | #{String(video.owner.username)} / #{String(video.owner.nickname)}
-      //-아바타넣기
-  br
-  small #{video.views}/5
-  br
-  small #{video.createdDate}
-  hr
+  div.video__headline     
+    span.video__title #{video.title}
+    span.video__Sum #{video.summary}
+    small.video__views #{video.views} 회
+  div.video__data        
+    div.video__metabox
+      span#genres Genres
+      span 📁  
+      each genre in video.genres 
+        span #{genre}
+        span            
+      br
+      span#hashtags Hashtags
+      span 🧡  
+      each tag in video.hashtags 
+        span #{tag}    
+    br
+    div.video__infobox
+      span.video__owner Creator |  
+        a(href=`/users/${video.owner._id}`) #{String(video.owner.username)} / 
+        a(href=`/users/${video.owner._id}`) #{String(video.owner.nickname)}
+      br
+      small.video__createdAt=new Date(video.createdDate).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+  if loggeduser._id  === String(video.owner.id)
+    div.video__modifybox1
+      a(href=`${video.id}/edit`) Edit Video  ✅ 
+    div.video__modifybox2 
+      a(href=`${video.id}/delete`)  Delete Video  ⛔
 
 
 
@@ -55,10 +67,6 @@ block content
              button.comment__delete ❌
              
 
-  if loggeduser._id  === String(video.owner.id)
-    a(href=`${video.id}/edit`) Edit Video &rarr;
-    br
-    a(href=`${video.id}/delete`) Delete Video &rarr;
 block scripts 
   script(src="/static/js/videoPlayer.js")
   script(src="/static/js/comment.js")

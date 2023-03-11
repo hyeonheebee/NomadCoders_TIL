@@ -7,8 +7,8 @@ mixin video(item)
                 span#summary  Summary 📌
                 span #{item.summary} 
                 br
-                small  #{item.createdDate}  •  
-                small#views #{item.views} 회
+                small=new Date(item.createdDate).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}) 
+                small#views •  #{item.views} 회
                 br
                 if item.owner
                     span#nickname #{item.owner.nickname} 

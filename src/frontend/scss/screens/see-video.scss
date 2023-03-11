@@ -1,21 +1,22 @@
 .video__data {
+  position: relative;
   margin-top: 20px;
   display: flex;
-  flex-direction: column;
-  .video__title {
-    font-size: 26px;
-    margin-bottom: 5px;
+  justify-content: space-between;
+
+  #genres,
+  #hashtags {
+    font-weight: 500;
+    display: inline-block;
+    margin: 2px 0px;
   }
+
   .video__createdAt {
+    position: absolute;
+    right: 0;
+    display: block;
+    margin-top: 8px;
     font-size: 12px;
-  }
-  .video__owner {
-    margin-bottom: 5px;
-    font-size: 14px;
-    a {
-      color: cornflowerblue;
-      text-decoration: underline;
-    }
   }
 }
 .video__comments {
@@ -32,4 +33,47 @@
     color: black;
     margin-bottom: 10px;
   }
+}
+.video__Sum {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.video__title {
+  color: $gh;
+  font-size: 30px;
+  margin-bottom: 5px;
+  margin-right: 20px;
+}
+.video__views {
+  position: absolute;
+  right: 0;
+  font-size: 15px;
+  top: 5px;
+}
+.video__owner {
+  font-weight: 500;
+  margin-bottom: 10px;
+  font-size: 14px;
+  a {
+    color: $ghl;
+  }
+}
+.video__infobox {
+  position: relative;
+}
+.video__headline {
+  position: relative;
+}
+.video__modifybox1,
+.video__modifybox2 {
+  font-size: 18px;
+  position: absolute;
+  right: 30px;
+}
+.video__modifybox1 {
+  margin-top: 15px;
+}
+.video__modifybox2 {
+  position: absolute;
+  margin-top: 40px;
 }
