@@ -23,4 +23,13 @@ block content
       +video(video)
     else
       span.empty__message sorry you don't have any video
+  hr
+  span My Comments
+  div.comment-grid
+    each comment in user.comments   
+      span=comment.text
+        a(href=`/videos/${String(comment.videos)}`) &rarr; See this Video
+    else  
+      span.empty__message sorry you don't have any comment
+
       

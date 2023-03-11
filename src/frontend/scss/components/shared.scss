@@ -2,10 +2,20 @@
   margin-bottom: 50px;
   font-size: 18px;
 }
-.video-grid {
+.video-grid,
+.comment-grid {
   display: grid;
   gap: 50px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.comment-grid {
+  margin-top: 10px;
+  padding-left: 10px;
+}
+.comment-grid span {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0px;
 }
 .auth-switch {
   text-align: center;

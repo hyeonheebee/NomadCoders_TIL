@@ -9,13 +9,22 @@ import Video from "../models/Video";
 export const see = async (req, res) => {
   // return res.render("user/see");
   const { id } = req.params;
-  const user = await User.findById(id).populate({
-    path: "videos",
-    populate: {
-      path: "owner",
-      model: "User",
-    },
-  });
+  const user = await User.findById(id)
+    .populate({
+      path: "videos",
+      populate: {
+        path: "owner",
+        model: "User",
+      },
+    })
+    .populate({
+      path: "comments",
+      populate: {
+        path: "owner",
+        model: "User",
+      },
+    });
+  console.log(user);
   if (!user) {
     const errorMessage = "Sorry, we can't find your profile";
     return res
@@ -23,7 +32,6 @@ export const see = async (req, res) => {
       .render("404", { pageTitle: "404 ERROR", errorMessage });
   }
   return res.render(`user/see`, { pageTitle: user.name, user });
-  // 이렇게도 할수있는데 내 방식이랑 차이가 뭘까?
 };
 export const getEdit = async (req, res) => {
   return res.render("user/edit");

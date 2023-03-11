@@ -4,11 +4,13 @@ mixin video(item)
         div.video-mixin__data
             span.video-mixin__title=item.title
             div.video-mixin__meta
-                span  summary | #{item.summary}
+                span#summary  Summary 📌
+                span #{item.summary} 
                 br
-                small #{item.createdDate}
+                small  #{item.createdDate}  •  
+                small#views #{item.views} 회
                 br
                 if item.owner
-                    span #{item.owner.nickname} • 
-                span #{item.views} 회
+                    span#nickname #{item.owner.nickname} 
+                    //- a(href=`/users/${item.owner._id}`) 
 
