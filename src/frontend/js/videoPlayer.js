@@ -11,39 +11,29 @@ const videoControls = document.querySelector("#videoControls");
 const playBtnIcon = playBtn.querySelector("i");
 const muteBtnIcon = muteBtn.querySelector("i");
 const fullScreenIcon = fullScreenBtn.querySelector("i");
+const commentForm = document.querySelector("#commentForm");
+const textarea = commentForm.querySelector("textarea");
+
 let videoVolume = 0.5;
 let startTimeoutId = null;
 let finishTimeoutId = null;
 
-// let commentArea;
-// const commentForm = document.querySelector("#commentForm");
-// if (commentForm) {
-//   commentArea = commentForm.querySelector("textarea");
-// }
-//   commentArea.addEventListener("input", handleInput);
-//   const handleInput = (event) => {
-//     console.log(event);
-//   };
-
 const handleKeyDown = (event) => {
-  // console.log(event.target.document);
-  // console.log(event.target.tag);
-  // console.log(event.target.window);
-  // console.log(event.target);
-  // console.log("value:", event.target.value);
-
-  if (event.code === "Space") {
-    if (video.paused) {
-      video.play();
+  console.dir(event.target);
+  if (event.target.localName !== "textarea") {
+    // if (event.target.childElementCount !== 0) {
+    if (event.code === "Space") {
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+      playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
     } else {
-      video.pause();
+      return;
     }
-    playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
-  } else {
-    return;
   }
 };
-
 const handleVideoPause = (event) => {
   if (video.paused) {
     video.play();
