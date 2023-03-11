@@ -76,9 +76,18 @@ export const search = async (req, res) => {
 
 export const see = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id).populate("owner").populate("comments");
+  const video = await Video.findById(id)
+    .populate("owner")
+    .populate({
+      path: "comments",
+      populate: {
+        path: "videos",
+        model: "Video",
+      },
+    });
+  console.log("I am video", video.comments);
   // const user = await User.findById(id).populate("video");
-  console.log(video);
+
   if (!video) {
     const errorMessage = "Sorry, we can't find any Video";
     return res
@@ -194,7 +203,7 @@ export const postComment = async (req, res) => {
   const { text } = req.body;
   const { user } = req.session;
   const userDb = await User.findById(user._id);
-  console.log(userDb);
+  console.log("this is user!!!!", userDb);
   console.log(user);
   const video = await Video.findById(id);
   console.log(video);
@@ -211,8 +220,9 @@ export const postComment = async (req, res) => {
   userDb.save();
   video.comments.push(comment);
   video.save();
+
   // req.flash("success", "Your comment is uploaded! 📨 ");
-  return res.status(201).json({ id: comment._id });
+  return res.status(201).json({ id: comment._id, owner: comment.owner });
 };
 
 export const deleteComment = async (req, res) => {

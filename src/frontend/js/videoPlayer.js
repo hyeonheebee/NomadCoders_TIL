@@ -12,7 +12,6 @@ const playBtnIcon = playBtn.querySelector("i");
 const muteBtnIcon = muteBtn.querySelector("i");
 const fullScreenIcon = fullScreenBtn.querySelector("i");
 const commentForm = document.querySelector("#commentForm");
-const textarea = commentForm.querySelector("textarea");
 
 let videoVolume = 0.5;
 let startTimeoutId = null;

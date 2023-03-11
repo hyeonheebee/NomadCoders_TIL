@@ -53,15 +53,15 @@ block content
 
 
   if loggedIn          
-    div.video__post-comments
-        form.video__comment-form#commentForm(data-user=loggeduser._id)
-          textarea( cols="30", rows="10",placeholder="give some comments now ")
-          button Post Comment    
+      div.video__post-comments
+          form.video__comment-form#commentForm(data-user=loggeduser._id)
+            textarea( cols="30", rows="10",placeholder="give some comments now ")
+            button Post Comment    
   div.video__comments
     ul 
       each comment in video.comments.reverse()
         li.video__comment(data-id=comment.id)
-          i.fas.fa-comment(data-owner=String(comment.owner._id))
+          i.fas.fa-comment(data-id=comment.owner)
           span #{comment.text}
           if loggeduser._id  === String(comment.owner)
              button.comment__delete ❌
