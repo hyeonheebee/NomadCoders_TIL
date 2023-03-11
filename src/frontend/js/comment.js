@@ -44,12 +44,18 @@ const postRealtimeComment = (text, commentId) => {
 
 const handleDeleteComment = async (event) => {
   const commentBubble = event.target.parentElement;
+  const commentBubbleIcon = commentBubble.querySelector("i");
+  const commentOwner = commentBubbleIcon.dataset.owner;
+  const commentUser = commentForm.dataset.user;
+  console.log(commentUser);
+  console.log(commentOwner);
   const commentId = commentBubble.dataset.id;
   await fetch(`/api/comments/${commentId}`, {
     method: "DELETE",
   });
-
-  commentBubble.remove();
+  if (commentUser === commentOwner) {
+    commentBubble.remove();
+  }
 };
 //내가 클릭한 요소가 뭔지 찾지못하는 문제
 ////부모요소 안에서 찾아야한다..

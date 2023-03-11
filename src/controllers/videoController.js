@@ -221,10 +221,13 @@ export const deleteComment = async (req, res) => {
   const comment = await Comment.findById(id)
     .populate("owner")
     .populate("videos");
-  console.log(comment);
+  if (!comment) {
+    req.flash("error", "Denied ❌");
+    return res.status(403).redirect("/");
+  }
   if (String(user._id) !== String(comment.owner._id)) {
     req.flash("error", "Denied ❌");
-    return res.sendStatus(403);
+    return res.status(403).redirect("/");
     // 세션유저와 작성자 다를때 삭제불가능
     //owner > comments [] : id
     //videos > comments [] : id
