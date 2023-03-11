@@ -3,6 +3,7 @@
 //comments, comments/delete
 import Video from "../models/Video";
 import User from "../models/User";
+import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
   const videos = await Video.find({})
@@ -75,7 +76,7 @@ export const search = async (req, res) => {
 
 export const see = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id).populate("owner");
+  const video = await Video.findById(id).populate("owner").populate("comments");
   // const user = await User.findById(id).populate("video");
   if (!video) {
     const errorMessage = "Sorry, we can't find any Video";
@@ -186,4 +187,27 @@ export const postView = async (req, res) => {
   video.views = video.views + 1;
   await video.save();
   return res.sendStatus(200);
+};
+
+export const postComment = async (req, res) => {
+  const { id } = req.params;
+  const { text } = req.body;
+  const { user } = req.session;
+  const userDb = await User.findById(user._id);
+  const video = await Video.findById(id);
+  if (!video) {
+    res.flash("error", "No video ⏳");
+    return res.sendStatus(404);
+  }
+  const comment = await Comment.create({
+    text,
+    owner: user._id,
+    videos: id,
+  });
+  userDb.comments.push(comment);
+  userDb.save();
+  video.comments.push(comment);
+  video.save();
+  // req.flash("success", "Your comment is uploaded! 📨 ");
+  return res.sendStatus(201);
 };

@@ -23,11 +23,34 @@ block content
       div 
         sapn#fullScreen 
             i.fas.fa-expand
+  ul
+    each genre in video.genres 
+     span #{genre} 
+  ul
+    each tag in video.hashtags 
+      span #{tag}    
+  br
+  small Creator | #{String(video.owner.username)} / #{String(video.owner.nickname)}
+      //-아바타넣기
+  br
+  small #{video.views}/5
+  br
+  small #{video.createdDate}
+  hr
+
+
+
   if loggedIn          
+    div.video__post-comments
+        form.video__comment-form#commentForm
+          textarea( cols="30", rows="10",placeholder="give some comments now ")
+          button Post Comment    
   div.video__comments
-      form.video__comment-form#commentForm
-        textarea( cols="30", rows="10",placeholder="give some comments now ")
-        button Post Comment    
+    ul  
+      each comment in video.comments.reverse()
+        li.video__comment
+          i.fas.fa-comment 
+          | #{comment.text}
 
   if loggeduser._id  === String(video.owner.id)
     a(href=`${video.id}/edit`) Edit Video &rarr;
@@ -35,17 +58,5 @@ block content
     a(href=`${video.id}/delete`) Delete Video &rarr;
 block scripts 
   script(src="/static/js/videoPlayer.js")
-  script(src="/static/js/comment.js")
-  //- ul
-  //-   each genre in video.genres 
-  //-    li=genre
-  //- ul
-  //-   each tag in video.hashtags 
-  //-     li=tag   
-  //- br
-  //- small Creator | #{String(video.owner.username)} / #{String(video.owner.nickname)}
-  //- br
-  //- small #{video.views}/5
-  //- br
-  //- small #{video.createdDate}
-  //- hr
+  if loggedIn
+    script(src="/static/js/comment.js")

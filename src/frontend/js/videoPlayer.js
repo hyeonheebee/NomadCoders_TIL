@@ -15,14 +15,24 @@ let videoVolume = 0.5;
 let startTimeoutId = null;
 let finishTimeoutId = null;
 
-const commentForm = document.querySelector("#commentForm");
-const commentArea = commentForm.querySelector("textarea");
+// let commentArea;
+// const commentForm = document.querySelector("#commentForm");
+// if (commentForm) {
+//   commentArea = commentForm.querySelector("textarea");
+// }
+//   commentArea.addEventListener("input", handleInput);
+//   const handleInput = (event) => {
+//     console.log(event);
+//   };
 
 const handleKeyDown = (event) => {
-  let validation = commentArea.textLength;
+  console.log(event.target.document);
+  console.log(event.target.tag);
+  console.log(event.target.window);
+  console.log(event.target);
+  console.log("value:", event.target.value);
 
-  if (!validation && event.code === "Space") {
-    console.log("hi");
+  if (event.code === "Space") {
     if (video.paused) {
       video.play();
     } else {
@@ -126,6 +136,7 @@ const handlePostView = () => {
   const { id } = videoContainer.dataset;
   fetch(`/api/videos/${id}/view`, {
     method: "POST",
+    body: JSON.stringify({ text1: -1, text2: -2 }),
   });
   playBtnIcon.classList = "fas fa-play";
 };
@@ -148,5 +159,5 @@ fullScreenBtn.addEventListener("click", handleFullScreen);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 video.addEventListener("click", handleVideoPause);
-document.addEventListener("keydown", handleKeyDown);
 video.addEventListener("ended", handlePostView);
+window.addEventListener("keydown", handleKeyDown);

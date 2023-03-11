@@ -15,7 +15,7 @@
   \************************************/
 /***/ (() => {
 
-eval("const commentForm = document.querySelector(\"#commentForm\");\nconst commentArea = commentForm.querySelector(\"textarea\");\nconst commentBtn = commentForm.querySelector(\"button\");\nconst videoContainer = document.querySelector(\"#videoContainer\");\nconst handlePostComment = event => {\n  event.preventDefault();\n  const text = commentArea.value;\n  const id = videoContainer.dataset.id;\n  console.log(id);\n  fetch(`/videos/${id}/see`, {\n    method: \"POST\"\n  });\n};\ncommentForm.addEventListener(\"submit\", handlePostComment);\n\n//# sourceURL=webpack://wetube_final/./src/frontend/js/comment.js?");
+eval("const commentForm = document.querySelector(\"#commentForm\");\nconst videoContainer = document.querySelector(\"#videoContainer\");\nconst commentArea = commentForm.querySelector(\"textarea\");\nconst commentBtn = commentForm.querySelector(\"button\");\nconst handlePostComment = event => {\n  const text = commentArea.value;\n  event.preventDefault();\n  const id = videoContainer.dataset.id;\n  if (!text) {\n    return;\n  }\n  fetch(`/api/videos/${id}/comment`, {\n    method: \"POST\",\n    body: JSON.stringify({\n      text\n    }),\n    headers: {\n      \"Content-Type\": \"application/json\"\n    }\n  });\n  commentArea.value = \"\";\n};\ncommentForm.addEventListener(\"submit\", handlePostComment);\n\n//# sourceURL=webpack://wetube_final/./src/frontend/js/comment.js?");
 
 /***/ })
 
