@@ -42,15 +42,18 @@ block content
 
   if loggedIn          
     div.video__post-comments
-        form.video__comment-form#commentForm
+        form.video__comment-form#commentForm(data-user=loggeduser)
           textarea( cols="30", rows="10",placeholder="give some comments now ")
           button Post Comment    
   div.video__comments
-    ul  
+    ul 
       each comment in video.comments.reverse()
-        li.video__comment
-          i.fas.fa-comment 
-          | #{comment.text}
+        li.video__comment(data-id=comment.id)
+          i.fas.fa-comment(data-owner=String(comment.owner))
+          span #{comment.text}
+          if loggeduser._id  === String(comment.owner)
+             button.comment__delete ❌
+             
 
   if loggeduser._id  === String(video.owner.id)
     a(href=`${video.id}/edit`) Edit Video &rarr;
@@ -58,5 +61,4 @@ block content
     a(href=`${video.id}/delete`) Delete Video &rarr;
 block scripts 
   script(src="/static/js/videoPlayer.js")
-  if loggedIn
-    script(src="/static/js/comment.js")
+  script(src="/static/js/comment.js")

@@ -26,11 +26,11 @@ let finishTimeoutId = null;
 //   };
 
 const handleKeyDown = (event) => {
-  console.log(event.target.document);
-  console.log(event.target.tag);
-  console.log(event.target.window);
-  console.log(event.target);
-  console.log("value:", event.target.value);
+  // console.log(event.target.document);
+  // console.log(event.target.tag);
+  // console.log(event.target.window);
+  // console.log(event.target);
+  // console.log("value:", event.target.value);
 
   if (event.code === "Space") {
     if (video.paused) {

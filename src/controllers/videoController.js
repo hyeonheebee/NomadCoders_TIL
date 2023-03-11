@@ -84,13 +84,14 @@ export const see = async (req, res) => {
       .status(404)
       .render("404", { pageTitle: "404 ERROR", errorMessage });
   }
-
+  console.log(video);
   return res.render("video/see", { pageTitle: video.title, video });
 };
 export const getEdit = async (req, res) => {
   const { _id } = req.session.user;
   const { id } = req.params;
   const video = await Video.findById(id);
+  console.log(video);
   if (!video) {
     const errorMessage = "Sorry, we can't find any Video";
     return res
@@ -167,7 +168,6 @@ export const deleteVideo = async (req, res) => {
       model: "Video",
     },
   });
-  console.log("hi", video);
 
   if (String(video.owner.id) !== String(_id)) {
     req.flash("error", "Authorized User Only Allows");
@@ -194,14 +194,17 @@ export const postComment = async (req, res) => {
   const { text } = req.body;
   const { user } = req.session;
   const userDb = await User.findById(user._id);
+  console.log(userDb);
+  console.log(user);
   const video = await Video.findById(id);
+  console.log(video);
   if (!video) {
     res.flash("error", "No video ⏳");
     return res.sendStatus(404);
   }
   const comment = await Comment.create({
     text,
-    owner: user._id,
+    owner: userDb._id,
     videos: id,
   });
   userDb.comments.push(comment);
@@ -209,5 +212,21 @@ export const postComment = async (req, res) => {
   video.comments.push(comment);
   video.save();
   // req.flash("success", "Your comment is uploaded! 📨 ");
-  return res.sendStatus(201);
+  return res.status(201).json({ id: comment._id });
+};
+
+export const deleteComment = async (req, res) => {
+  const { id } = req.params;
+  const { user } = req.session;
+  const comment = await Comment.findById(id);
+  if (String(user._id) !== String(comment.owner)) {
+    req.flash("error", "Denied ❌");
+    return res.sendStatus(403);
+    // 세션유저와 작성자 다를때 삭제불가능
+  }
+  await Comment.findOneAndDelete({ _id: id });
+  // userArray.save();
+  // videoArray.save();
+  // 삭제가능
+  return res.sendStatus(200);
 };
