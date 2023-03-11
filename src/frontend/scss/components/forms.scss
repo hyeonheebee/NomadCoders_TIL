@@ -7,6 +7,9 @@ form {
     border-radius: 10px;
     border: 1px solid rgba($color: #fff, $alpha: 0.1);
   }
+  #video__uploadBtn {
+    background-color: $ghl;
+  }
 }
 
 input:not(#volume, #timeLine) {
@@ -33,4 +36,11 @@ input[type="submit"],
   text-align: center;
   cursor: pointer;
   display: block;
+}
+input:not(#volume, #timeLine) {
+  text-align: center;
+}
+input[type="file"] {
+  cursor: pointer;
+  margin-left: 10px;
 }

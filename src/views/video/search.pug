@@ -3,10 +3,18 @@ include ../mixins/video
 
 block content 
   form(method).search__form
-    label(for="title") Video Search | title
+    label(for="title") THE TITLE
     input(id="title", name="title", placeholder="Write the Title of Video",type="text" )
     button
       i.fas.fa-search
+  if errorMessage 
+    span=errorMessage
+  if videos
+    div.video-grid
+      each video in videos  
+        +video(video)
+      else 
+        span.empty__message  No Result  
   //- form(method)
   //-   label(for="hashtags") Video Search | hashtags
   //-   input(id="hashtags",name="hashtags", placeholder="hashtags: divided by comma",type="text")
@@ -16,11 +24,3 @@ block content
   //-   label(for="genres") Video Search | genres
   //-   input(id="genres",name="genres", placeholder="Genres: divided by comma",type="text")
   //-   input(value="upload",type="submit")
-  if errorMessage 
-    span=errorMessage
-  if videos
-    div.video-grid
-      each video in videos  
-        +video(video)
-      else 
-        span.empty__message  No Result  
