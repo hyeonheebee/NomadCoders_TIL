@@ -20,7 +20,6 @@ let finishTimeoutId = null;
 const handleKeyDown = (event) => {
   console.dir(event.target);
   if (event.target.localName !== "textarea") {
-    // if (event.target.childElementCount !== 0) {
     if (event.code === "Space") {
       if (video.paused) {
         video.play();
