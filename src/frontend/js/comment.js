@@ -1,3 +1,5 @@
+// const { container } = require("webpack");
+
 const commentForm = document.querySelector("#commentForm");
 const videoContainer = document.querySelector("#videoContainer");
 const commentSection = document.querySelector(".video__comments");
@@ -47,21 +49,15 @@ const postRealtimeComment = (text, commentId, owner) => {
 const handleDeleteComment = async (event) => {
   const commentBubble = event.target.parentElement;
   const commentBubbleIcon = commentBubble.querySelector("i");
-  console.log(commentBubbleIcon);
   const commentId = commentBubble.dataset.id;
   await fetch(`/api/comments/${commentId}`, {
     method: "DELETE",
   });
   const commentOwner = commentBubbleIcon.dataset.id;
   const commentUser = commentForm.dataset.user;
-  // console.log(commentUser);
-  // console.log(commentOwner);
-  // console.log(String(commentOwner));
   if (commentUser === commentOwner) {
     commentBubble.remove();
   }
 };
-const deleteFakeUser = (owner) => {};
-//내가 클릭한 요소가 뭔지 찾지못하는 문제
-////부모요소 안에서 찾아야한다..
+
 commentSection.addEventListener("click", handleDeleteComment);
