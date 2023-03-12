@@ -47,17 +47,18 @@ const postRealtimeComment = (text, commentId, owner) => {
 };
 
 const handleDeleteComment = async (event) => {
-  const commentBubble = event.target.parentElement;
-  const commentBubbleIcon = commentBubble.querySelector("i");
-  const commentId = commentBubble.dataset.id;
-  await fetch(`/api/comments/${commentId}`, {
-    method: "DELETE",
-  });
-  const commentOwner = commentBubbleIcon.dataset.id;
-  const commentUser = commentForm.dataset.user;
-  if (commentUser === commentOwner) {
-    commentBubble.remove();
+  if (event.target.localName === "button") {
+    const commentBubble = event.target.parentElement;
+    const commentBubbleIcon = commentBubble.querySelector("i");
+    const commentId = commentBubble.dataset.id;
+    await fetch(`/api/comments/${commentId}`, {
+      method: "DELETE",
+    });
+    const commentOwner = commentBubbleIcon.dataset.id;
+    const commentUser = commentForm.dataset.user;
+    if (commentUser === commentOwner) {
+      commentBubble.remove();
+    }
   }
 };
-
 commentSection.addEventListener("click", handleDeleteComment);
