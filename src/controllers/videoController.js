@@ -146,6 +146,7 @@ export const postUpload = async (req, res) => {
   const pageTitle = "Upload Video";
   const { title, summary, genres, hashtags } = req.body;
   const { location } = req.file;
+  const useHeroku = process.env.NODE_ENV === "production";
   const { _id } = req.session.user;
   try {
     const uploadedVideo = await Video.create({
@@ -153,7 +154,7 @@ export const postUpload = async (req, res) => {
       summary,
       hashtags: Video.hashFormatting(hashtags),
       genres: Video.genreFormatting(genres),
-      fileUrl: location,
+      fileUrl: useHeroku ? location : path,
       owner: _id,
     });
     const user = await User.findById(_id);

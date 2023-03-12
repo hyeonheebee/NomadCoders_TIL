@@ -42,11 +42,16 @@ export const postEdit = async (req, res) => {
   const { nickname } = req.body;
   console.log("this is", file);
   // path = req.session.user.avatarUrl;
+  const useHeroku = process.env.NODE_ENV === "production";
   const user = await User.findByIdAndUpdate(
     _id,
     {
       nickname,
-      avatarUrl: file ? `${file.location}` : req.session.user.avatarUrl,
+      avatarUrl: file
+        ? useHeroku
+          ? file.location
+          : `/${file.path}`
+        : req.session.user.avatarUrl,
     },
     { new: true }
   );
