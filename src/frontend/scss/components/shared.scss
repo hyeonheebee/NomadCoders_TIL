@@ -24,6 +24,16 @@
   width: auto;
   border-radius: 10px;
 }
+
+#commentForm {
+  display: flex;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: rgba($color: $bg, $alpha: 0.7);
+  border-radius: 10px;
+  border: 1px solid rgba($color: #fff, $alpha: 0.1);
+}
+
 .video__comment-form textarea {
   height: 40px;
   width: 60%;
@@ -70,4 +80,5 @@
   color: $hond;
   position: absolute;
   right: 50px;
+  margin-bottom: 4px;
 }

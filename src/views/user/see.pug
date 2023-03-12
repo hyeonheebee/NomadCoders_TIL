@@ -15,9 +15,9 @@ block content
           i.fas.fa-smile.fa-5x
     else  
        img(src=user.avatarUrl).avatar
-    span=user.username
-    span=user.nickname
-    a(href=`/users/${user._id}/edit`) &rarr; Edit your Profile 
+    span#profile__name #{user.username}
+    span#profile__nickname #{user.nickname}
+    a#edit__profile__link(href=`/users/${user._id}/edit`) ✨ Edit your Profile ✨
   div.video-grid
     each video in user.videos 
       +video(video)

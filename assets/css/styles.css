@@ -199,7 +199,7 @@ footer {
   padding: 0px 15px;
 }
 .video-mixin .video-mixin__data .video-mixin__title {
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 500;
   color: rgb(11, 230, 230);
   display: block;
@@ -227,18 +227,18 @@ footer {
 .video-mixin .video-mixin__data .video-mixin__meta #nickname {
   display: block;
   margin-top: 5px;
-  font-size: 18px;
+  font-size: 15px;
   color: rgb(183, 250, 250);
 }
 
-form {
+form:not(#commentForm) {
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 420px;
   margin: 0 auto;
 }
-form:not(.search__form) {
+form:not(#commentForm):not(.search__form) {
   padding: 30px;
   background-color: rgba(14, 17, 23, 0.7);
   border-radius: 10px;
@@ -326,6 +326,15 @@ input[type=file] {
   border-radius: 10px;
 }
 
+#commentForm {
+  display: flex;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: rgba(14, 17, 23, 0.7);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .video__comment-form textarea {
   height: 40px;
   width: 60%;
@@ -378,6 +387,7 @@ input[type=file] {
   color: #e6c622;
   position: absolute;
   right: 50px;
+  margin-bottom: 4px;
 }
 
 #videoContainer {
@@ -528,6 +538,20 @@ label[for=video] {
   font-size: 18px;
 }
 
+#profile__name {
+  margin: 7px 0;
+}
+
+#profile__nickname {
+  color: rgb(0, 214, 214);
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+#edit__profile__link {
+  color: rgb(183, 250, 250);
+}
+
 .video__data {
   position: relative;
   margin-top: 20px;
@@ -614,6 +638,12 @@ label[for=video] {
 .video__modifybox2 {
   position: absolute;
   margin-right: 125px;
+}
+
+#edit__video__preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 body {

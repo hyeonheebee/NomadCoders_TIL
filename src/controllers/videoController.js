@@ -186,6 +186,7 @@ export const deleteVideo = async (req, res) => {
   await Video.findOneAndDelete({ _id: id });
   // video.owner.videos.splice(video.owner.videos.indexOf(id), 0);
   // video.owner.save();
+  req.flash("success", "Your video is deleted !⛔");
   return res.redirect("/");
 };
 export const postView = async (req, res) => {
