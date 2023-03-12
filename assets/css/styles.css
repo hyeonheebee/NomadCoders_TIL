@@ -245,7 +245,7 @@ form:not(.search__form) {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-input:not(#volume, #timeLine, .social__btn, #video__uploadBtn) {
+input:not(#volume, #timeLine, .social__btn, #video__uploadBtn, #pw__updateBtn) {
   all: unset;
   padding: 15px 20px;
   border-radius: 5px;
@@ -256,13 +256,14 @@ input:not(#volume, #timeLine, .social__btn, #video__uploadBtn) {
   color: white;
   width: 90%;
 }
-input:not(#volume, #timeLine, .social__btn, #video__uploadBtn)::placeholder {
+input:not(#volume, #timeLine, .social__btn, #video__uploadBtn, #pw__updateBtn)::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
 
 input[type=submit],
 .social__btn,
-#video__uploadBtn {
+#video__uploadBtn,
+#pw__updateBtn {
   width: 100%;
   border-radius: 5px;
   padding: 10px 20px;
@@ -359,6 +360,24 @@ input[type=file] {
   width: 150px;
   height: 150px;
   border-radius: 50%;
+}
+
+#pwerror__message {
+  font-size: 15px;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+#comment-grid__title {
+  margin-left: 10px;
+  font-size: 20px;
+  color: #effaaa;
+}
+
+#uploading__link {
+  color: #e6c622;
+  position: absolute;
+  right: 50px;
 }
 
 #videoContainer {
@@ -637,7 +656,7 @@ main {
   border-radius: 10000px;
   text-align: center;
   animation: goAway 0.5s ease-in-out forwards;
-  animation-delay: 5s;
+  animation-delay: 2s;
 }
 .flashMessage.error {
   background-color: tomato;

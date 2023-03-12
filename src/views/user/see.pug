@@ -22,14 +22,17 @@ block content
     each video in user.videos 
       +video(video)
     else
-      span.empty__message sorry you don't have any video
+      span.empty__message Don't Have Any Video
+      br
+      span
+      a.empty__message#uploading__link(href="/videos/upload") Try Uploading now 🎬
   hr
-  span My Comments
+  span#comment-grid__title My Comments
   div.comment-grid
     each comment in user.comments   
       span=comment.text
         a(href=`/videos/${String(comment.videos)}`) &rarr; See this Video
     else  
-      span.empty__message sorry you don't have any comment
+      span.empty__message Don't have Any Comment
 
       

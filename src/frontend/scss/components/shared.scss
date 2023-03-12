@@ -56,3 +56,18 @@
   height: 150px;
   border-radius: 50%;
 }
+#pwerror__message {
+  font-size: 15px;
+  opacity: 0.8;
+  font-weight: 500;
+}
+#comment-grid__title {
+  margin-left: 10px;
+  font-size: 20px;
+  color: $honl;
+}
+#uploading__link {
+  color: $hond;
+  position: absolute;
+  right: 50px;
+}

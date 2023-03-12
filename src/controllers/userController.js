@@ -190,10 +190,12 @@ export const postChangePW = async (req, res) => {
   const validation = await bcrypt.compare(nowPassword, user.password);
   if (!validation) {
     const errorMessage = "Current password doesn't correct";
+    req.flash("error", "Please Try again ! 😉");
     return res.status(404).render("user/changePW", { errorMessage });
   } else {
     if (newPassword !== validPassword) {
       const errorMessage = "please check new password again";
+      req.flash("error", "Please Try again ! 😉");
       return res.status(400).render("user/changePW", { errorMessage });
     }
     // newPassword = await User.hashingPw(newPassword);

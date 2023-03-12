@@ -28,6 +28,7 @@ export const search = async (req, res) => {
     req.flash("error", "No Video ⏳");
     return res.status(404).redirect("/");
   }
+  req.flash("success", "I got it! 🔎");
   return res.render("video/search", { pageTitle, videos });
 };
 
@@ -203,10 +204,7 @@ export const postComment = async (req, res) => {
   const { text } = req.body;
   const { user } = req.session;
   const userDb = await User.findById(user._id);
-  console.log("this is user!!!!", userDb);
-  console.log(user);
   const video = await Video.findById(id);
-  console.log(video);
   if (!video) {
     res.flash("error", "No video ⏳");
     return res.sendStatus(404);
