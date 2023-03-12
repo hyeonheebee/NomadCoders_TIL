@@ -25,6 +25,12 @@ block content
     span.video__title #{video.title}
     span.video__Sum #{video.summary}
     small.video__views #{video.views} 회
+  if loggeduser._id  === String(video.owner.id)
+    div.video__modifybox2 
+      a(href=`${video.id}/delete`)  Delete Video  ⛔
+    div.video__modifybox1
+      a(href=`${video.id}/edit`) Edit Video  ✅ 
+
   div.video__data        
     div.video__metabox
       span#genres Genres
@@ -44,11 +50,6 @@ block content
         a(href=`/users/${video.owner._id}`) #{String(video.owner.nickname)}
       br
       small.video__createdAt=new Date(video.createdDate).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
-  if loggeduser._id  === String(video.owner.id)
-    div.video__modifybox1
-      a(href=`${video.id}/edit`) Edit Video  ✅ 
-    div.video__modifybox2 
-      a(href=`${video.id}/delete`)  Delete Video  ⛔
 
 
 

@@ -6,6 +6,7 @@ header {
   .header__logo {
     color: $red;
     font-size: 38px;
+    margin-right: 10px;
   }
   ul {
     display: flex;
@@ -31,5 +32,8 @@ header {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+  }
+  #header__titlebox {
+    display: flex;
   }
 }

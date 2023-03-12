@@ -22,16 +22,22 @@
 .video__comments {
   display: flex;
   flex-direction: column;
-  max-width: 320px;
-  width: 100%;
+  max-width: 700px;
+  width: 80%;
   margin: 0 auto;
   margin-top: 20px;
   .video__comment {
     padding: 10px;
+    max-width: 500px;
     border-radius: 9999px;
     background-color: white;
     color: black;
     margin-bottom: 10px;
+  }
+  .comment__delete {
+    border: none;
+    background-color: white;
+    cursor: pointer;
   }
 }
 .video__Sum {
@@ -70,10 +76,9 @@
   position: absolute;
   right: 30px;
 }
-.video__modifybox1 {
-  margin-top: 15px;
-}
+
 .video__modifybox2 {
   position: absolute;
-  margin-top: 40px;
+
+  margin-right: 125px;
 }

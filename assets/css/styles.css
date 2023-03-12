@@ -147,6 +147,7 @@ header {
 header .header__logo {
   color: #cc0d00;
   font-size: 38px;
+  margin-right: 10px;
 }
 header ul {
   display: flex;
@@ -173,12 +174,16 @@ header .header__avatar {
   height: 40px;
   border-radius: 50%;
 }
+header #header__titlebox {
+  display: flex;
+}
 
 footer {
   text-align: center;
   font-size: 12px;
   opacity: 0.8;
   margin-top: 50px;
+  color: rgb(11, 230, 230);
 }
 
 .video-mixin .video-mixin__thumb {
@@ -303,6 +308,36 @@ input[type=file] {
   display: flex;
   flex-direction: column;
   margin: 5px 0px;
+}
+
+.video__comment-form {
+  display: flex;
+  justify-content: center;
+  max-width: none;
+  width: auto;
+  border-radius: 10px;
+}
+
+.video__comment-form textarea {
+  height: 40px;
+  width: 60%;
+  opacity: 0.6;
+  border-radius: 10px;
+  padding-left: 20px;
+}
+
+.video__comment-form textarea::placeholder {
+  font-size: 15px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.video__comment-form button {
+  background-color: rgb(0, 214, 214);
+  width: 150px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .auth-switch {
@@ -484,17 +519,23 @@ label[for=video] {
 .video__comments {
   display: flex;
   flex-direction: column;
-  max-width: 320px;
-  width: 100%;
+  max-width: 700px;
+  width: 80%;
   margin: 0 auto;
   margin-top: 20px;
 }
 .video__comments .video__comment {
   padding: 10px;
+  max-width: 500px;
   border-radius: 9999px;
   background-color: white;
   color: black;
   margin-bottom: 10px;
+}
+.video__comments .comment__delete {
+  border: none;
+  background-color: white;
+  cursor: pointer;
 }
 
 .video__Sum {
@@ -540,13 +581,9 @@ label[for=video] {
   right: 30px;
 }
 
-.video__modifybox1 {
-  margin-top: 15px;
-}
-
 .video__modifybox2 {
   position: absolute;
-  margin-top: 40px;
+  margin-right: 125px;
 }
 
 body {

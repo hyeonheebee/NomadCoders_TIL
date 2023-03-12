@@ -17,6 +17,32 @@
   flex-direction: column;
   margin: 5px 0px;
 }
+.video__comment-form {
+  display: flex;
+  justify-content: center;
+  max-width: none;
+  width: auto;
+  border-radius: 10px;
+}
+.video__comment-form textarea {
+  height: 40px;
+  width: 60%;
+  opacity: 0.6;
+  border-radius: 10px;
+  padding-left: 20px;
+}
+.video__comment-form textarea::placeholder {
+  font-size: 15px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.video__comment-form button {
+  background-color: $ghh;
+  width: 150px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
 .auth-switch {
   text-align: center;
   margin-top: 40px;

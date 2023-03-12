@@ -1,6 +1,10 @@
 header
-    a(href="/").header__logo
-      i.fab.fa-youtube
+    div#header__titlebox
+      a(href="/").header__logo
+        i.fab.fa-forumbee
+        span  
+        //- i.fab.fa-youtube
+        span=apptitle
     nav   
       ul 
         if loggedIn
