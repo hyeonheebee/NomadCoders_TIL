@@ -10,10 +10,11 @@ block content
   //-     hr -//
 
   div.profile__data
-    if loggeduser.avatarUrl === ""
+    if loggeduser.avatarUrl === "" || !loggeduser.avatarUrl
        span 
           i.fas.fa-smile.fa-5x
-    else  
+    else
+      if loggeduser.avatarUrl  
        img(src=user.avatarUrl).avatar
     span#profile__name #{user.username}
     span#profile__nickname #{user.nickname}

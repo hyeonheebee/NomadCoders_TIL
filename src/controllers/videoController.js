@@ -145,7 +145,7 @@ export const getUpload = (req, res) => {
 export const postUpload = async (req, res) => {
   const pageTitle = "Upload Video";
   const { title, summary, genres, hashtags } = req.body;
-  const { path } = req.file;
+  const { location } = req.file;
   const { _id } = req.session.user;
   try {
     const uploadedVideo = await Video.create({
@@ -153,7 +153,7 @@ export const postUpload = async (req, res) => {
       summary,
       hashtags: Video.hashFormatting(hashtags),
       genres: Video.genreFormatting(genres),
-      fileUrl: path,
+      fileUrl: location,
       owner: _id,
     });
     const user = await User.findById(_id);

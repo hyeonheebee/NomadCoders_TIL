@@ -46,7 +46,7 @@ export const postEdit = async (req, res) => {
     _id,
     {
       nickname,
-      avatarUrl: file ? `/${file.path}` : req.session.user.avatarUrl,
+      avatarUrl: file ? `${file.location}` : req.session.user.avatarUrl,
     },
     { new: true }
   );
