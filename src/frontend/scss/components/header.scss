@@ -4,9 +4,12 @@ header {
   justify-content: space-between;
   align-items: center;
   .header__logo {
-    color: $red;
-    font-size: 38px;
+    color: $honl;
+    font-size: 30px;
     margin-right: 10px;
+  }
+  .header__logo i {
+    color: $hond;
   }
   ul {
     display: flex;

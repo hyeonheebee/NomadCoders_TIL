@@ -7,8 +7,8 @@ block content
     input(id="title", name="title", placeholder="Write the Title of Video",type="text" )
     button
       i.fas.fa-search
-  if errorMessage 
-    span=errorMessage
+    if errorMessage 
+      span=errorMessage
   if videos
     div.video-grid
       each video in videos  
