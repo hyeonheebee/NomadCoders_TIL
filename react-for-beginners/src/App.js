@@ -1,38 +1,50 @@
 import { useState, useEffect } from "react";
 
 function App() {
-  const [toDo, setToDo] = useState("");
-  const [toDos, setToDos] = useState([]);
+  const [loading, setloading] = useState(true);
+  const [coins, setCoins] = useState([]);
 
-  const onChange = (event) => setToDo(event.target.value);
-  const onSubmit = (event) => {
-    event.preventDefault();
-    if (toDo === "") {
-      return;
-    }
-    setToDos((currentArray) => [toDo, ...currentArray]);
-    setToDo("");
+  const [value, setValue] = useState(0);
+  const [index, setIndex] = useState(0);
+  const onSelect = (event) => {
+    setIndex(event.target.value);
+    console.log(event.target.value);
   };
-  useEffect(() => console.log(toDos), [toDos]);
-  console.log(toDos.map((item, index) => <li key={index}>{item}</li>));
+  const onChange = (event) => setValue(event.target.value);
+
+  useEffect(() => {
+    fetch("https://api.coinpaprika.com/v1/tickers")
+      .then((response) => response.json())
+      .then((json) => setCoins(json));
+    setloading(false);
+  }, []);
+
   return (
     <div>
-      <h1>My To Dos ({toDos.length})</h1>
-      <form onSubmit={onSubmit}>
-        <input
-          onChange={onChange}
-          value={toDo}
-          type="text"
-          placeholder="Wirte your todo"
-        />
-        <button>Add To Do</button>
-      </form>
-      <hr />
-      <ul>
-        {toDos.map((item, index) => (
-          <li key={index}>{item}</li>
+      <h1>The coins! {coins.length} </h1>
+      {loading ? <strong>Loading...</strong> : null}
+      <select value={index} onChange={onSelect}>
+        {coins.map((coin) => (
+          <option value={coin.name} key={coin.id}>
+            {coin.name}
+          </option>
         ))}
-      </ul>
+      </select>
+      {coins.map((coin) =>
+        coin?.name === index ? (
+          <h1>
+            {coin.symbol} : {coin.quotes.USD.price} USD
+            <div>
+              <input value={value} onChange={onChange} />
+              <input
+                value={value / coin.quotes.USD.price}
+                onChange={onChange}
+              />
+              <span>{coin.name}</span>
+            </div>
+          </h1>
+        ) : null
+      )}
     </div>
   );
 }
