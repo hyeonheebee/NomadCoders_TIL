@@ -32,7 +32,7 @@ function App() {
       </select>
       {coins.map((coin) =>
         coin?.name === index ? (
-          <h1>
+          <span>
             {coin.symbol} : {coin.quotes.USD.price} USD
             <div>
               <input value={value} onChange={onChange} />
@@ -42,7 +42,7 @@ function App() {
               />
               <span>{coin.name}</span>
             </div>
-          </h1>
+          </span>
         ) : null
       )}
     </div>
