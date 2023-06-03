@@ -3,7 +3,6 @@ import styled from "styled-components"
 import { useParams } from "react-router-dom";
 import { fetchDetail } from "../api";
 
-
 const CharImg = styled.img`
 width: 400px;
 height: 400px;
