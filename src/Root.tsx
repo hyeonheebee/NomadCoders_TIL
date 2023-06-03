@@ -4,8 +4,9 @@ import styled, { createGlobalStyle } from "styled-components";
 import Circle from "./Circle";
 import Header from "./Components/Header";
 import Router from "./Router";
-const GlobalStyle = createGlobalStyle`
+import { ReactQueryDevtools } from "react-query/devtools";
 
+const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
 
 html, body, div, span, applet, object, iframe,
@@ -71,11 +72,10 @@ a{
 function Root() {
   return (
     <>
-      <div>
-        <GlobalStyle />
-        <Header />
-        <Outlet />
-      </div>
+      <Outlet />
+      <GlobalStyle />
+      <Header />
+      <ReactQueryDevtools initialIsOpen={true} />
     </>
   );
 }

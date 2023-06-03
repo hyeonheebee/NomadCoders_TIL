@@ -9,6 +9,9 @@ import User from "./screens/users/User";
 import Followers from "./screens/users/Followers";
 import Coins from "./screens/Coins";
 import Coin from "./screens/coin";
+import { Children } from "react";
+import Price from "./screens/Price";
+import Chart from "./screens/Chart";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +28,20 @@ const router = createBrowserRouter([
         element: <About />,
       },
       { path: "/coins", element: <Coins /> },
-      { path: "/:coinId", element: <Coin /> },
+      {
+        path: "/:coinId",
+        element: <Coin />,
+        children: [
+          {
+            path: "price",
+            element: <Price />,
+          },
+          {
+            path: "chart",
+            element: <Chart />,
+          },
+        ],
+      },
       {
         path: "users/:userId",
         element: <User />,
