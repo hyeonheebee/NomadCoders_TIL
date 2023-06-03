@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components"
 import { useParams } from "react-router-dom";
@@ -30,5 +31,9 @@ return (
 
 </>}</>
 )
+=======
+function Detail(){
+return <h1>Detail</h1>
+>>>>>>> f30b9cbfe91692afb079c7d09cba738b6e07805b
 }
 export default Detail;
