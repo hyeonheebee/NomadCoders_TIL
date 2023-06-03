@@ -10,8 +10,11 @@ children:[{
   path:"",
   element:<Home /> 
 },
-{path : "/character/:id",
-element:<Detail />}]
+{
+path:"/character/:id",
+element:<Detail />
+
+}]
 }]);
 
 export default router;
