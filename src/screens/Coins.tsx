@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { fetchCoins } from "../api";
+import { useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atom";
 
 const Container = styled.div`
   padding: 0px 10px;
@@ -55,13 +57,11 @@ interface Icoin {
   is_active: boolean;
   type: string;
 }
-interface IDark {
-  toggleDark: () => void;
-  isDark: boolean;
-}
+interface IDark {}
 function Coins() {
   const { isLoading, data } = useQuery<Icoin[]>("allCoins", fetchCoins);
-  const { toggleDark } = useOutletContext<IDark>();
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
   // const [coins, setCoins] = useState<CoinInterface[]>([]);
   // const [loading, setLoading] = useState(true);
   // useEffect(() => {
@@ -78,7 +78,7 @@ function Coins() {
     <Container>
       <CoinsHeader>
         <Title>Coins</Title>
-        <button onClick={toggleDark}>Toggle Theme</button>
+        <button onClick={toggleDarkAtom}>Toggle Theme</button>
       </CoinsHeader>
       {isLoading ? (
         <Loader>Loading...</Loader>

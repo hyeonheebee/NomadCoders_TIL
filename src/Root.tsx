@@ -6,6 +6,8 @@ import Header from "./Components/Header";
 import Router from "./Router";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { darkTheme, lightTheme } from "./theme";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atom";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
@@ -71,12 +73,11 @@ a{
 }
 `;
 function Root() {
-  const [isDark, setIsDark] = useState(true);
-  const toggleDark = () => setIsDark((pre) => !pre);
+  const isDark = useRecoilValue(isDarkAtom);
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <Outlet context={{ toggleDark, isDark }} />
+        <Outlet />
         <GlobalStyle />
         <Header />
         <ReactQueryDevtools initialIsOpen={true} />
