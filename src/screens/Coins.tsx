@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useOutletContext } from "react-router-dom";
 
 import styled from "styled-components";
 import { useEffect, useState } from "react";
@@ -17,7 +17,7 @@ const CoinsHeader = styled.header`
 const CoinsList = styled.ul``;
 const Coin = styled.li`
   background-color: white;
-  color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
   margin-bottom: 10px;
   border-radius: 15px;
   a {
@@ -55,10 +55,13 @@ interface Icoin {
   is_active: boolean;
   type: string;
 }
-
+interface IDark {
+  toggleDark: () => void;
+  isDark: boolean;
+}
 function Coins() {
   const { isLoading, data } = useQuery<Icoin[]>("allCoins", fetchCoins);
-
+  const { toggleDark } = useOutletContext<IDark>();
   // const [coins, setCoins] = useState<CoinInterface[]>([]);
   // const [loading, setLoading] = useState(true);
   // useEffect(() => {
@@ -75,6 +78,7 @@ function Coins() {
     <Container>
       <CoinsHeader>
         <Title>Coins</Title>
+        <button onClick={toggleDark}>Toggle Theme</button>
       </CoinsHeader>
       {isLoading ? (
         <Loader>Loading...</Loader>

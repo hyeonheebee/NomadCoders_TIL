@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import Circle from "./Circle";
 import Header from "./Components/Header";
 import Router from "./Router";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { darkTheme, lightTheme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
@@ -70,12 +71,16 @@ a{
 }
 `;
 function Root() {
+  const [isDark, setIsDark] = useState(true);
+  const toggleDark = () => setIsDark((pre) => !pre);
   return (
     <>
-      <Outlet />
-      <GlobalStyle />
-      <Header />
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <Outlet context={{ toggleDark, isDark }} />
+        <GlobalStyle />
+        <Header />
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
     </>
   );
 }
