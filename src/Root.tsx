@@ -1,75 +1,67 @@
 import React from "react";
-
-import { createGlobalStyle } from "styled-components";
-import ToDoList from "./ToDoList";
-const GlobalStyle = createGlobalStyle`
-   @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, menu, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-main, menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, main, menu, nav, section {
-  display: block;
-}
-/* HTML5 hidden-attribute fix for newer browsers */
-*[hidden] {
-    display: none;
-}
-body {
-  line-height: 1;
-}
-menu, ol, ul {
-  list-style: none;
-}
-blockquote, q {
-  quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-body{
-  font-family: 'Nanum Pen Script', cursive;
-background-color:${(props) => props.theme.bgColor};
-color: ${(props) => props.theme.textColor};
-}
-*{
-  box-sizing:border-box;
-}
-a{
-  text-decoration : none;
-  color:inherit;
-}
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { stringify } from "querystring";
+const Wrapper = styled(motion.div)`
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
 `;
+const Box = styled(motion.div)`
+  width: 200px;
+  height: 200px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+`;
+const Circle = styled(motion.div)`
+  width: 70px;
+  height: 70px;
+  background-color: white;
+  border-radius: 35px;
+  place-self: center;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+`;
+
+const boxVar = {
+  start: { opacity: 0 },
+  end: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      duration: 0.5,
+      bounce: 0.5,
+      delayChildren: 0.5,
+      staggerChildren: 0.2,
+    },
+  },
+};
+const circleVar = {
+  start: {
+    opacity: 0,
+    y: 10,
+  },
+  end: {
+    opacity: 1,
+    y: 0,
+  },
+};
 function Root() {
   return (
     <>
-      <GlobalStyle />
-      <ToDoList />
+      <Wrapper>
+        <Box variants={boxVar} initial="start" animate="end">
+          <Circle variants={circleVar} />
+          <Circle variants={circleVar} />
+          <Circle variants={circleVar} />
+          <Circle variants={circleVar} />
+        </Box>
+      </Wrapper>
     </>
   );
 }
