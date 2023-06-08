@@ -60,10 +60,10 @@ table {
 body {
   font-weight: 300;
   font-family: 'Source Sans Pro', sans-serif;
-  background-color:${(props) => props.theme.bgColor};
+
   color:black;
   line-height: 1.2;
-  background:linear-gradient(135deg,#e09,#d0e);
+
 }
 a {
   text-decoration:none;
@@ -74,10 +74,10 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <ThemeProvider theme={darkTheme}>
+  <>
     <GlobalStyle />
     <Root />
-  </ThemeProvider>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function
