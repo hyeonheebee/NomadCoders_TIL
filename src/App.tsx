@@ -156,7 +156,7 @@ export default function App() {
   const [timerMinutes, setTimerMinutes] = useRecoilState(timerMinutesAtom);
   const [counter, setCounter] = useRecoilState(counterAtomn);
   const [goal, setGoal] = useRecoilState(goalAtome);
-  const [isPause, setPause] = useRecoilState(isPauseAtom);
+  // const [isPause, setPause] = useRecoilState(isPauseAtom);
   const [visible, setVisible] = useState(1);
   const nextplease = () =>
     setVisible((prev) =>
@@ -169,27 +169,30 @@ export default function App() {
   // );
 
   const toggleFn = () => {
-    if (isActive) {
-      setPause((prev) => !prev);
-      setActive(false);
-    }
-    if (isPause) {
-      setPause((prev) => !prev);
-      setActive(true);
-    }
-    if (!isActive && !isPause) {
-      setActive(true);
-    }
+    setActive((prev) => !prev);
+    // if (isActive) {
+    //   // setPause((prev) => !prev);
+    //   setActive(false);
+    // }
+    // if (isPause) {
+    //   setPause((prev) => !prev);
+    //   setActive(true);
+    // }
+    // if (!isActive) {
+    //   setActive(true);
+    // }
     clearInterval(timerId);
   };
 
   const startMinuteTimer = () => {
-    if (timerMinutes > 0) {
-      setTimerMinutes((prev) => prev - 1);
-      setTimerSeconds(
-        timerSeconds === 60 ? 0 : 60 - Math.floor(timerMinutes / 60)
-      );
-      setArray((prevArray) => []);
+    if (isActive) {
+      if (timerMinutes > 0) {
+        setTimerMinutes((prev) => prev - 1);
+        setTimerSeconds(
+          timerSeconds === 60 ? 0 : 60 - Math.floor(timerMinutes / 60)
+        );
+        setArray((prevArray) => []);
+      }
     } else {
       clearInterval(timerId);
       setCounter((prev) => prev + 1);
@@ -233,11 +236,13 @@ export default function App() {
     }
   }, [goal]);
 
-  array.map((i) => (i === String(visible) ? console.log(i) : "hi"));
-  array.map((i) => console.log(i));
+  // array.map((i) => (i === String(visible) ? console.log(i) : "hi"));
+  // array.map((i) => console.log(i));
   console.log("timerSEconds : ", timerSeconds);
-  console.log("isPause :", isPause);
+  // console.log("isPause :", isPause);
+  console.log(timerSeconds);
   console.log("isPause :", timerSeconds);
+  console.log("isMath :", 59 - Math.floor(timerMinutes / 60));
   return (
     <>
       <GlobalStyle />
@@ -245,35 +250,44 @@ export default function App() {
       <Wrapper>
         <span>POMODORO</span>
         <WrapperColumns>
-          {!isActive && !isPause ? (
+          {isActive && timerSeconds !== 60 ? (
             <WrapperCardSection>
-              <CardSection>25</CardSection>:<CardSection>00</CardSection>
+              <CardSection>{String(timerMinutes).padStart(2, "0")}</CardSection>
+              :
+              <AnimatePresence>
+                {array.map((i) =>
+                  i === String(timerSeconds) ? (
+                    <CardSection
+                      variants={box}
+                      initial="invisible"
+                      animate="visible"
+                      exit="exit"
+                      key={Number(i)}
+                    >
+                      {i.padStart(2, "0")}
+                    </CardSection>
+                  ) : null
+                )}
+              </AnimatePresence>
             </WrapperCardSection>
           ) : (
             <WrapperCardSection>
               <CardSection>{String(timerMinutes).padStart(2, "0")}</CardSection>
               :
               <AnimatePresence>
-                <CardSection
-                  variants={box}
-                  initial="invisible"
-                  animate="visible"
-                  exit="exit"
-                >
-                  {array.map((i) =>
-                    i === String(timerSeconds) ? (
-                      i === String(60) ? (
-                        <CardSection key={Number(i)}>00</CardSection>
-                      ) : (
-                        <CardSection key={Number(i)}>
-                          {i.padStart(2, "0")}
-                        </CardSection>
-                      )
-                    ) : null
-                  )}
-                  {isPause ? <div>{timerSeconds}</div> : null}
-                  {/* {String(timerSeconds).padStart(2, "0")} */}
-                </CardSection>
+                {array.map((i) =>
+                  i === String(timerSeconds) ? (
+                    <CardSection
+                      variants={box}
+                      initial="invisible"
+                      animate="visible"
+                      exit="exit"
+                      key={Number(i)}
+                    >
+                      {i.padStart(2, "0")}
+                    </CardSection>
+                  ) : null
+                )}
               </AnimatePresence>
             </WrapperCardSection>
           )}
@@ -282,7 +296,6 @@ export default function App() {
           <button type="button" onClick={toggleFn}>
             {!isActive ? (
               <span>
-                {/* play{" "} */}
                 <svg
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -292,9 +305,8 @@ export default function App() {
                   <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
                 </svg>
               </span>
-            ) : !isPause ? (
+            ) : (
               <span>
-                {/* pause */}
                 <svg
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -302,18 +314,6 @@ export default function App() {
                   aria-hidden="true"
                 >
                   <path d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z"></path>
-                </svg>
-              </span>
-            ) : (
-              <span>
-                {/* play{" "} */}
-                <svg
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
                 </svg>
               </span>
             )}
