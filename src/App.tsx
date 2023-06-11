@@ -250,7 +250,7 @@ export default function App() {
       <Wrapper>
         <span>POMODORO</span>
         <WrapperColumns>
-          {isActive && timerSeconds !== 60 ? (
+          {isActive ? (
             <WrapperCardSection>
               <CardSection>{String(timerMinutes).padStart(2, "0")}</CardSection>
               :
