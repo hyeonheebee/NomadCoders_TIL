@@ -1,3 +1,4 @@
+import styled, { createGlobalStyle } from "styled-components";
 import { useEffect, useState, useRef } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
@@ -9,53 +10,186 @@ import {
   initialSecondsAtom,
   initialMinutesAtom,
   testNumAtom,
-  isPauseAtom
+  isPauseAtom,
 } from "./atoms";
+import { AnimatePresence, motion } from "framer-motion";
+const GlobalStyle = createGlobalStyle`
+   @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, menu, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+  display: block;
+}
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden] {
+    display: none;
+}
+body {
+  line-height: 1;
+}
+menu, ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+body{
+  font-family: 'Nanum Pen Script', cursive;
+  background-color: tomato;
+}
+*{
+  box-sizing:border-box;
+}
+a{
+  text-decoration : none;
+  color:inherit;
+}
+`;
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  font-size: 100px;
+`;
+const WrapperColumns = styled.div`
+  height: 20%;
+  width: auto;
+  button {
+    font-size: 50px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-top: 50px;
+    svg {
+      width: 30px;
+      margin-bottom: 1px;
+      margin-left: 5px;
+    }
+  }
+`;
+const CardSection = styled(motion.div)`
+  width: 100px;
+  height: 150px;
+  background-color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const WrapperCardSection = styled(motion.div)`
+  display: flex;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+`;
+
+const box = {
+  invisible: {
+    x: 500,
+    opacity: 0,
+    scale: 0,
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    rotateZ: 360,
+  },
+  leaving: {
+    opacity: 0,
+    scale: 0,
+    y: 50,
+    transition: {
+      duration: 1,
+    },
+  },
+  exit: { x: -500, opacity: 0, scale: 0, transition: { duration: 1 } },
+};
+
 export default function App() {
+  const [array, setArray] = useState<String[]>([]);
+
   let timerId: number | undefined;
   const [test, setTest] = useRecoilState(testNumAtom);
-  const [initialMinutes, setInitialMinutes] = useRecoilState(
-    initialMinutesAtom
-  );
-  const [initialSeconds, setInitialSeconds] = useRecoilState(
-    initialSecondsAtom
-  );
-  setTest((v) => (v = 60));
-  setInitialMinutes((minutes) => (minutes = 24));
-  setInitialSeconds(
-    (seconds) =>
-      (seconds = seconds >= 60 ? 0 : Math.ceil(test - initialMinutes / test))
-  );
+  const [initialMinutes, setInitialMinutes] =
+    useRecoilState(initialMinutesAtom);
+  const [initialSeconds, setInitialSeconds] =
+    useRecoilState(initialSecondsAtom);
 
-  // const test = useRecoilValue(testNumAtom);
-  // const initialMinutes = useRecoilValue(initialMinutesAtom);
-  // const initialSeconds = useRecoilValue(initialSecondsAtom);
   const [isActive, setActive] = useRecoilState(isActiveAtom);
   const [timerSeconds, setTimerSeconds] = useRecoilState(timerSecondsAtom);
   const [timerMinutes, setTimerMinutes] = useRecoilState(timerMinutesAtom);
   const [counter, setCounter] = useRecoilState(counterAtomn);
   const [goal, setGoal] = useRecoilState(goalAtome);
   const [isPause, setPause] = useRecoilState(isPauseAtom);
+  const [visible, setVisible] = useState(1);
+  const nextplease = () =>
+    setVisible((prev) =>
+      prev === timerSeconds ? timerSeconds : timerSeconds - 1
+    );
+  // setTest((v) => (v = 60));
+  // setInitialMinutes((minutes) => (minutes = 25));
+  // setInitialSeconds((seconds) =>
+  //   timerSeconds === 60 ? 0 : 60 - Math.floor(initialMinutes / 60)
+  // );
 
   const toggleFn = () => {
-    clearInterval(timerId);
     if (isActive) {
       setPause((prev) => !prev);
       setActive(false);
     }
     if (isPause) {
-      setActive(true);
       setPause((prev) => !prev);
+      setActive(true);
     }
     if (!isActive && !isPause) {
       setActive(true);
     }
+    clearInterval(timerId);
   };
 
   const startMinuteTimer = () => {
     if (timerMinutes > 0) {
       setTimerMinutes((prev) => prev - 1);
-      setTimerSeconds(Math.floor(test - timerMinutes / test));
+      setTimerSeconds(
+        timerSeconds === 60 ? 0 : 60 - Math.floor(timerMinutes / 60)
+      );
+      setArray((prevArray) => []);
     } else {
       clearInterval(timerId);
       setCounter((prev) => prev + 1);
@@ -70,13 +204,15 @@ export default function App() {
       } else {
         startMinuteTimer();
       }
-    }, 10);
+    }, 1000);
   };
 
   useEffect(() => {
     let timerId: NodeJS.Timeout | undefined;
     if (isActive) {
       startSecondTimer();
+      setArray((prevArray) => [...prevArray, String(timerSeconds)]);
+      nextplease();
     } else if (timerSeconds <= 0) {
       clearTimeout(timerId);
       startMinuteTimer();
@@ -93,45 +229,102 @@ export default function App() {
       setCounter((current) => 0);
       setGoal((current) => 0);
       setTest(0);
-      setInitialMinutes(0);
-      setInitialSeconds(0);
       setActive(false);
     }
   }, [goal]);
-  console.log(initialMinutes, initialSeconds, goal, counter, isActive);
+
+  array.map((i) => (i === String(visible) ? console.log(i) : "hi"));
+  array.map((i) => console.log(i));
+  console.log("timerSEconds : ", timerSeconds);
+  console.log("isPause :", isPause);
+  console.log("isPause :", timerSeconds);
   return (
     <>
-      <div>
-        <span>
-          {/* 만약 ispause가 true일때도 timer이 보이고, isActive가 true일때도 타이머가 보인다 
-          단 pause버튼을 누르면 ispause는 false로 바뀌고 그때는 현재 시간 타이머가 보인다. 
-          25:00 이 보일때는 isActive 가 false일때 뿐이다 */}
-          {!isActive && goal === 12 ? (
-            <span>00:00</span>
-          ) : !isActive && !isPause && goal !== 12 ? (
-            <span>
-              {timerMinutes}:{timerSeconds}
-            </span>
-          ) : (
-            <span>
-              {timerMinutes}:{timerSeconds}
-            </span>
-          )}
-        </span>
+      <GlobalStyle />
 
-        <button onClick={toggleFn}>
-          {!isActive ? (
-            <span>play</span>
-          ) : !isPause ? (
-            <span>pause</span>
+      <Wrapper>
+        <span>POMODORO</span>
+        <WrapperColumns>
+          {!isActive && !isPause ? (
+            <WrapperCardSection>
+              <CardSection>25</CardSection>:<CardSection>00</CardSection>
+            </WrapperCardSection>
           ) : (
-            <span>play</span>
+            <WrapperCardSection>
+              <CardSection>{String(timerMinutes).padStart(2, "0")}</CardSection>
+              :
+              <AnimatePresence>
+                <CardSection
+                  variants={box}
+                  initial="invisible"
+                  animate="visible"
+                  exit="exit"
+                >
+                  {array.map((i) =>
+                    i === String(timerSeconds) ? (
+                      i === String(60) ? (
+                        <CardSection key={Number(i)}>00</CardSection>
+                      ) : (
+                        <CardSection key={Number(i)}>
+                          {i.padStart(2, "0")}
+                        </CardSection>
+                      )
+                    ) : null
+                  )}
+                  {isPause ? <div>{timerSeconds}</div> : null}
+                  {/* {String(timerSeconds).padStart(2, "0")} */}
+                </CardSection>
+              </AnimatePresence>
+            </WrapperCardSection>
           )}
-        </button>
-      </div>
-      <span>counter : {counter} / 4 </span>
+        </WrapperColumns>
+        <WrapperColumns>
+          <button type="button" onClick={toggleFn}>
+            {!isActive ? (
+              <span>
+                {/* play{" "} */}
+                <svg
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
+                </svg>
+              </span>
+            ) : !isPause ? (
+              <span>
+                {/* pause */}
+                <svg
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z"></path>
+                </svg>
+              </span>
+            ) : (
+              <span>
+                {/* play{" "} */}
+                <svg
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
+                </svg>
+              </span>
+            )}
+          </button>
+        </WrapperColumns>
+        <WrapperColumns>
+          <span>counter : {counter} / 4 </span>
 
-      <span>goal : {goal} / 12</span>
+          <span>goal : {goal} / 12</span>
+        </WrapperColumns>
+      </Wrapper>
     </>
   );
 }
