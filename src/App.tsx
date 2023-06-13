@@ -1,12 +1,12 @@
 import styled, { createGlobalStyle } from "styled-components";
-import { useEffect, useState, useRef } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import {
   isActiveAtom,
   timerSecondsAtom,
   timerMinutesAtom,
   counterAtomn,
-  goalAtome
+  goalAtome,
 } from "./atoms";
 import { AnimatePresence, motion } from "framer-motion";
 const GlobalStyle = createGlobalStyle`
@@ -133,23 +133,23 @@ const WrapperCardSection = styled.div`
 const box = {
   invisible: {
     opacity: 0,
-    scale: 0
+    scale: 0,
   },
   visible: {
     opacity: 1,
-    scale: 1
-  }
+    scale: 1,
+  },
 };
 const button = {
   invisible: {
     opacity: 0,
-    scale: 0
+    scale: 0,
   },
   visible: {
     opacity: 1,
-    scale: 1
+    scale: 1,
   },
-  exit: { opacity: 0, scale: 0 }
+  exit: { opacity: 0, scale: 0 },
 };
 export default function App() {
   const [array, setArray] = useState<String[]>([]);
@@ -161,11 +161,6 @@ export default function App() {
   const [timerMinutes, setTimerMinutes] = useRecoilState(timerMinutesAtom);
   const [counter, setCounter] = useRecoilState(counterAtomn);
   const [goal, setGoal] = useRecoilState(goalAtome);
-  const [visible, setVisible] = useState(1);
-  const nextplease = () =>
-    setVisible((prev) =>
-      prev === timerSeconds ? timerSeconds : timerSeconds - 1
-    );
 
   const toggleFn = () => {
     setActive((prev) => !prev);
@@ -206,7 +201,6 @@ export default function App() {
     } else if (isActive) {
       startSecondTimer();
       setArray((prevArray) => [...prevArray, String(timerSeconds)]);
-      nextplease();
     } else if (timerSeconds <= 0) {
       clearTimeout(timerId);
       startMinuteTimer();
