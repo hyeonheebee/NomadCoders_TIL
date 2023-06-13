@@ -1,39 +1,45 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "hoist-non-react-statics/node_modules/@types/react";
+import { useState } from "react";
 import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import { getPopular, IAPIResponse, makeImagePath } from "../api";
+import { Container, ContainerWrapper } from "../App";
 
 function Home() {
+  const [movieId, setMovieId] = useState(0);
+  const [movieBgUrl, setMovieBgUrl] = useState("");
+  const [movieOverView, setMovieOverView] = useState("");
   const { isLoading: popularLoading, data: popularData } =
     useQuery<IAPIResponse>(["popular"], () => getPopular());
-  let Id: number;
+
+  const handleClick = (Id: number) => {
+    popularData?.results?.find((movie) => {
+      if (movie.id === Id) {
+        setMovieId(Id);
+        setMovieBgUrl(movie.backdrop_path);
+        setMovieOverView(movie.overview);
+      }
+    });
+  };
 
   return (
     <>
-      <h1>Home</h1>
       {popularLoading ? (
         <h1>Please..wating..</h1>
       ) : (
-        <ul>
-          <Outlet />
-          {popularData?.results?.map((m) => (
-            <>
-              <li key={m.id}>
-                <Link
-                  to={`${m.id}`}
-                  onClick={() => {
-                    popularData?.results?.find((movie) =>
-                      movie.id === m.id ? (Id = m.id) : null
-                    );
-                  }}
-                >
+        <>
+          <Outlet context={{ movieId, movieBgUrl, movieOverView }} />
+          <ContainerWrapper>
+            {popularData?.results?.map((m) => (
+              <Container key={m.id}>
+                <Link to={`${m.id}`} onClick={() => handleClick(m.id)}>
                   {m.title} <img src={makeImagePath(m.poster_path)} />{" "}
                 </Link>
-              </li>
-            </>
-          ))}
-        </ul>
+              </Container>
+            ))}
+          </ContainerWrapper>
+        </>
       )}
     </>
   );

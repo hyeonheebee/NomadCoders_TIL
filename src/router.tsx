@@ -1,11 +1,14 @@
 import App from "./App";
 import { createBrowserRouter } from "react-router-dom";
-import { Children } from "react";
+
 import Home from "./screens/Home";
 import Coming from "./screens/Coming";
 import Now from "./screens/Now";
 import Detail from "./screens/Detail";
-
+import CancleComing from "./components/CancleComing";
+import CancelPopular from "./components/CancelPopular";
+import CancleNow from "./components/CancleNow";
+import Collection from "./screens/Collection";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -16,23 +19,62 @@ export const router = createBrowserRouter([
         element: <Home />,
         children: [
           {
-            path: "/:id",
+            path: ":id",
             element: <Detail />,
+            children: [
+              {
+                path: "collection",
+                element: <Collection />,
+              },
+
+              {
+                path: "",
+                element: <CancelPopular />,
+              },
+            ],
           },
         ],
       },
       {
         path: "/coming-soon",
         element: <Coming />,
+        children: [
+          {
+            path: ":id",
+            element: <Detail />,
+            children: [
+              {
+                path: "collection",
+                element: <Collection />,
+              },
+              {
+                path: "",
+                element: <CancleComing />,
+              },
+            ],
+          },
+        ],
       },
       {
         path: "/now-playing",
         element: <Now />,
+        children: [
+          {
+            path: ":id",
+            element: <Detail />,
+            children: [
+              {
+                path: "collection",
+                element: <Collection />,
+              },
+              {
+                path: "",
+                element: <CancleNow />,
+              },
+            ],
+          },
+        ],
       },
-      // {
-      //   path: "/detail",
-      //   element: <Detail />,
-      // },
     ],
   },
 ]);
