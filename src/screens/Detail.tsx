@@ -37,6 +37,10 @@ const GenresUl = styled.ul`
 function Detail() {
   const { movieId, movieBgUrl, movieOverView } = useOutletContext<ImoviePre>();
   const { id } = useParams();
+  const NOTFOUND =
+    "https://mblogthumb-phinf.pstatic.net/20160122_105/rmdwjdansdud_14534438344224j2jM_JPEG/Cap_2016-01-22_15-22-16-770.jpg?type=w420";
+  const NOOVERVIEW =
+    "Sorry, No Overview, PLEASE PRESS NAVIGATOR THEN Go back to page";
   const [isActive, setActive] = useState(false);
   const { isLoading, data: detailData } = useQuery<IMovieDetail>(
     ["detail", movieId],
@@ -46,6 +50,18 @@ function Detail() {
     setActive((prev) => !prev);
   };
 
+  const preventReload = (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+    e.returnValue = "";
+  };
+  useEffect(() => {
+    (() => {
+      window.addEventListener("beforeunload", preventReload);
+    })();
+    return () => {
+      window.removeEventListener("beforeunload", preventReload);
+    };
+  }, []);
   return (
     <>
       {isLoading ? (
@@ -53,8 +69,8 @@ function Detail() {
       ) : (
         <DetailSection>
           <h1>{detailData?.title}</h1>
-          <Img src={makeBgPath(movieBgUrl)} />
-          <p>{movieOverView}</p>
+          <Img src={movieBgUrl ? makeBgPath(movieBgUrl) : NOTFOUND} />
+          <p>{movieOverView ? movieOverView : NOOVERVIEW}</p>
           <DetailDescript>
             <span>budget : {detailData?.budget}</span>
             <span>runtime : {detailData?.runtime}</span>
