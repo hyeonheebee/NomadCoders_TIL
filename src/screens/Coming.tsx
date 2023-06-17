@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { getComingSoon, IAPIResponse, makeImagePath } from "../api";
-import { Container, ContainerWrapper } from "../App";
+import { Container, ContainerWrapper,containerVariants,MovieListVariants } from "../components/motion";
 
 function Coming() {
   const { isLoading: comingLoading, data: comingData } = useQuery<IAPIResponse>(
@@ -27,7 +27,6 @@ function Coming() {
 
   return (
     <>
-      <h1>Coming</h1>
       {comingLoading ? (
         <h1>Please..wating..</h1>
       ) : (
@@ -41,9 +40,9 @@ function Coming() {
               isClick,
             }}
           />
-          <ContainerWrapper>
+          <ContainerWrapper variants={containerVariants} initial="start" animate="end">
             {comingData?.results?.map((m) => (
-              <Container key={m.id}>
+              <Container key={m.id}  variants={MovieListVariants}>
                 <Link to={`${m.id}`} onClick={() => handleClick(m.id)}>
                   {m.title}
 

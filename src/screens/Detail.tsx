@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router";
 import { getMovie, IMovieDetail, makeBgPath } from "../api";
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import { Link, useOutletContext, useParams,useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { CancleDiv, OutContainer, overlay, Overlay } from "../App";
-import { AnimatePresence } from "framer-motion";
+import { CancleDiv  } from "../components/motion";
+import { AnimatePresence,motion } from "framer-motion";
 
 interface ImoviePre {
   movieId: number;
@@ -14,13 +14,34 @@ interface ImoviePre {
   setClick: React.Dispatch<React.SetStateAction<boolean>>;
   isClick: boolean;
 }
+ const Overlay = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  position: absolute;
+  width:50%;
+`;
+const overlay = {
+  visible: {
+    opacity:1,
+    zIndex: 3,
+  },
+  exit: {
+    opacity:0,
+    zIndex: -1,
+  },
+  initial: { 
+    opacity:0,
+    zIndex: -1,
+  },
+};
 const Img = styled.img`
   width: 100px;
   height: 150px;
 `;
 const DetailSection = styled.div`
-  width: 100%;
-  height: 800px;
   background-color: inherit;
 `;
 const DetailDescript = styled.div`
@@ -37,7 +58,10 @@ const GenresUl = styled.ul`
     margin-left: 10px;
   }
 `;
-
+const DetailWrapper = styled.div `
+display:flex;
+justify-content:center;
+align-itmes:center;`
 function Detail() {
   const { movieId, movieBgUrl, movieOverView, setClick, isClick } =
     useOutletContext<ImoviePre>();
@@ -47,6 +71,7 @@ function Detail() {
   const NOOVERVIEW =
     "Sorry, No Overview, PLEASE PRESS NAVIGATOR THEN Go back to page";
   const [isActive, setActive] = useState(false);
+  const location = useLocation();
   const {
     isLoading,
     data: detailData,
@@ -57,14 +82,18 @@ function Detail() {
   const toggleFn = () => {
     setActive((prev) => !prev);
   };
+  const clickFn = () => {
+    setClick(false);
+  };
 
+  
+  /// 새로고침 방지
+  
   const preventReload = (e: BeforeUnloadEvent) => {
     e.preventDefault();
     e.returnValue = "";
   };
-  const clickFn = () => {
-    setClick(false);
-  };
+
   useEffect(() => {
     (() => {
       window.addEventListener("beforeunload", preventReload);
@@ -73,14 +102,24 @@ function Detail() {
       window.removeEventListener("beforeunload", preventReload);
     };
   }, []);
+
+
+
+  ////path 수정중 
+  let path=""
+  useEffect(()=>{
+    if(location.pathname.includes("")){ path =""} else if (location.pathname.includes("/coming-soon")){path="/coming-soon"}
+    else if(location.pathname.includes("/now-playing")){
+      path = "/now-playing"
+    
+    }
+  },[location])
+
+
   return (
-    <>
-      <>
-        {isLoading ? (
-          <h1>please..Loading</h1>
-        ) : (
+          <DetailWrapper>
           <AnimatePresence>
-            {isClick && successFetch ? (
+            {isClick && successFetch&&!isLoading ? (
               <Overlay
                 layoutId={id}
                 variants={overlay}
@@ -111,6 +150,7 @@ function Detail() {
                     </GenresUl>
                   </DetailDescript>
                   <DetailDescript>
+                    
                     <Link onClick={toggleFn} to={isActive ? "" : "collection"}>
                       {isActive ? "🔽 Collection" : " ▶ Collection"}
                     </Link>
@@ -120,18 +160,17 @@ function Detail() {
                       }}
                     />
                     <CancleDiv>
-                      <Link to={""} onClick={clickFn}>
-                        x
+                      
+                      <Link to={path}  >
+                        ✖
                       </Link>
                     </CancleDiv>
                   </DetailDescript>
                 </DetailSection>
               </Overlay>
             ) : null}
-          </AnimatePresence>
+            </AnimatePresence>
+            </DetailWrapper>
         )}
-      </>
-    </>
-  );
-}
+  
 export default Detail;

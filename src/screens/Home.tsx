@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Outlet } from "react-router";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import { getPopular, IAPIResponse, makeImagePath } from "../api";
-import { Container, ContainerWrapper } from "../App";
+import { Container, ContainerWrapper,containerVariants,MovieListVariants } from "../components/motion";
 
 function Home() {
   const [movieId, setMovieId] = useState(0);
@@ -23,6 +23,7 @@ function Home() {
       }
     });
   };
+
   return (
     <>
       {popularLoading ? (
@@ -38,9 +39,9 @@ function Home() {
               isClick,
             }}
           />
-          <ContainerWrapper>
+          <ContainerWrapper variants={containerVariants} initial="start" animate="end">
             {popularData?.results?.map((m) => (
-              <Container key={m.id}>
+              <Container key={m.id } variants={MovieListVariants}  >
                 <Link to={`${m.id}`} onClick={() => handleClick(m.id)}>
                   {m.title} <img src={makeImagePath(m.poster_path)} />{" "}
                 </Link>
