@@ -103,8 +103,6 @@ function Detail() {
     };
   }, []);
 
-
-
   ////path 수정중 
   let path=""
   useEffect(()=>{
