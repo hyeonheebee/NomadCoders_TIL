@@ -4,25 +4,26 @@ import { Outlet } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import Header from "./components/Header";
 
-
 const GlobalStyle = createGlobalStyle`
 body{
   display:flex;
   flex-direction:column;
   justify-content:center;
-
+  background-color:black;
+color:white;
 }
-a:link{
+a{
   text-decoration: none;
+  color:white;
 }
-`
+`;
 
 export default function App() {
   return (
     <>
       <GlobalStyle />
       <Header />
-     <Outlet />
+      <Outlet />
     </>
   );
 }

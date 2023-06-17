@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 export const ContainerWrapper = styled(motion.div)`
   margin-top: 150px;
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
 `;
 export const Container = styled(motion.div)`
@@ -27,7 +27,7 @@ export const MovieListVariants = {
     opacity: 1,
     y: 0,
   },
-}
+};
 export const containerVariants = {
   start: {
     opacity: 0,
@@ -44,14 +44,19 @@ export const containerVariants = {
       staggerChildren: 0.2,
     },
   },
-}
+};
 export const CancleDiv = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
-  background-color: tomato;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  button {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    background-color: tomato;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;

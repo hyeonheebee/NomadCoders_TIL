@@ -2,10 +2,17 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router";
 import { getMovie, IMovieDetail, makeBgPath } from "../api";
-import { Link, useOutletContext, useParams,useLocation } from "react-router-dom";
+import {
+  Link,
+  useOutletContext,
+  useParams,
+  useSearchParams,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import styled from "styled-components";
-import { CancleDiv  } from "../components/motion";
-import { AnimatePresence,motion } from "framer-motion";
+import { CancleDiv } from "../components/motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface ImoviePre {
   movieId: number;
@@ -14,26 +21,26 @@ interface ImoviePre {
   setClick: React.Dispatch<React.SetStateAction<boolean>>;
   isClick: boolean;
 }
- const Overlay = styled(motion.div)`
+const Overlay = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: black;
   color: white;
   position: absolute;
-  width:50%;
+  width: 50%;
 `;
 const overlay = {
   visible: {
-    opacity:1,
+    opacity: 1,
     zIndex: 3,
   },
   exit: {
-    opacity:0,
+    opacity: 0,
     zIndex: -1,
   },
-  initial: { 
-    opacity:0,
+  initial: {
+    opacity: 0,
     zIndex: -1,
   },
 };
@@ -58,10 +65,11 @@ const GenresUl = styled.ul`
     margin-left: 10px;
   }
 `;
-const DetailWrapper = styled.div `
-display:flex;
-justify-content:center;
-align-itmes:center;`
+const DetailWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-itmes: center;
+`;
 function Detail() {
   const { movieId, movieBgUrl, movieOverView, setClick, isClick } =
     useOutletContext<ImoviePre>();
@@ -86,9 +94,7 @@ function Detail() {
     setClick(false);
   };
 
-  
   /// 새로고침 방지
-  
   const preventReload = (e: BeforeUnloadEvent) => {
     e.preventDefault();
     e.returnValue = "";
@@ -103,72 +109,65 @@ function Detail() {
     };
   }, []);
 
-  ////path 수정중 
-  let path=""
-  useEffect(()=>{
-    if(location.pathname.includes("")){ path =""} else if (location.pathname.includes("/coming-soon")){path="/coming-soon"}
-    else if(location.pathname.includes("/now-playing")){
-      path = "/now-playing"
-    
-    }
-  },[location])
-
-
+  const navigate = useNavigate();
   return (
-          <DetailWrapper>
-          <AnimatePresence>
-            {isClick && successFetch&&!isLoading ? (
-              <Overlay
-                layoutId={id}
-                variants={overlay}
-                initial="initial"
-                animate="visible"
-                exit="exit"
-              >
-                <DetailSection>
-                  <h1>{detailData?.title}</h1>
-                  <Img src={movieBgUrl ? makeBgPath(movieBgUrl) : NOTFOUND} />
-                  <p>{movieOverView ? movieOverView : NOOVERVIEW}</p>
-                  <DetailDescript>
-                    <span>budget : {detailData?.budget}</span>
-                    <span>runtime : {detailData?.runtime}</span>
-                    <span>revenue: {detailData?.revenue}</span>
-                  </DetailDescript>
-                  <DetailDescript>
-                    <a href={detailData?.homepage} target={"_blank"}>
-                      homepage{" "}
-                    </a>
-                    <GenresUl>
-                      Genres :
-                      {detailData?.genres
-                        ? detailData?.genres.map((genre) => (
-                            <li key={genre.id}>{genre.name}</li>
-                          ))
-                        : null}
-                    </GenresUl>
-                  </DetailDescript>
-                  <DetailDescript>
-                    
-                    <Link onClick={toggleFn} to={isActive ? "" : "collection"}>
-                      {isActive ? "🔽 Collection" : " ▶ Collection"}
-                    </Link>
-                    <Outlet
-                      context={{
-                        collection: detailData?.belongs_to_collection,
-                      }}
-                    />
-                    <CancleDiv>
-                      
-                      <Link to={path}  >
-                        ✖
-                      </Link>
-                    </CancleDiv>
-                  </DetailDescript>
-                </DetailSection>
-              </Overlay>
-            ) : null}
-            </AnimatePresence>
-            </DetailWrapper>
-        )}
-  
+    <DetailWrapper>
+      <AnimatePresence>
+        {isClick && successFetch && !isLoading ? (
+          <Overlay
+            layoutId={id}
+            variants={overlay}
+            initial="initial"
+            animate="visible"
+            exit="exit"
+          >
+            <DetailSection>
+              <h1>{detailData?.title}</h1>
+              <Img src={movieBgUrl ? makeBgPath(movieBgUrl) : NOTFOUND} />
+              <p>{movieOverView ? movieOverView : NOOVERVIEW}</p>
+              <DetailDescript>
+                <span>budget : {detailData?.budget}</span>
+                <span>runtime : {detailData?.runtime}</span>
+                <span>revenue: {detailData?.revenue}</span>
+              </DetailDescript>
+              <DetailDescript>
+                <a href={detailData?.homepage} target={"_blank"}>
+                  homepage{" "}
+                </a>
+                <GenresUl>
+                  Genres :
+                  {detailData?.genres
+                    ? detailData?.genres.map((genre) => (
+                        <li key={genre.id}>{genre.name}</li>
+                      ))
+                    : null}
+                </GenresUl>
+              </DetailDescript>
+              <DetailDescript>
+                <Link onClick={toggleFn} to={isActive ? "" : "collection"}>
+                  {isActive ? "🔽 Collection" : " ▶ Collection"}
+                </Link>
+                <Outlet
+                  context={{
+                    collection: detailData?.belongs_to_collection,
+                  }}
+                />
+                <CancleDiv>
+                  <button
+                    onClick={() => {
+                      navigate(-1);
+                    }}
+                  >
+                    x
+                  </button>
+                </CancleDiv>
+              </DetailDescript>
+            </DetailSection>
+          </Overlay>
+        ) : null}
+      </AnimatePresence>
+    </DetailWrapper>
+  );
+}
+
 export default Detail;
