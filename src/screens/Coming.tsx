@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { getComingSoon, IAPIResponse, makeImagePath } from "../api";
@@ -12,12 +13,14 @@ function Coming() {
   const [movieId, setMovieId] = useState(0);
   const [movieBgUrl, setMovieBgUrl] = useState("");
   const [movieOverView, setMovieOverView] = useState("");
+  const [isClick, setClick] = useState(false);
   const handleClick = (Id: number) => {
     comingData?.results?.find((movie) => {
       if (movie.id === Id) {
         setMovieId(Id);
         setMovieBgUrl(movie.backdrop_path);
         setMovieOverView(movie.overview);
+        setClick(true);
       }
     });
   };
@@ -29,7 +32,15 @@ function Coming() {
         <h1>Please..wating..</h1>
       ) : (
         <>
-          <Outlet context={{ movieId, movieBgUrl, movieOverView }} />
+          <Outlet
+            context={{
+              movieId,
+              movieBgUrl,
+              movieOverView,
+              setClick,
+              isClick,
+            }}
+          />
           <ContainerWrapper>
             {comingData?.results?.map((m) => (
               <Container key={m.id}>

@@ -26,9 +26,14 @@ function Collection() {
     <>
       {collection ? (
         <>
-          <h3>{collection.name}</h3>
-          <BgImg src={makeBgPath(collection.backdrop_path)} />
-          <MainImg src={makeImagePath(collection.poster_path)} />
+          {makeBgPath(collection.backdrop_path) &&
+          makeImagePath(collection.poster_path) ? (
+            <>
+              <h3>{collection.name}</h3>
+              <BgImg src={makeBgPath(collection.backdrop_path)} />
+              <MainImg src={makeImagePath(collection.poster_path)} />
+            </>
+          ) : null}
         </>
       ) : (
         <h1>no collection!</h1>

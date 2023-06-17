@@ -3,9 +3,14 @@ import styled from "styled-components";
 const HeaderContainer = styled.div`
   width: 100vw;
   height: 50px;
-  margin-bottom: 150px;
   display: flex;
   justify-content: space-between;
+  position: fixed;
+  top: 0;
+  background-color: black;
+  a {
+    color: white;
+  }
 `;
 function Header() {
   return (

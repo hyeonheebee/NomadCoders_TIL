@@ -1,5 +1,6 @@
+import { motion } from "framer-motion";
 import { Outlet } from "react-router-dom";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import Header from "./components/Header";
 export const ContainerWrapper = styled.div`
   display: grid;
@@ -28,11 +29,46 @@ export const CancleDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
+export const Overlay = styled(motion.div)`
+    z-index: 1,
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+    width: "100%",
+    height: "100%",
+`;
+export const overlay = {
+  visible: {
+    scale: 1,
+    zIndex: 3,
+    backgroundColor: "rgb(0, 0, 0)",
+    color: "white",
+    position: "absolute",
+  },
+  exit: {
+    zIndex: -1,
+  },
+  initial: {
+    zIndex: -1,
+  },
+};
+const OutContainer = styled.div`
+  margin-top: 150px;
+`;
+const GlobalStyle = createGlobalStyle`
+a:link{
+  text-decoration: none;
+}
+
+`;
 export default function App() {
   return (
-    <div>
+    <>
+      <GlobalStyle />
       <Header />
-      <Outlet />
-    </div>
+      <OutContainer>
+        <Outlet />
+      </OutContainer>
+    </>
   );
 }

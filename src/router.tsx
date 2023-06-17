@@ -26,11 +26,6 @@ export const router = createBrowserRouter([
                 path: "collection",
                 element: <Collection />,
               },
-
-              {
-                path: "",
-                element: <CancelPopular />,
-              },
             ],
           },
         ],
@@ -47,10 +42,6 @@ export const router = createBrowserRouter([
                 path: "collection",
                 element: <Collection />,
               },
-              {
-                path: "",
-                element: <CancleComing />,
-              },
             ],
           },
         ],
@@ -66,10 +57,6 @@ export const router = createBrowserRouter([
               {
                 path: "collection",
                 element: <Collection />,
-              },
-              {
-                path: "",
-                element: <CancleNow />,
               },
             ],
           },

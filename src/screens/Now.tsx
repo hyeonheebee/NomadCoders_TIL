@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { HTMLAttributes, useState } from "react";
+
+import { useState } from "react";
 import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
 import { getNowPlaying, IAPIResponse, makeImagePath } from "../api";
@@ -14,13 +15,14 @@ function Now() {
   const [movieId, setMovieId] = useState(0);
   const [movieBgUrl, setMovieBgUrl] = useState("");
   const [movieOverView, setMovieOverView] = useState("");
-
+  const [isClick, setClick] = useState(false);
   const handleClick = (Id: number) => {
     nowData?.results?.find((movie) => {
       if (movie.id === Id) {
         setMovieId(Id);
         setMovieBgUrl(movie.backdrop_path);
         setMovieOverView(movie.overview);
+        setClick(true);
       }
     });
   };
@@ -32,7 +34,15 @@ function Now() {
         <h1>Please..wating..</h1>
       ) : (
         <>
-          <Outlet context={{ movieId, movieBgUrl, movieOverView }} />
+          <Outlet
+            context={{
+              movieId,
+              movieBgUrl,
+              movieOverView,
+              setClick,
+              isClick,
+            }}
+          />
           <ContainerWrapper>
             {nowData?.results?.map((m) => (
               <Container key={m.id}>
