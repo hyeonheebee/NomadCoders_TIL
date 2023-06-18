@@ -11,7 +11,11 @@ export const Container = styled(motion.div)`
   width: 50%;
   height: 30%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: 30px;
+
   font-family: "Bangers", cursive;
   ul {
     display: flex;
@@ -66,4 +70,9 @@ export const CancleDiv = styled.div`
       color: #f5f42c;
     }
   }
+`;
+export const HeartDiv = styled(motion.div)`
+  color: grey;
+  width: 20px;
+  margin-right: 5px;
 `;

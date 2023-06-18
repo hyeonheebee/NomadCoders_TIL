@@ -9,7 +9,7 @@ const MarkerWrapper = styled.div`
     border-radius: 50%;
     background-color: #f5f42c;
     position: absolute;
-    top: 45px;
+    top: 50px;
   }
 `;
 const HeaderMarker1 = styled(motion.div)`
@@ -31,6 +31,7 @@ const HeaderContainer = styled.div`
   padding: 5px 10px;
   top: 0;
   background-color: black;
+  z-index: 10;
   a {
     diplay: block;
     width: 15%;
@@ -44,6 +45,18 @@ function Header() {
   return (
     <>
       <HeaderContainer>
+        <span
+          style={{
+            zIndex: 50,
+            position: "fixed",
+            top: 0,
+            left: "50px",
+            fontSize: "45px",
+            color: "#f5f42c",
+          }}
+        >
+          P:HONEIX
+        </span>
         <Link to={"/"}>Popular-Movie</Link>
         <Link to={"/coming-soon"}>Coming-Soon</Link>
         <Link to={"/now-playing"}>Now-playing</Link>
