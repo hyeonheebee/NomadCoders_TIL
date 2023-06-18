@@ -56,7 +56,13 @@ function Popular() {
               <span>📌 {likeItem} </span>
             ))}
             <button
-              style={{ border: "none", backgroundColor: "#f5f42c" }}
+              style={{
+                border: "none",
+                backgroundColor: "#f5f42c",
+                borderRadius: "10px",
+                padding: "2px 0px",
+                margin: "5px 0px",
+              }}
               onClick={() => {
                 setLike([]);
               }}
