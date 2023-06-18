@@ -72,7 +72,7 @@ export const CancleDiv = styled.div`
   }
 `;
 export const HeartDiv = styled(motion.div)`
-  color: grey;
+  color: rgb(128, 128, 128);
   width: 20px;
   margin-right: 5px;
 `;

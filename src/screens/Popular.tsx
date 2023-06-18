@@ -93,7 +93,7 @@ function Popular() {
                   whileHover={{
                     scale: 1.1,
                     cursor: "pointer",
-                    color: "tomato",
+                    color: ["grey", "tomato"],
                   }}
                 >
                   <svg
