@@ -1,20 +1,37 @@
 import styled from "styled-components";
 import { makeBgPath, makeImagePath } from "../api";
-import { DetailDescript } from "../components/DetailMotion";
+
 const CollectionWrapper = styled.div`
   position: relative;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  span {
+    z-index: 3;
+    font-size: 25px;
+    font-family: "Permanent Marker", cursive;
+    font-weight: 700;
+    margin-left: 10px;
+  }
 `;
 const BgImg = styled.img`
-  width: 150px;
+  width: 100%;
+  z-index: -2;
   height: auto;
-  opacity: 0.7;
-  border-radius: 20px;
+  -webkit-filter: opacity(75%);
+  filter: opacity(50%);
+  border-radius: 10px;
+  margin-top: 5px;
+  position: relative;
 `;
 const MainImg = styled.img`
   width: 150px;
   height: auto;
-  border-radius: 20px;
+  border-radius: 10px;
+  position: absolute;
+  left: 20px;
+  margin-top: 45px;
+  z-index: 3;
 `;
 interface IDetailPre {
   id: number;
@@ -25,11 +42,12 @@ interface IDetailPre {
 function Collection(collection: IDetailPre) {
   const NOTFOUND =
     "https://mblogthumb-phinf.pstatic.net/20160122_105/rmdwjdansdud_14534438344224j2jM_JPEG/Cap_2016-01-22_15-22-16-770.jpg?type=w420";
+
   return (
     <CollectionWrapper>
       {collection ? (
-        <DetailDescript>
-          <h4>{collection.name}</h4>
+        <div>
+          <span>{collection.name}</span>
           <BgImg
             src={
               collection.backdrop_path
@@ -44,7 +62,7 @@ function Collection(collection: IDetailPre) {
                 : NOTFOUND
             }
           />
-        </DetailDescript>
+        </div>
       ) : (
         <h1>no collection!</h1>
       )}

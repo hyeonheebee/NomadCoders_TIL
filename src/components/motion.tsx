@@ -10,12 +10,15 @@ export const ContainerWrapper = styled(motion.div)`
 export const Container = styled(motion.div)`
   width: 50%;
   height: 30%;
-
+  text-align: center;
+  font-size: 30px;
+  font-family: "Bangers", cursive;
   ul {
     display: flex;
     justify-content: center;
   }
   img {
+    margin-top: 10px;
     width: 100%;
     height: auto;
   }
@@ -43,23 +46,24 @@ export const containerVariants = {
       type: "spring",
       duration: 0.5,
       bounce: 0.5,
-      delayChildren: 1,
-      staggerChildren: 0.2,
+      delayChildren: 0.8,
+      staggerChildren: 0.4,
     },
   },
 };
 export const CancleDiv = styled.div`
-  button {
-    width: 20px;
-    height: 20px;
+  svg {
+    width: 100%;
+    height: 50px;
     border-radius: 5px;
-    background-color: tomato;
-    color: white;
+    color: black;
+    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
     &:hover {
       cursor: pointer;
+      color: #f5f42c;
     }
   }
 `;

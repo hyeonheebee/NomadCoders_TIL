@@ -4,12 +4,11 @@ export const Overlay = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-
   border-radius: 20px;
   color: black;
   position: fixed;
   width: 50%;
-  height: 60%;
+  height: 50%;
   top: 20%;
 `;
 export const overlay = {
@@ -27,24 +26,39 @@ export const overlay = {
   },
 };
 export const Img = styled.img`
-  width: 100px;
-  height: 150px;
+  width: 100%;
+  height: auto;
 `;
 
 export const CollectionBtn = styled.div`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+
   &: hover {
     cursor: pointer;
   }
+  div {
+    display: flex;
+    align-items: center;
+  }
+  span {
+    font-size: 20px;
+    font-weight: 700;
+  }
 `;
 export const DetailSection = styled.div`
-  background-color: rgba(255, 255, 255, 0.9);
+  border: 5px rgba(0, 0, 0, 0.7) solid;
+  h1 {
+    font-family: "Permanent Marker", cursive;
+  }
+  img {
+    border-radius: 10px;
+  }
   margin: 20px 25px;
   padding: 50px 25px;
   border-radius: 20px;
-  height: 60%;
+  height: 50%;
   width: 50%;
   position: inherit;
   overflow-y: scroll;
@@ -52,27 +66,64 @@ export const DetailSection = styled.div`
   &::-webkit-scrollbar {
     width: 8px;
     background: white;
-    border-radius: 5px;
   }
   &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
     height: 20%;
     background: rgba(255, 255, 255, 0.5);
   }
   &::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.5);
   }
+  p {
+    font-weight: 400;
+    font-size: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+  }
 `;
+
 export const DetailDescript = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-
-  a {
-    color: tomato;
+    margin-top: 5px;
   }
+  div {
+    span {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    p {
+      font-weight: 600;
+    }
+  }
+
 `;
-export const GenresUl = styled.ul`
+export const HPWrapper = styled.div`
   display: flex;
+    span {
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom:20px;
+  }
+  a {
+      font-size: 18px;
+    color: blue;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+`;
+export const GenresUl = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  span {
+    font-size: 20px;
+    font-weight: 700;
+  }
   li {
     list-style: none;
     margin-left: 10px;
