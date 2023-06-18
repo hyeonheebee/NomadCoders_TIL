@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { getPopular, IAPIResponse, makeImagePath } from "../api";
 import { Container, ContainerWrapper,containerVariants,MovieListVariants } from "../components/motion";
 
-function Home() {
+function Popular() {
   const [movieId, setMovieId] = useState(0);
   const [movieBgUrl, setMovieBgUrl] = useState("");
   const [movieOverView, setMovieOverView] = useState("");
@@ -26,7 +26,9 @@ function Home() {
   return (
     <>
       {popularLoading ? (
-        <h1>Please..wating..</h1>
+          <h1 style={{ position: "absolute", top: "300px", left: "300px" }}>
+          Please..wating..
+        </h1>
       ) : (
         <>
           <Outlet
@@ -52,4 +54,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Popular;

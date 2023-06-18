@@ -4,16 +4,19 @@ export const ContainerWrapper = styled(motion.div)`
   margin-top: 150px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  grid-gap: 50px 10px;
 `;
 export const Container = styled(motion.div)`
-  width: 100px;
-  height: 150px;
+  width: 50%;
+  height: 30%;
+
   ul {
     display: flex;
     justify-content: center;
   }
   img {
-    width: 50px;
+    width: 100%;
     height: auto;
   }
 `;
