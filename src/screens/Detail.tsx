@@ -108,19 +108,23 @@ function Detail() {
               <p>{movieOverView ? movieOverView : NOOVERVIEW}</p>
               <DetailDescript>
                 <div>
-                  <span>💸budget </span>{" "}
+                  <span>💸 Budget </span>{" "}
                   <p> $ {priceToString(detailData?.budget)}</p>
                 </div>
                 <div>
-                  <span>⏱runtime </span>
+                  <span>⏱ Runtime </span>
                   <p>{detailData?.runtime} min </p>
                 </div>
                 <div>
-                  <span> 💰revenue</span>
+                  <span> 💰 Revenue</span>
                   <p> $ {priceToString(detailData?.revenue)} </p>
                 </div>
               </DetailDescript>
               <DetailDescript>
+                <div>
+                  <span>🍅 Rating</span>
+                  <p>{detailData?.vote_average}</p>
+                </div>
                 <GenresUl>
                   <span> 📌 Genres </span>
                   <p>
