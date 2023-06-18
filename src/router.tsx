@@ -1,7 +1,7 @@
 import App from "./App";
 import { createBrowserRouter } from "react-router-dom";
 
-import Home from "./screens/Home";
+import Popular from "./screens/Popular";
 import Coming from "./screens/Coming";
 import Now from "./screens/Now";
 import Detail from "./screens/Detail";
@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home />,
+        element: <Popular />,
         children: [
           {
             path: ":id",

@@ -32,7 +32,9 @@ function Coming() {
   return (
     <>
       {comingLoading ? (
-        <h1>Please..wating..</h1>
+        <h1 style={{ position: "absolute", top: "300px", left: "300px" }}>
+          Please..wating..
+        </h1>
       ) : (
         <>
           <Outlet
@@ -40,7 +42,6 @@ function Coming() {
               movieId,
               movieBgUrl,
               movieOverView,
-              setClick,
               isClick,
             }}
           />

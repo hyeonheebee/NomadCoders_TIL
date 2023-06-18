@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import  { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import Header from "./components/Header";
 
 const GlobalStyle = createGlobalStyle`
@@ -8,6 +8,8 @@ body{
   flex-direction:column;
   justify-content:center;
   background-color:black;
+  
+  
 color:white;
 }
 a{

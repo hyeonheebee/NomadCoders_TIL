@@ -2,75 +2,29 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { getMovie, IMovieDetail, makeBgPath } from "../api";
 import {
-
-  useOutletContext,
-  useParams,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
-import styled from "styled-components";
+  Overlay,
+  overlay,
+  Img,
+  DetailSection,
+  DetailDescript,
+  GenresUl,
+  DetailWrapper,
+  CollectionBtn,
+} from "../components/DetailMotion";
+import { useOutletContext, useParams, useNavigate } from "react-router-dom";
 import { CancleDiv } from "../components/motion";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import Collection from "../components/Collection";
 
 interface ImoviePre {
   movieId: number;
   movieBgUrl: string;
   movieOverView: string;
-  setClick: React.Dispatch<React.SetStateAction<boolean>>;
   isClick: boolean;
 }
-const Overlay = styled(motion.div)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: black;
-  color: white;
-  position: absolute;
-  width: 50%;
-`;
-const overlay = {
-  visible: {
-    opacity: 1,
-    zIndex: 3,
-  },
-  exit: {
-    opacity: 0,
-    zIndex: -1,
-  },
-  initial: {
-    opacity: 0,
-    zIndex: -1,
-  },
-};
-const Img = styled.img`
-  width: 100px;
-  height: 150px;
-`;
-const DetailSection = styled.div`
-  background-color: inherit;
-`;
-const DetailDescript = styled.div`
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-`;
-const GenresUl = styled.ul`
-  display: flex;
 
-  li {
-    list-style: none;
-    margin-left: 10px;
-  }
-`;
-const DetailWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-itmes: center;
-`;
 function Detail() {
-  const { movieId, movieBgUrl, movieOverView, setClick, isClick } =
+  const { movieId, movieBgUrl, movieOverView, isClick } =
     useOutletContext<ImoviePre>();
   const { id } = useParams();
   const NOTFOUND =
@@ -78,7 +32,6 @@ function Detail() {
   const NOOVERVIEW =
     "Sorry, No Overview, PLEASE PRESS NAVIGATOR THEN Go back to page";
   const [isActive, setActive] = useState(false);
-  const location = useLocation();
   const {
     isLoading,
     data: detailData,
@@ -88,9 +41,6 @@ function Detail() {
   );
   const toggleFn = () => {
     setActive((prev) => !prev);
-  };
-  const clickFn = () => {
-    setClick(false);
   };
 
   /// 새로고침 방지
@@ -121,7 +71,19 @@ function Detail() {
             exit="exit"
           >
             <DetailSection>
-              <h1>{detailData?.title}</h1>
+              <DetailDescript>
+                <h1>{detailData?.title}</h1>
+                <CancleDiv>
+                  <button
+                    onClick={() => {
+                      navigate(-1);
+                    }}
+                  >
+                    x
+                  </button>
+                </CancleDiv>
+              </DetailDescript>
+
               <Img src={movieBgUrl ? makeBgPath(movieBgUrl) : NOTFOUND} />
               <p>{movieOverView ? movieOverView : NOOVERVIEW}</p>
               <DetailDescript>
@@ -142,24 +104,10 @@ function Detail() {
                     : null}
                 </GenresUl>
               </DetailDescript>
-              <DetailDescript>
-                <button onClick={toggleFn}>
-                  {isActive ? "🔽 Collection" : " ▶ Collection"}
-                </button>
-                {isActive
-                  ? Collection(detailData?.belongs_to_collection)
-                  : null}
-
-                <CancleDiv>
-                  <button
-                    onClick={() => {
-                      navigate(-1);
-                    }}
-                  >
-                    x
-                  </button>
-                </CancleDiv>
-              </DetailDescript>
+              <CollectionBtn onClick={toggleFn}>
+                {isActive ? "🔻 Collection" : " 🔺 Collection"}
+              </CollectionBtn>
+              {isActive ? Collection(detailData?.belongs_to_collection) : null}
             </DetailSection>
           </Overlay>
         ) : null}

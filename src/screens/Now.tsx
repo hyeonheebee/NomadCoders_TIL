@@ -34,7 +34,9 @@ function Now() {
   return (
     <>
       {nowLoading ? (
-        <h1>Please..wating..</h1>
+        <h1 style={{ position: "absolute", top: "300px", left: "300px" }}>
+          Please..wating..
+        </h1>
       ) : (
         <>
           <Outlet
@@ -42,7 +44,6 @@ function Now() {
               movieId,
               movieBgUrl,
               movieOverView,
-              setClick,
               isClick,
             }}
           />
