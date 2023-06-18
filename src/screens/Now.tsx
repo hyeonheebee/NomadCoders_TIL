@@ -1,10 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { HTMLAttributes, useState } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
 import { getNowPlaying, IAPIResponse, makeImagePath } from "../api";
-import { Container, ContainerWrapper } from "../App";
-
+import {
+  Container,
+  ContainerWrapper,
+  containerVariants,
+  MovieListVariants,
+} from "../components/motion";
 function Now() {
   const { isLoading: nowLoading, data: nowData } = useQuery<IAPIResponse>(
     ["now"],
@@ -14,6 +18,7 @@ function Now() {
   const [movieId, setMovieId] = useState(0);
   const [movieBgUrl, setMovieBgUrl] = useState("");
   const [movieOverView, setMovieOverView] = useState("");
+  const [isClick, setClick] = useState(false);
 
   const handleClick = (Id: number) => {
     nowData?.results?.find((movie) => {
@@ -21,21 +26,33 @@ function Now() {
         setMovieId(Id);
         setMovieBgUrl(movie.backdrop_path);
         setMovieOverView(movie.overview);
+        setClick(true);
       }
     });
   };
 
   return (
     <>
-      <h1>now-playing</h1>
       {nowLoading ? (
         <h1>Please..wating..</h1>
       ) : (
         <>
-          <Outlet context={{ movieId, movieBgUrl, movieOverView }} />
-          <ContainerWrapper>
+          <Outlet
+            context={{
+              movieId,
+              movieBgUrl,
+              movieOverView,
+              setClick,
+              isClick,
+            }}
+          />
+          <ContainerWrapper
+            variants={containerVariants}
+            initial="start"
+            animate="end"
+          >
             {nowData?.results?.map((m) => (
-              <Container key={m.id}>
+              <Container key={m.id} variants={MovieListVariants}>
                 <Link to={`${m.id}`} onClick={() => handleClick(m.id)}>
                   {m.title}
                   <img src={makeImagePath(m.poster_path)} />

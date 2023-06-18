@@ -13,22 +13,27 @@ const MainImg = styled.img`
   border-radius: 20px;
 `;
 interface IDetailPre {
-  collection: {
+
     id: number;
     name: string;
     poster_path: string;
     backdrop_path: string;
-  };
+
 }
-function Collection() {
-  const { collection } = useOutletContext<IDetailPre>();
+function Collection(collection:IDetailPre) {
+  // const { collection } = useOutletContext<IDetailPre>();
   return (
     <>
       {collection ? (
         <>
-          <h3>{collection.name}</h3>
-          <BgImg src={makeBgPath(collection.backdrop_path)} />
-          <MainImg src={makeImagePath(collection.poster_path)} />
+          {makeBgPath(collection.backdrop_path) &&
+          makeImagePath(collection.poster_path) ? (
+            <>
+              <h3>{collection.name}</h3>
+              <BgImg src={makeBgPath(collection.backdrop_path)} />
+              <MainImg src={makeImagePath(collection.poster_path)} />
+            </>
+          ) : null}
         </>
       ) : (
         <h1>no collection!</h1>
