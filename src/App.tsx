@@ -8,7 +8,7 @@ body{
   flex-direction:column;
   justify-content:center;
   background-color:black;
-  
+ 
   
 color:white;
 }

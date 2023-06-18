@@ -7,19 +7,19 @@ const MarkerWrapper = styled.div`
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background-color: tomato;
+    background-color: #f5f42c;
     position: absolute;
-    top: 45px;
+    top: 50px;
   }
 `;
 const HeaderMarker1 = styled(motion.div)`
-  left: 518px;
+  left: 452px;
 `;
 const HeaderMarker2 = styled(motion.div)`
   left: 647px;
 `;
 const HeaderMarker3 = styled(motion.div)`
-  right: 518px;
+  right: 452px;
 `;
 const HeaderContainer = styled.div`
   width: 100vw;
@@ -31,9 +31,10 @@ const HeaderContainer = styled.div`
   padding: 5px 10px;
   top: 0;
   background-color: black;
+  z-index: 10;
   a {
     diplay: block;
-    width: 10%;
+    width: 15%;
     color: white;
     text-align: center;
   }
@@ -44,9 +45,21 @@ function Header() {
   return (
     <>
       <HeaderContainer>
-        <Link to={"/"}>Popular</Link>
+        <span
+          style={{
+            zIndex: 50,
+            position: "fixed",
+            top: 0,
+            left: "50px",
+            fontSize: "45px",
+            color: "#f5f42c",
+          }}
+        >
+          P:HONEIX
+        </span>
+        <Link to={"/"}>Popular-Movie</Link>
         <Link to={"/coming-soon"}>Coming-Soon</Link>
-        <Link to={"/now-playing"}>now-playing</Link>
+        <Link to={"/now-playing"}>Now-playing</Link>
         <MarkerWrapper>
           {location.pathname === "/" ? (
             <HeaderMarker1 layoutId="circle" />
