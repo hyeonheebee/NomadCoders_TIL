@@ -34,7 +34,6 @@ function Home() {
               movieId,
               movieBgUrl,
               movieOverView,
-              setClick,
               isClick,
             }}
           />

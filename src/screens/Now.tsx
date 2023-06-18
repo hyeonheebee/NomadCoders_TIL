@@ -42,7 +42,6 @@ function Now() {
               movieId,
               movieBgUrl,
               movieOverView,
-              setClick,
               isClick,
             }}
           />

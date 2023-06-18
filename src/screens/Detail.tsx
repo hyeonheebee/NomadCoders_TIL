@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { getMovie, IMovieDetail, makeBgPath } from "../api";
 import {
-
   useOutletContext,
   useParams,
   useNavigate,
@@ -17,7 +16,6 @@ interface ImoviePre {
   movieId: number;
   movieBgUrl: string;
   movieOverView: string;
-  setClick: React.Dispatch<React.SetStateAction<boolean>>;
   isClick: boolean;
 }
 const Overlay = styled(motion.div)`
@@ -70,7 +68,7 @@ const DetailWrapper = styled.div`
   align-itmes: center;
 `;
 function Detail() {
-  const { movieId, movieBgUrl, movieOverView, setClick, isClick } =
+  const { movieId, movieBgUrl, movieOverView, isClick } =
     useOutletContext<ImoviePre>();
   const { id } = useParams();
   const NOTFOUND =
@@ -78,7 +76,6 @@ function Detail() {
   const NOOVERVIEW =
     "Sorry, No Overview, PLEASE PRESS NAVIGATOR THEN Go back to page";
   const [isActive, setActive] = useState(false);
-  const location = useLocation();
   const {
     isLoading,
     data: detailData,
@@ -89,10 +86,7 @@ function Detail() {
   const toggleFn = () => {
     setActive((prev) => !prev);
   };
-  const clickFn = () => {
-    setClick(false);
-  };
-
+ 
   /// 새로고침 방지
   const preventReload = (e: BeforeUnloadEvent) => {
     e.preventDefault();

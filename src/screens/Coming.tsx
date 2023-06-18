@@ -40,7 +40,6 @@ function Coming() {
               movieId,
               movieBgUrl,
               movieOverView,
-              setClick,
               isClick,
             }}
           />
