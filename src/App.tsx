@@ -1,7 +1,5 @@
-import { motion } from "framer-motion";
 import { Outlet } from "react-router-dom";
-
-import styled, { createGlobalStyle } from "styled-components";
+import  { createGlobalStyle } from "styled-components";
 import Header from "./components/Header";
 
 const GlobalStyle = createGlobalStyle`

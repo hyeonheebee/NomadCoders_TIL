@@ -1,18 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router";
 import { getMovie, IMovieDetail, makeBgPath } from "../api";
 import {
-  Link,
+
   useOutletContext,
   useParams,
-  useSearchParams,
   useNavigate,
   useLocation,
 } from "react-router-dom";
 import styled from "styled-components";
 import { CancleDiv } from "../components/motion";
 import { AnimatePresence, motion } from "framer-motion";
+import Collection from "../components/Collection";
 
 interface ImoviePre {
   movieId: number;
@@ -144,14 +143,13 @@ function Detail() {
                 </GenresUl>
               </DetailDescript>
               <DetailDescript>
-                <Link onClick={toggleFn} to={isActive ? "" : "collection"}>
+                <button onClick={toggleFn}>
                   {isActive ? "🔽 Collection" : " ▶ Collection"}
-                </Link>
-                <Outlet
-                  context={{
-                    collection: detailData?.belongs_to_collection,
-                  }}
-                />
+                </button>
+                {isActive
+                  ? Collection(detailData?.belongs_to_collection)
+                  : null}
+
                 <CancleDiv>
                   <button
                     onClick={() => {

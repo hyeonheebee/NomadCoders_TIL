@@ -1,9 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { getComingSoon, IAPIResponse, makeImagePath } from "../api";
-import { Container, ContainerWrapper,containerVariants,MovieListVariants } from "../components/motion";
+import {
+  Container,
+  ContainerWrapper,
+  containerVariants,
+  MovieListVariants,
+} from "../components/motion";
 
 function Coming() {
   const { isLoading: comingLoading, data: comingData } = useQuery<IAPIResponse>(
@@ -40,12 +44,15 @@ function Coming() {
               isClick,
             }}
           />
-          <ContainerWrapper variants={containerVariants} initial="start" animate="end">
+          <ContainerWrapper
+            variants={containerVariants}
+            initial="start"
+            animate="end"
+          >
             {comingData?.results?.map((m) => (
-              <Container key={m.id}  variants={MovieListVariants}>
+              <Container key={m.id} variants={MovieListVariants}>
                 <Link to={`${m.id}`} onClick={() => handleClick(m.id)}>
                   {m.title}
-
                   <img src={makeImagePath(m.poster_path)} />
                 </Link>
               </Container>

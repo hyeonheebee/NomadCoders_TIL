@@ -5,10 +5,6 @@ import Home from "./screens/Home";
 import Coming from "./screens/Coming";
 import Now from "./screens/Now";
 import Detail from "./screens/Detail";
-import CancleComing from "./components/CancleComing";
-import CancelPopular from "./components/CancelPopular";
-import CancleNow from "./components/CancleNow";
-import Collection from "./screens/Collection";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -21,12 +17,6 @@ export const router = createBrowserRouter([
           {
             path: ":id",
             element: <Detail />,
-            children: [
-              {
-                path: "collection",
-                element: <Collection />,
-              },
-            ],
           },
         ],
       },
@@ -37,12 +27,6 @@ export const router = createBrowserRouter([
           {
             path: ":id",
             element: <Detail />,
-            children: [
-              {
-                path: "collection",
-                element: <Collection />,
-              },
-            ],
           },
         ],
       },
@@ -53,12 +37,6 @@ export const router = createBrowserRouter([
           {
             path: ":id",
             element: <Detail />,
-            children: [
-              {
-                path: "collection",
-                element: <Collection />,
-              },
-            ],
           },
         ],
       },

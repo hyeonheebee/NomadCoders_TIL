@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { AnimatePresence, motion } from "framer-motion";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router";
-import { Link,useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getPopular, IAPIResponse, makeImagePath } from "../api";
 import { Container, ContainerWrapper,containerVariants,MovieListVariants } from "../components/motion";
 

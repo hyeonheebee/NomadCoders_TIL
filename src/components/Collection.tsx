@@ -13,15 +13,15 @@ const MainImg = styled.img`
   border-radius: 20px;
 `;
 interface IDetailPre {
-  collection: {
+
     id: number;
     name: string;
     poster_path: string;
     backdrop_path: string;
-  };
+
 }
-function Collection() {
-  const { collection } = useOutletContext<IDetailPre>();
+function Collection(collection:IDetailPre) {
+  // const { collection } = useOutletContext<IDetailPre>();
   return (
     <>
       {collection ? (
