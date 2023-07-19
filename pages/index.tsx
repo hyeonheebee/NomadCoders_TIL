@@ -15,7 +15,7 @@ export default function App() {
   const [cookie, setCookie] = useState<string | undefined>("");
   const [tokenFn, mainState] = useFetching("/api/user/main");
   const [tweetFn, userTweet] = useFetching("/api/user/tweet");
-  const { data: tweets } = useTweet();
+  const { data: tweets, mutate } = useTweet();
 
   const router = useRouter();
   const { register, handleSubmit } = useForm<ITextForm>();
@@ -28,11 +28,12 @@ export default function App() {
   useEffect(() => {
     setCookie(document.cookie);
     tokenFn(cookie);
+    mutate(false);
     if (mainState.fetchData?.success && !cookie) {
       router.push("/log-in");
       setCookie("");
     }
-  }, [router, mainState.fetchData?.success]);
+  }, [router, mainState.fetchData?.success, userTweet]);
   console.log("this is home success", mainState.fetchData);
   console.log(userTweet.fetchData, "fetchData");
   return (
@@ -52,11 +53,12 @@ export default function App() {
               kind="text"
               placeholder="Tweeeeeets"
             />
-            <Button
-              text={true ? "Unlike" : "like"}
-              onClick={onLikeClick}
-            ></Button>
+            <Button text="submit"></Button>
           </form>
+          <Button
+            text={true ? "Unlike" : "like"}
+            onClick={onLikeClick}
+          ></Button>
         </>
       ) : (
         <span>please waiting..</span>
