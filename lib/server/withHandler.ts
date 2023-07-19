@@ -5,14 +5,14 @@ export interface ResponseType {
   [key: string]: any;
 }
 export default function withHandler(
-  method: "GET" | "POST",
+  methods: Array<"GET" | "POST">,
   handlerFn: (req: NextApiRequest, res: NextApiResponse) => void
 ) {
   return async function (
     req: NextApiRequest,
     res: NextApiResponse
   ): Promise<any> {
-    if (req.method !== method) {
+    if (!req.method && !methods.includes(req.method as any)) {
       return res.status(405).end();
     }
     try {

@@ -1,9 +1,8 @@
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../components/button";
 import Input from "../components/input";
-import useAuth from "../lib/client/useAuth";
 import useFetching from "../lib/client/useFetching";
 
 interface IAccountForm {
