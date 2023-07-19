@@ -22,10 +22,11 @@ export default function useAuth(
   function auth(token: any) {
     setState({ ...state, loading: true });
     fetch(url, {
-      method: "GET",
+      method: "POST",
       headers: {
         Authorization: `${token}`,
       },
+      body: JSON.stringify(token),
     })
       .then((response) => response.json().catch(() => {}))
       .then((fetchData) => setState({ ...state, fetchData, loading: false }))

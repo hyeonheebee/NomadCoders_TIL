@@ -7,6 +7,7 @@ interface IFetchingState {
     token?: string;
     authorization?: string;
     name?: string;
+    userTweet?: object;
   };
   fetchError?: object;
 }

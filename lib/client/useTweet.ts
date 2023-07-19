@@ -1,5 +1,4 @@
-import { useRouter } from "next/router";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 
 export default function useTweet() {
   const { data } = useSWR("/api/user/tweet");

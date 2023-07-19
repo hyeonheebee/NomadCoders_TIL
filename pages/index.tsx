@@ -1,7 +1,7 @@
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import useSWR, { mutate } from "swr";
+
 import Button from "../components/button";
 import Input from "../components/input";
 import useFetching from "../lib/client/useFetching";
@@ -13,8 +13,8 @@ interface ITextForm {
 }
 export default function App() {
   const [cookie, setCookie] = useState<string | undefined>("");
-  const [tokenFn, state] = useFetching("/api/user/main");
-  const [tweetFn, tweet] = useFetching("/api/user/tweet");
+  const [tokenFn, mainState] = useFetching("/api/user/main");
+  const [tweetFn, userTweet] = useFetching("/api/user/tweet");
   const { data: tweets } = useTweet();
 
   const router = useRouter();
@@ -22,26 +22,25 @@ export default function App() {
 
   const onLikeClick = () => {};
   const onValid = (data: ITextForm) => {
-    tweetFn({ data, user: state.fetchData?.user });
+    tweetFn({ data, user: mainState.fetchData?.user });
   };
 
   useEffect(() => {
     setCookie(document.cookie);
     tokenFn(cookie);
-    if (state.fetchData?.success && !state.fetchData?.user) {
+    if (mainState.fetchData?.success && !cookie) {
       router.push("/log-in");
-      console.log(state.fetchData?.user);
-    } else if (state.fetchData?.success && state.fetchData?.user) {
-      console.log("this is home success", state.fetchData);
+      setCookie("");
     }
-  }, [state.fetchData?.success, cookie]);
-
+  }, [router, mainState.fetchData?.success]);
+  console.log("this is home success", mainState.fetchData);
+  console.log(userTweet.fetchData, "fetchData");
   return (
     <div>
       home~
-      {state.fetchData?.user ? (
+      {mainState.fetchData?.user ? (
         <>
-          <h2>{state.fetchData?.name} 님, 어서오세요 ✨</h2>
+          <h2>{mainState.fetchData?.name} 님, 어서오세요 ✨</h2>
           <form onSubmit={handleSubmit(onValid)}>
             <Input
               register={register("text", {

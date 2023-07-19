@@ -24,4 +24,4 @@ async function handler(
 
   return res.json({ success: true, user, token: tokenObj?.token });
 }
-export default withHandler("POST", handler);
+export default withHandler(["POST"], handler);

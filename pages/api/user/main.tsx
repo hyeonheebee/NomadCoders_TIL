@@ -14,10 +14,8 @@ async function handler(
 
   const cookie = req.body;
 
-  if (!cookie) return res.status(400).json({ success: false });
   const cookieToken = findTokenString(cookie);
   token = decodeURIToken(cookieToken);
-  console.log(cookieToken);
   tokenObj = await client.token.findUnique({
     where: { token },
   });
@@ -26,7 +24,6 @@ async function handler(
       where: { id: tokenObj?.userId },
     });
   }
-
   return res.json({
     success: true,
     token,

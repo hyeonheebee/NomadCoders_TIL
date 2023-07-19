@@ -13,10 +13,10 @@ interface ILoginForm {
   phone?: string;
 }
 export default function App() {
-  const AccountURL = "/api/user/login";
+  const LogoinURL = "/api/user/login";
   const AuthURL = "/api/user/auth";
 
-  const [postLogin, state] = useFetching(AccountURL);
+  const [postLogin, state] = useFetching(LogoinURL);
   const [getAuth, authState] = useAuth(AuthURL);
 
   const { register, reset, handleSubmit } = useForm<ILoginForm>();
@@ -37,21 +37,20 @@ export default function App() {
   useEffect(() => {
     if (state.fetchData?.success && !state.fetchData?.user) {
       router.push("/create-account");
-    } else if (state.fetchData?.success && state.fetchData?.user) {
+    }
+    if (state.fetchData?.success && state.fetchData?.user) {
+      getAuth(state.fetchData?.token);
       setToken(state.fetchData?.token);
       if (token) {
         setTokenCookie(token);
-        getAuth(state.fetchData?.token);
-      }
-      getAuth(state.fetchData?.token);
-      if (authState.fetchData?.user) {
-        router.push({
-          pathname: "/",
-        });
       }
     }
-    console.log("this is login success", state.fetchData);
-  }, [state.fetchData?.success, authState.fetchData?.user]);
+    if (authState.fetchData?.user) {
+      router.push("/");
+    }
+    console.log("this is authState success", authState.fetchData);
+    console.log("this is State success", state.fetchData);
+  }, [state.fetchData, authState.fetchData]);
 
   return (
     <div>

@@ -8,7 +8,6 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   const { authorization } = req.headers;
-  console.log("this is auth api", authorization);
   let tokenObj;
   let user;
   tokenObj = await client.token.findUnique({
@@ -17,9 +16,8 @@ async function handler(
   user = await client.user.findUnique({
     where: { id: tokenObj?.userId },
   });
-
   if (user) {
     return res.json({ success: true, user, id: user.id });
   }
 }
-export default withHandler("GET", handler);
+export default withHandler(["POST"], handler);
