@@ -32,6 +32,7 @@ async function handler(
     token,
     user,
     id: user?.id,
+    name: user?.name,
   });
 }
 

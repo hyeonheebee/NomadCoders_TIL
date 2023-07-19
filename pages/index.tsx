@@ -40,22 +40,25 @@ export default function App() {
     <div>
       home~
       {state.fetchData?.user ? (
-        <form onSubmit={handleSubmit(onValid)}>
-          <Input
-            register={register("text", {
-              required: false,
-            })}
-            label="Tweeeeeets"
-            name="text"
-            type="text"
-            kind="text"
-            placeholder="Tweeeeeets"
-          />
-          <Button
-            text={true ? "Unlike" : "like"}
-            onClick={onLikeClick}
-          ></Button>
-        </form>
+        <>
+          <h2>{state.fetchData?.name} 님, 어서오세요 ✨</h2>
+          <form onSubmit={handleSubmit(onValid)}>
+            <Input
+              register={register("text", {
+                required: false,
+              })}
+              label="Tweeeeeets"
+              name="text"
+              type="text"
+              kind="text"
+              placeholder="Tweeeeeets"
+            />
+            <Button
+              text={true ? "Unlike" : "like"}
+              onClick={onLikeClick}
+            ></Button>
+          </form>
+        </>
       ) : (
         <span>please waiting..</span>
       )}

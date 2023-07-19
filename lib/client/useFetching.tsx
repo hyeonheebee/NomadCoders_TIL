@@ -6,6 +6,7 @@ interface IFetchingState {
     user?: object;
     token?: string;
     authorization?: string;
+    name?: string;
   };
   fetchError?: object;
 }

@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/api/user/tweet": "pages/api/user/tweet.js",
-  "/api/user/main": "pages/api/user/main.js"
+  "/api/user/main": "pages/api/user/main.js",
+  "/api/user/tweet": "pages/api/user/tweet.js"
 }
