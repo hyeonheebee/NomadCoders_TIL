@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 
 import Button from "../components/button";
 import Input from "../components/input";
+import List from "../components/list";
+
 import useFetching from "../lib/client/useFetching";
-import useTweet from "../lib/client/useTweet";
+import useTweetList from "../lib/client/useTweetList";
 
 interface ITextForm {
   text: string;
@@ -15,12 +17,11 @@ export default function App() {
   const [cookie, setCookie] = useState<string | undefined>("");
   const [tokenFn, mainState] = useFetching("/api/user/main");
   const [tweetFn, userTweet] = useFetching("/api/user/tweet");
-  const { data: tweets, mutate } = useTweet();
+  const { data: tweets, mutate } = useTweetList();
 
   const router = useRouter();
   const { register, handleSubmit } = useForm<ITextForm>();
 
-  const onLikeClick = () => {};
   const onValid = (data: ITextForm) => {
     tweetFn({ data, user: mainState.fetchData?.user });
   };
@@ -55,10 +56,6 @@ export default function App() {
             />
             <Button text="submit"></Button>
           </form>
-          <Button
-            text={true ? "Unlike" : "like"}
-            onClick={onLikeClick}
-          ></Button>
         </>
       ) : (
         <span>please waiting..</span>
@@ -67,7 +64,7 @@ export default function App() {
         <div>
           {tweets.tweets.map((tweet: any) => (
             <div>
-              <span>{tweet?.tweet}</span>
+              <List id={tweet?.id} text={tweet?.tweet} />
             </div>
           ))}
         </div>
