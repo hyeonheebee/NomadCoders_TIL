@@ -13,6 +13,11 @@ export function getPassword() {
   }
   return password;
 }
+export function deleteCookie() {
+  const expiredDate = new Date();
+  expiredDate.setTime(expiredDate.getTime() - 1);
+  document.cookie = `token=;expires=${expiredDate.toUTCString()};path=/`;
+}
 export function setTokenCookie(token: string) {
   const expires = new Date();
   expires.setDate(expires.getDate() + 7);

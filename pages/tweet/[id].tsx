@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 import SingleList from "../../components/singleList";
@@ -32,6 +33,7 @@ export default function tweet() {
           />
         </div>
       ) : null}
+      <Link href="/">Go Home</Link>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -48,8 +49,6 @@ export default function App() {
     if (authState.fetchData?.user) {
       router.push("/");
     }
-    console.log("this is authState success", authState.fetchData);
-    console.log("this is State success", state.fetchData);
   }, [state.fetchData, authState.fetchData]);
 
   return (
@@ -91,6 +90,7 @@ export default function App() {
           text={method === "email" ? "Get login link " : "Get sms Auth"}
         ></Button>
       </form>
+      <Link href="/create-account">Go to account right now</Link>
     </div>
   );
 }

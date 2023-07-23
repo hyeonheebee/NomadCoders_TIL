@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -8,6 +9,7 @@ import List from "../components/list";
 
 import useFetching from "../lib/client/useFetching";
 import useTweetList from "../lib/client/useTweetList";
+import { deleteCookie } from "../lib/client/utils";
 
 interface ITextForm {
   text: string;
@@ -35,8 +37,10 @@ export default function App() {
       setCookie("");
     }
   }, [router, mainState.fetchData?.success, userTweet]);
-  console.log("this is home success", mainState.fetchData);
-  console.log(userTweet.fetchData, "fetchData");
+  const onLogoutClick = () => {
+    deleteCookie();
+    router.push("/log-in");
+  };
   return (
     <div>
       home~
@@ -69,6 +73,7 @@ export default function App() {
           ))}
         </div>
       ) : null}
+      <button onClick={onLogoutClick}>logout</button>
     </div>
   );
 }
