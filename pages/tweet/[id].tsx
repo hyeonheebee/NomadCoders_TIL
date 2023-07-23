@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import Navigator from "../../components/navigator";
 
 import SingleList from "../../components/singleList";
 
@@ -18,6 +19,7 @@ export default function tweet() {
   console.log(data);
   return (
     <div>
+      <Navigator url="/" urlText="Home|Tweets" />
       hi tweet~
       {data?.singleTweet ? (
         <div>

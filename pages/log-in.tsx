@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../components/button";
 import Input from "../components/input";
+import Navigator from "../components/navigator";
 import useAuth from "../lib/client/useAuth";
 import useFetching from "../lib/client/useFetching";
 
@@ -53,6 +54,7 @@ export default function App() {
 
   return (
     <div>
+      <Navigator url="/create-account" urlText="Go to create-account page" />
       <Button
         text={method === "email" ? "Phone-Login" : "Email-Login"}
         onClick={method === "email" ? onPhoneClick : onEmailClick}
@@ -90,7 +92,6 @@ export default function App() {
           text={method === "email" ? "Get login link " : "Get sms Auth"}
         ></Button>
       </form>
-      <Link href="/create-account">Go to account right now</Link>
     </div>
   );
 }

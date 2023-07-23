@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -6,6 +5,7 @@ import { useForm } from "react-hook-form";
 import Button from "../components/button";
 import Input from "../components/input";
 import List from "../components/list";
+import Navigator from "../components/navigator";
 
 import useFetching from "../lib/client/useFetching";
 import useTweetList from "../lib/client/useTweetList";
@@ -43,6 +43,7 @@ export default function App() {
   };
   return (
     <div>
+      <Navigator onClickfn={onLogoutClick} />
       home~
       {mainState.fetchData?.user ? (
         <>
@@ -73,7 +74,6 @@ export default function App() {
           ))}
         </div>
       ) : null}
-      <button onClick={onLogoutClick}>logout</button>
     </div>
   );
 }
