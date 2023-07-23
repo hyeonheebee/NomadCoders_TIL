@@ -15,8 +15,8 @@ export default function Tab({ onClickFn, method }: TabProps) {
   //   emailColor = "bg-white  text-rose-500 ";
   //   phoneColor = "bg-rose-300  text-white";
   // }
-  const accentColor = "bg-rose-300  text-white";
-  const baseColor = "bg-white  text-rose-400 ";
+  const accentColor = " bg-rose-300  text-white ";
+  const baseColor = "bg-white  text-rose-400 border-rose-200";
 
   method === "email"
     ? ((emailColor = accentColor), (phoneColor = baseColor))
@@ -28,7 +28,7 @@ export default function Tab({ onClickFn, method }: TabProps) {
         onClick={onClickFn}
         className={"".concat(
           emailColor,
-          "font-marker w-full  py-2 border border-transparent rounded-t text-lg focus:outline-none  ",
+          " w-full  py-2   rounded-t text-lg focus:outline-none border  ",
           emailColor
         )}
       >
@@ -39,7 +39,7 @@ export default function Tab({ onClickFn, method }: TabProps) {
         onClick={onClickFn}
         className={"".concat(
           phoneColor,
-          "font-marker w-full   py-2 border border-transparent rounded-t text-lg focus:outline-none ",
+          "  w-full  py-2   rounded-t text-lg focus:outline-none border ",
           phoneColor
         )}
       >
