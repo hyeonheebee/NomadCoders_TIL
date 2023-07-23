@@ -3,7 +3,7 @@ import Like from "./like";
 interface singleListProps {
   id: number;
   text: string;
-  like: number;
+  like: boolean | undefined;
   [key: string]: any;
 }
 

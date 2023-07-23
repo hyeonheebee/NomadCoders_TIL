@@ -5,6 +5,6 @@ export default function useTweetLike(): [(fn: any) => void, IFetchingState] {
   const router = useRouter();
   const id = router.query.id;
   const [fn, data] = useFetching(`/api/user/tweet/${id}/like`);
-  console.log(data);
+
   return [fn, data];
 }

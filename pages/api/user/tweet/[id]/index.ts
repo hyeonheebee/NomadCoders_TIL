@@ -10,7 +10,6 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   const { id } = req.query;
-  console.log(id, "req.qeury");
   let singleTweet;
   if (!id) return res.status(400).json({ success: false });
 
