@@ -1,5 +1,5 @@
 import { useState } from "react";
-interface IFetchingState {
+export interface IFetchingState {
   loading: boolean;
   fetchData?: {
     success?: boolean;
@@ -8,6 +8,7 @@ interface IFetchingState {
     authorization?: string;
     name?: string;
     userTweet?: object;
+    isLike?: boolean;
   };
   fetchError?: object;
 }

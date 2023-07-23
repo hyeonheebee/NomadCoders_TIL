@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import SingleList from "../../components/singleList";
 
@@ -6,16 +6,17 @@ import useTweetItem from "../../lib/client/useTweetItem";
 import useTweetLike from "../../lib/client/useTweetLike";
 
 export default function tweet() {
-  const { data, mutate } = useTweetItem();
+  const { data } = useTweetItem();
+  const [clickFn] = useTweetLike();
   const [likeClick, setLikeClick] = useState(0);
-  const { data: likedata, mutate: likemutate } = useTweetLike();
+  const [like, setLike] = useState(false);
 
   const onLikeClick = () => {
+    clickFn(data);
     setLikeClick((prev) => prev + 1);
-    likemutate(true);
+    setLike((prev) => !prev);
   };
-
-  console.log(likedata);
+  console.log(data);
   return (
     <div>
       hi tweet~
@@ -29,8 +30,7 @@ export default function tweet() {
           />
         </div>
       ) : null}
-      {likedata?.newLike?.id ? <span>like</span> : null}
-      {!likedata?.newLike?.id ? <span>unlike</span> : null}
+      {like ? <span>Unlike</span> : <span>like</span>}
     </div>
   );
 }

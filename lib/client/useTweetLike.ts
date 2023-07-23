@@ -1,12 +1,10 @@
 import { useRouter } from "next/router";
-import useSWR from "swr";
+import useFetching, { IFetchingState } from "./useFetching";
 
-export default function useTweetLike() {
+export default function useTweetLike(): [(fn: any) => void, IFetchingState] {
   const router = useRouter();
   const id = router.query.id;
-
-  const { data, mutate } = useSWR(`/api/user/tweet/${id}/like`);
-
-  console.log("useTweetlike ID", id);
-  return { data, mutate };
+  const [fn, data] = useFetching(`/api/user/tweet/${id}/like`);
+  console.log(data);
+  return [fn, data];
 }
