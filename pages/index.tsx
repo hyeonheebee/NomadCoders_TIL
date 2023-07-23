@@ -6,6 +6,7 @@ import Button from "../components/button";
 import Input from "../components/input";
 import List from "../components/list";
 import Navigator from "../components/navigator";
+import SmallButton from "../components/smallButton";
 
 import useFetching from "../lib/client/useFetching";
 import useTweetList from "../lib/client/useTweetList";
@@ -44,22 +45,29 @@ export default function App() {
   return (
     <div>
       <Navigator onClickfn={onLogoutClick} />
-      home~
       {mainState.fetchData?.user ? (
         <>
-          <h2>{mainState.fetchData?.name} 님, 어서오세요 ✨</h2>
+          <span className="text-lg ml-2 text-teal-700 font-extrabold">
+            {mainState.fetchData?.name}
+            <span className="text-lg ml-2 text-red-500">
+              님의
+              <span className="text-teal-700"> 생각</span>을 기록해보세요 💚
+            </span>
+          </span>
           <form onSubmit={handleSubmit(onValid)}>
-            <Input
-              register={register("text", {
-                required: false,
-              })}
-              label="Tweeeeeets"
-              name="text"
-              type="text"
-              kind="text"
-              placeholder="Tweeeeeets"
-            />
-            <Button text="submit"></Button>
+            <div className="mt-4 flex w-full relative justify-center">
+              <Input
+                register={register("text", {
+                  required: false,
+                })}
+                label="Tweets"
+                name="text"
+                type="text"
+                kind="text"
+                placeholder="지금 무슨 생각을 하고 있나요?"
+              />
+              <SmallButton text="기록하기"></SmallButton>
+            </div>
           </form>
         </>
       ) : (

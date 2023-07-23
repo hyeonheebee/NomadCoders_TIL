@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import Button from "../components/button";
 import Input from "../components/input";
 import Navigator from "../components/navigator";
+import Tab from "../components/Tab";
 
 import useAuth from "../lib/client/useAuth";
 import useFetching from "../lib/client/useFetching";
@@ -53,12 +54,11 @@ export default function App() {
   }, [state.fetchData, authState.fetchData]);
 
   return (
-    <div>
-      <Navigator url="/create-account" urlText="Go to create-account page" />
-      <Button
-        text={method === "email" ? "Phone-Login" : "Email-Login"}
-        onClick={method === "email" ? onPhoneClick : onEmailClick}
-      ></Button>
+    <div className="bg-gradient-to-b from-rose-400 via-rose-100 to-white">
+      <Tab
+        method={method}
+        onClickFn={method === "email" ? onPhoneClick : onEmailClick}
+      ></Tab>
 
       <form onSubmit={handleSubmit(onValid)}>
         {method === "phone" ? (
@@ -89,9 +89,15 @@ export default function App() {
           />
         ) : null}
         <Button
-          text={method === "email" ? "Get login link " : "Get sms Auth"}
+          text={
+            method === "email" ? "Login with Email " : "Login with Phone-Number"
+          }
         ></Button>
       </form>
+      <Navigator
+        url="/create-account"
+        urlText="&rarr; Create-account "
+      ></Navigator>
     </div>
   );
 }

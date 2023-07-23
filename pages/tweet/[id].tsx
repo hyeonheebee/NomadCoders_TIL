@@ -16,11 +16,9 @@ export default function tweet() {
     mutate({ ...data, isLiked: likeData.fetchData?.isLike }, true);
   };
 
-  console.log(data);
   return (
     <div>
       <Navigator url="/" urlText="Home|Tweets" />
-      hi tweet~
       {data?.singleTweet ? (
         <div>
           <SingleList
@@ -35,7 +33,6 @@ export default function tweet() {
           />
         </div>
       ) : null}
-      <Link href="/">Go Home</Link>
     </div>
   );
 }

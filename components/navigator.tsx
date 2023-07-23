@@ -6,12 +6,11 @@ interface NavProps {
 }
 export default function Navigator({ url, urlText, onClickfn }: NavProps) {
   return (
-    <nav
-      className="w-full bg-orange-600 text-white cursor-pointer px-4 border border-transparent rounded-md shadow-sm font-medium flex justify-between
-    "
-    >
-      {url ? <Link href={url}>{urlText}</Link> : null}
-      {onClickfn ? <button onClick={onClickfn}>Logout</button> : null}
-    </nav>
+    <div className="w-full my-2  mb-16 px-4 bg-teal-500 text-sm text-white  py-1 border border-transparent shadow-sm font-medium flex justify-between hover:bg-teal-800 rounded-b md:border-teal-200">
+      <nav className="cursor-pointer">
+        {url ? <Link href={url}>{urlText}</Link> : null}
+        {onClickfn ? <button onClick={onClickfn}>Logout</button> : null}
+      </nav>
+    </div>
   );
 }

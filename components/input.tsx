@@ -21,43 +21,46 @@ export default function Input({
   register,
 }: InputProps) {
   return (
-    <div>
+    <div className="w-screen">
       <label
-        className="mb-1 block text-sm font-medium text-gray-700"
+        className="mb-1 ml-2 block text-sm font-medium text-red-800"
         htmlFor={name}
       >
         {label}
+        {kind === "username" ? (
+          <span className="text-xs ml-4 text-rose-600">
+            💕 이름을 공백으로 두시면 재밌는 랜덤 이름을 만들어 드려요 😆
+          </span>
+        ) : null}
       </label>
+
       {kind === "text" ? (
-        <div className="rounded-md relative flex  items-center shadow-sm">
-          <span>text</span>
-          <input
-            id={name}
-            type={type}
-            placeholder={placeholder}
-            {...register}
-            className="appearance-none w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
-          />
-        </div>
+        <input
+          id={name}
+          type={type}
+          placeholder={placeholder}
+          {...register}
+          className="appearance-none w-full px-3 py-2  border border-rose-300 rounded-md shadow-sm placeholder-rose-300 focus:outline-none focus:ring-rose-300 focus:border-rose-300"
+        />
       ) : null}
       {kind === "username" ? (
-        <div className="rounded-md relative flex  items-center shadow-sm flex flex-col ">
-          <div className="rounded-md relative flex  items-center shadow-sm">
-            if you don't write down your nickname, we can create random NickName
-          </div>
-          <input
-            id={name}
-            type={type}
-            placeholder={placeholder}
-            required={required}
-            {...register}
-            className="appearance-none pl-7 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
-          />
-        </div>
+        <>
+          {" "}
+          <div className="rounded-md relative flex  items-center shadow-sm flex flex-col  ">
+            <input
+              id={name}
+              type={type}
+              placeholder={placeholder}
+              required={required}
+              {...register}
+              className="appearance-none w-full px-3 py-2 mb-4  border border-rose-300 rounded-md shadow-sm placeholder-rose-300 focus:outline-none focus:ring-rose-300 focus:border-rose-300"
+            />
+          </div>{" "}
+        </>
       ) : null}
       {kind === "phone" ? (
         <div className="flex rounded-md shadow-sm">
-          <span className="flex items-center justify-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 select-none text-sm">
+          <span className="flex items-center justify-center mb-4 px-3 rounded-l-md border border-r-0 border-rose-300 bg-rose-300 text-white select-none text-sm">
             +82
           </span>
           <input
@@ -66,7 +69,7 @@ export default function Input({
             placeholder={placeholder}
             required={required}
             {...register}
-            className="appearance-none w-full px-3 py-2 border border-gray-300 rounded-md rounded-l-none shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+            className="appearance-none w-full px-3 py-2 mb-4  border border-rose-300 rounded-md shadow-sm placeholder-rose-300  focus:outline-none focus:ring-rose-300 focus:border-rose-300"
           />
         </div>
       ) : null}
@@ -78,7 +81,7 @@ export default function Input({
             placeholder={placeholder}
             required={required}
             {...register}
-            className="appearance-none w-full px-3 py-2 border border-gray-300 rounded-md rounded-l-none shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+            className="appearance-none w-full px-3 py-2  mb-4  border border-rose-300 rounded-md shadow-sm placeholder-rose-300  focus:outline-none focus:ring-rose-300 focus:border-rose-300"
           />
         </div>
       ) : null}

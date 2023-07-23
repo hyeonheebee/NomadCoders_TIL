@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Button from "../components/button";
 import Error from "../components/error";
 import Input from "../components/input";
+import Tab from "../components/Tab";
 import useFetching from "../lib/client/useFetching";
 
 interface IAccountForm {
@@ -43,14 +44,14 @@ export default function App() {
     }
   }, [state.fetchData?.success, state.fetchData?.user]);
   return (
-    <div>
+    <div className="bg-rose-100">
       {alert && <Error text="please use another Phone or Email"></Error>}
       {errors.phone && <Error text="phone Number is requred"></Error>}
       {errors.email && <Error text="Email is required"></Error>}
-      <Button
-        text={method === "email" ? "Phone-Login" : "Email-Login"}
-        onClick={method === "email" ? onPhoneClick : onEmailClick}
-      ></Button>
+      <Tab
+        method={method}
+        onClickFn={method === "email" ? onPhoneClick : onEmailClick}
+      ></Tab>
 
       <form onSubmit={handleSubmit(onValid)}>
         <Input
@@ -91,7 +92,9 @@ export default function App() {
           />
         ) : null}
         <Button
-          text={method === "email" ? "Get login link " : "Get sms Auth"}
+          text={
+            method === "email" ? "Join with Email " : "Join with Phone-Number"
+          }
         ></Button>
       </form>
     </div>
