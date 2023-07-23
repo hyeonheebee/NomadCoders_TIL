@@ -6,9 +6,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        marker: ["Noto Serif KR", "serif"],
-        dongle: ["Dongle", "sans-serif"],
-        span: ["Nanum Pen Script", "cursive"],
+        marker: ["Noto Serif KR", "serif", "font-serif"],
+        dongle: ["Dongle", "sans-serif", "font-serif"],
+        span: ["Nanum Pen Script", "Nanum Brush Script", "cursive"],
       },
     },
     plugins: [],

@@ -12,6 +12,7 @@ async function handler(
   const { id } = req.query;
   let singleTweet;
   let user;
+  let existedLike;
   if (!id) return res.status(400).json({ success: false });
 
   singleTweet = await client.tweet.findUnique({
@@ -25,8 +26,15 @@ async function handler(
         id: singleTweet.userId,
       },
     });
+    existedLike = await client.like.findFirst({
+      where: {
+        tweetId: +id,
+        userId: user?.id,
+      },
+    });
   }
-  return res.json({ success: true, singleTweet, user });
+
+  return res.json({ success: true, singleTweet, user, existedLike });
 }
 
 export default withHandler(["GET"], handler);

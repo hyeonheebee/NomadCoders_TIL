@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navigator from "../../components/navigator";
 
 import SingleList from "../../components/singleList";
@@ -9,30 +9,41 @@ import useTweetLike from "../../lib/client/useTweetLike";
 export default function tweet() {
   const { data, mutate } = useTweetItem();
   const [clickFn, likeData] = useTweetLike();
+  const [like, setLike] = useState(false);
   const onLikeClick = () => {
     clickFn(data);
     if (!likeData.fetchData) return;
-    mutate({ ...data, isLiked: likeData.fetchData?.isLike }, true);
+    mutate(
+      {
+        ...data,
+        isLiked: likeData.fetchData?.isLike,
+      },
+      true
+    );
   };
+  useEffect(() => {
+    clickFn({});
+  }, []);
 
+  console.log("one:", data, "two:", likeData.fetchData);
   return (
-    <div>
+    <div className="bg-rose-100 h-screen">
       <Navigator url="/" urlText="Home|Tweets" />
       {data?.singleTweet ? (
-        <div className="flex font-dongle">
+        <div className="flex font-dongle items-center justify-center bg-rose-200">
           <SingleList
             id={data?.singleTweet?.id}
             like={
-              data?.isLiked !== undefined
-                ? data?.isLiked
-                : likeData.fetchData?.isLike
+              likeData.fetchData?.isLike
+                ? likeData.fetchData?.isLike
+                : data?.existedLike
             }
             onClickFn={onLikeClick}
             text={data?.singleTweet?.tweet}
           />
+          <span className="font-span ml-8">by {data?.user?.name}</span>
         </div>
       ) : null}
-      <span>by {data?.user?.name}</span>
     </div>
   );
 }

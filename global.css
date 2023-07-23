@@ -17,3 +17,7 @@
   font-family: "Nanum Pen Script";
   src: url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
 }
+@font-face {
+  font-family: "Nanum Brush Script";
+  src: url("https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap");
+}

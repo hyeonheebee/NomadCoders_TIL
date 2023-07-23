@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import Button from "../components/button";
 import Input from "../components/input";
 import List from "../components/list";
 import Navigator from "../components/navigator";
@@ -42,6 +41,7 @@ export default function App() {
     deleteCookie();
     router.push("/log-in");
   };
+
   return (
     <div>
       <Navigator onClickfn={onLogoutClick} />
@@ -56,7 +56,7 @@ export default function App() {
             </span>
           </span>
           <form onSubmit={handleSubmit(onValid)}>
-            <div className="mt-4 flex w-full relative justify-center font-span text-2xl">
+            <div className="mt-4 flex w-full relative justify-center  font-marker text-sm">
               <Input
                 register={register("text", {
                   required: false,
