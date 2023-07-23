@@ -41,10 +41,10 @@ export default function Input({
         </div>
       ) : null}
       {kind === "username" ? (
-        <div className="rounded-md relative flex  items-center shadow-sm">
-          <span>
+        <div className="rounded-md relative flex  items-center shadow-sm flex flex-col ">
+          <div className="rounded-md relative flex  items-center shadow-sm">
             if you don't write down your nickname, we can create random NickName
-          </span>
+          </div>
           <input
             id={name}
             type={type}

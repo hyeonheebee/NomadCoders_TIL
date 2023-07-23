@@ -13,9 +13,15 @@ interface IAccountForm {
 export default function App() {
   const AccountURL = "/api/user/account";
   const [postAccount, state] = useFetching(AccountURL);
-  const { register, reset, handleSubmit } = useForm<IAccountForm>();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IAccountForm>();
   const [method, setMethod] = useState<"email" | "phone">("phone");
   const router = useRouter();
+  const [alert, setAlert] = useState(false);
   const onEmailClick = () => {
     reset(), setMethod("email");
   };
@@ -28,12 +34,23 @@ export default function App() {
   };
 
   useEffect(() => {
-    if (state.fetchData?.success && !state.fetchData?.user) {
+    if (state.fetchData?.success && !state.fetchData.user) {
       router.push("/log-in");
     }
-  }, [state.fetchData?.user, state.fetchData?.success]);
+    if (state.fetchData?.user) {
+      setAlert(true);
+    }
+  }, [state.fetchData?.success, state.fetchData?.user]);
   return (
     <div>
+      {alert && (
+        <span className="text-red-500 ">
+          {" "}
+          please use another Phone or Email
+        </span>
+      )}
+      {errors.phone && <span className="text-red-500 ">* phone required</span>}
+      {errors.email && <span className="text-red-500 ">* email required</span>}
       <Button
         text={method === "email" ? "Phone-Login" : "Email-Login"}
         onClick={method === "email" ? onPhoneClick : onEmailClick}

@@ -17,24 +17,31 @@ async function handler(
   if (!authMethod) return res.status(400).json({ success: false });
 
   const randomString = getPassword();
-
-  const userToken = await client.token.create({
-    data: {
-      token: randomString,
-      user: {
-        connectOrCreate: {
-          where: {
-            ...authMethod,
-          },
-          create: {
-            name: username ? username : randomName ? randomName : "Anonymous",
-            ...authMethod,
+  const existUser = await client.user.findUnique({
+    where: {
+      ...authMethod,
+    },
+  });
+  if (existUser) return res.json({ success: true, user: existUser });
+  if (!existUser) {
+    const userToken = await client.token.create({
+      data: {
+        token: randomString,
+        user: {
+          connectOrCreate: {
+            where: {
+              ...authMethod,
+            },
+            create: {
+              name: username ? username : randomName ? randomName : "Anonymous",
+              ...authMethod,
+            },
           },
         },
       },
-    },
-  });
+    });
 
-  return res.json({ success: true, token: userToken.token });
+    return res.json({ success: true, token: userToken.token, user: existUser });
+  }
 }
 export default withHandler(["POST"], handler);
