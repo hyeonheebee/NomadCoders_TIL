@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 import Navigator from "../../components/navigator";
 
@@ -20,7 +19,7 @@ export default function tweet() {
     <div>
       <Navigator url="/" urlText="Home|Tweets" />
       {data?.singleTweet ? (
-        <div>
+        <div className="flex ">
           <SingleList
             id={data?.singleTweet?.id}
             like={
@@ -33,6 +32,7 @@ export default function tweet() {
           />
         </div>
       ) : null}
+      <span>by {data?.user?.name}</span>
     </div>
   );
 }
