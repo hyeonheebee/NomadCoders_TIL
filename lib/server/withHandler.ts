@@ -5,7 +5,7 @@ export interface ResponseType {
   [key: string]: any;
 }
 export default function withHandler(
-  methods: Array<"GET" | "POST">,
+  methods: Array<"GET" | "POST" | "DELETE">,
   handlerFn: (req: NextApiRequest, res: NextApiResponse) => void
 ) {
   return async function (
