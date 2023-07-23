@@ -1,11 +1,11 @@
 interface ListProps {
-  like: boolean;
+  like: number;
   [key: string]: any;
 }
 
-export default function Like({ like }: ListProps) {
+export default function Like({ like, onClickFn }: ListProps) {
   return (
-    <div className=" cursor-pointer">
+    <div onClick={onClickFn} className=" cursor-pointer">
       <svg
         className="w-4 h-4  "
         fill="none"

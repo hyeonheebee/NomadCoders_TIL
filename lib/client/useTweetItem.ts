@@ -6,6 +6,7 @@ export default function useTweetItem() {
   const id = router.query.id;
 
   const { data, mutate } = useSWR(`/api/user/tweet/${id}`);
+
   console.log("useTweetItem ID", id);
   return { data, mutate };
 }

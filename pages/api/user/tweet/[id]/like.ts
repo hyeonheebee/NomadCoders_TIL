@@ -10,6 +10,7 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   const { id: tweetId } = req.query;
+  let newLike;
   if (!tweetId) return res.status(400).json({ success: false });
   const likeTweet = await client.tweet.findUnique({
     where: {
@@ -34,7 +35,7 @@ async function handler(
       },
     });
   } else {
-    await client.like.create({
+    newLike = await client.like.create({
       data: {
         user: {
           connect: {
@@ -47,9 +48,8 @@ async function handler(
       },
     });
   }
-  console.log(tweetId, "req.qeury");
 
-  return res.json({ success: true });
+  return res.json({ success: true, likeTweet, newLike });
 }
 
 export default withHandler(["GET"], handler);
