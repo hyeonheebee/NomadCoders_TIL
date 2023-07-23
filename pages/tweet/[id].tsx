@@ -19,7 +19,7 @@ export default function tweet() {
     <div>
       <Navigator url="/" urlText="Home|Tweets" />
       {data?.singleTweet ? (
-        <div className="flex ">
+        <div className="flex font-dongle">
           <SingleList
             id={data?.singleTweet?.id}
             like={

@@ -47,15 +47,16 @@ export default function App() {
       <Navigator onClickfn={onLogoutClick} />
       {mainState.fetchData?.user ? (
         <>
-          <span className="text-lg ml-2 text-teal-700 font-extrabold">
+          <span className="text-4xl ml-2 text-teal-700 font-bold font-span">
             {mainState.fetchData?.name}
-            <span className="text-lg ml-2 text-red-500">
+            <span className="text-2xl ml-2 text-red-500">
               님의
-              <span className="text-teal-700"> 생각</span>을 기록해보세요 💚
+              <span className="text-4xl text-teal-700"> 생각</span>을
+              기록해보세요 💚
             </span>
           </span>
           <form onSubmit={handleSubmit(onValid)}>
-            <div className="mt-4 flex w-full relative justify-center">
+            <div className="mt-4 flex w-full relative justify-center font-span text-2xl">
               <Input
                 register={register("text", {
                   required: false,
@@ -76,7 +77,7 @@ export default function App() {
       {tweets ? (
         <div>
           {tweets.tweets.map((tweet: any) => (
-            <div>
+            <div className="font-span text-2xl text-rose-900">
               <List id={tweet?.id} text={tweet?.tweet} />
             </div>
           ))}

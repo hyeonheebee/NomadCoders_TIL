@@ -23,12 +23,12 @@ export default function Input({
   return (
     <div className="w-screen">
       <label
-        className="mb-1 ml-2 block text-sm font-medium text-red-800"
+        className="mb-1 ml-2 block text-sm font-medium text-red-800 font-dongle"
         htmlFor={name}
       >
         {label}
         {kind === "username" ? (
-          <span className="text-xs ml-4 text-rose-600">
+          <span className="text-xs ml-4 text-rose-600 font-dongle">
             💕 이름을 공백으로 두시면 재밌는 랜덤 이름을 만들어 드려요 😆
           </span>
         ) : null}

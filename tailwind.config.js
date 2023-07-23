@@ -6,8 +6,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        marker: ["Permanent Marker", "cursive"],
-        display: ["Single Day", "cursive"],
+        marker: ["Noto Serif KR", "serif"],
+        dongle: ["Dongle", "sans-serif"],
+        span: ["Nanum Pen Script", "cursive"],
       },
     },
     plugins: [],
