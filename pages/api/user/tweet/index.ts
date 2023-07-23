@@ -16,7 +16,7 @@ async function handler(
       data: { text },
       user: { id },
     } = req.body;
-    console.log(text, "text");
+
     let userTweet;
     if (!id || !text) return res.status(400).json({ success: false });
     const user = await client.user.findUnique({

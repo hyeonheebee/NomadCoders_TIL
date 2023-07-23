@@ -75,7 +75,7 @@ export default function App() {
       )}
       {tweets ? (
         <div>
-          {tweets.tweets.map((tweet: any) => (
+          {tweets?.tweets?.map((tweet: any) => (
             <div className="font-span text-2xl text-rose-900">
               <List id={tweet?.id} text={tweet?.tweet} />
             </div>
