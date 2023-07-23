@@ -41,7 +41,6 @@ export default function App() {
     deleteCookie();
     router.push("/log-in");
   };
-
   return (
     <div>
       <Navigator onClickfn={onLogoutClick} />
