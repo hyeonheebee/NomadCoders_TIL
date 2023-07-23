@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../components/button";
+import Error from "../components/error";
 import Input from "../components/input";
 import useFetching from "../lib/client/useFetching";
 
@@ -43,14 +44,9 @@ export default function App() {
   }, [state.fetchData?.success, state.fetchData?.user]);
   return (
     <div>
-      {alert && (
-        <span className="text-red-500 ">
-          {" "}
-          please use another Phone or Email
-        </span>
-      )}
-      {errors.phone && <span className="text-red-500 ">* phone required</span>}
-      {errors.email && <span className="text-red-500 ">* email required</span>}
+      {alert && <Error text="please use another Phone or Email"></Error>}
+      {errors.phone && <Error text="phone Number is requred"></Error>}
+      {errors.email && <Error text="Email is required"></Error>}
       <Button
         text={method === "email" ? "Phone-Login" : "Email-Login"}
         onClick={method === "email" ? onPhoneClick : onEmailClick}

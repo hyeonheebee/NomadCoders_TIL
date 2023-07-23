@@ -1,13 +1,5 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/api/user/tweet": "pages/api/user/tweet.js",
-  "/api/user/main": "pages/api/user/main.js",
-  "/log-in": "pages/log-in.js",
-  "/api/user/login": "pages/api/user/login.js",
-  "/api/user/auth": "pages/api/user/auth.js",
-  "/create-account": "pages/create-account.js",
-  "/api/user/account": "pages/api/user/account.js"
+  "/_document": "pages/_document.js"
 }
