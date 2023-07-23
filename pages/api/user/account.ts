@@ -12,7 +12,7 @@ async function handler(
   let randomName;
   randomName = await getName(getNameURL);
   const { phone, email, username } = req.body;
-
+  console.log(username, "나는 account username");
   const authMethod = email ? { email } : phone ? { phone: +phone } : null;
   if (!authMethod) return res.status(400).json({ success: false });
 
