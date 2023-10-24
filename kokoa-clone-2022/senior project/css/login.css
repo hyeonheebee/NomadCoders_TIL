@@ -1,0 +1,92 @@
+@import 'reset.css';
+@import 'components/status-bar.css';
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap');
+@import 'components/variable.css';
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#whole-box {
+  width: 400px;
+  height: 700px;
+  background-color: thistle;
+}
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 200px;
+  font-family: var(--font);
+}
+.welcome__title {
+  display: block;
+  margin-bottom: 25px;
+  margin-top: 75px;
+  font-size: 33px;
+  font-weight: 700;
+  color: var(--purple);
+}
+.welcome__content:first-child {
+  display: block;
+}
+.welcome__content {
+  font-size: 20px;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-form div {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid var(--purple);
+}
+.login-input {
+  padding: 20px 0px 20px 10px;
+  width: 220px;
+  background: thistle;
+  font-family: var(--font);
+  font-size: 28px;
+  transition: all 0.5s ease-out;
+}
+.login-form div:nth-child(2) input {
+  font-size: 25px;
+}
+
+.login-input:focus::placeholder {
+  color: yellowgreen;
+  font-weight: 800;
+}
+.login__btn,
+.login__signup {
+  margin-top: 5px;
+  padding: 7px 0px;
+  background: thistle;
+  font-family: var(--font);
+  font-size: 22px;
+  border-radius: 15px;
+  border: 1px solid;
+  width: 300px;
+  font-weight: 800;
+}
+.login__btn {
+  margin-top: 40px;
+}
+.login__btn:hover,
+.login__signup:hover {
+  cursor: pointer;
+  background-color: rgb(137, 192, 26);
+}
+
+.login-form div:last-child {
+  display: flex;
+  justify-content: center;
+}
+.login-form h1 {
+  line-height: 1.6;
+  font-family: var(--font);
+  opacity: 0.5;
+}

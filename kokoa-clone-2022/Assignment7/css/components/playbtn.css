@@ -1,0 +1,29 @@
+.play-btn {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 45px;
+  box-sizing: border-box;
+}
+.play-btn input {
+  width: 94px;
+  padding: 9px 0px;
+  border-radius: 17px;
+  box-shadow: 0px 2px 2px 1px rgba(243, 243, 243, 0.9);
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+}
+.play-btn input:first-child {
+  background-color: black;
+  color: rgba(245, 245, 245, 0.85);
+}
+.play-btn input:last-child {
+  background-color: white;
+  color: rgb(0, 0, 0, 0.8);
+}
+.play-btn i {
+  position: relative;
+  left: 25px;
+}

@@ -1,0 +1,192 @@
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import "css/var.css";
+.main-box {
+  width: 310px;
+  height: 600px;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  background-color: var(--bg);
+  padding: 20px;
+  border: solid 6px var(--cont);
+  border-radius: 20px;
+}
+
+.Main-bar {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+}
+.Main-bar__column {
+  width: 33.3%;
+  height: 80%;
+}
+.Main-bar__column:first-child {
+  display: flex;
+  align-items: center;
+}
+.Main-bar__column:first-child i {
+  margin-left: 10px;
+  border-radius: 2px;
+  padding-left: 1px;
+  padding-right: 1px;
+
+  color: var(--menu);
+}
+.Main-bar__column:nth-child(2) span {
+  font-size: 15px;
+  font-family: "Bebas Neue", cursive;
+  color: var(--menu);
+  font-weight: 400;
+}
+.Main-bar__column:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Now-Music__image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10%;
+}
+.Now-Music {
+  width: 100%;
+  height: 20%;
+  margin-top: 3%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-evenly;
+}
+.Now-Music__image {
+  width: 40%;
+
+  border-radius: 10%;
+  box-sizing: border-box;
+}
+.Now-Music__column {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.Now-Music__Title {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.Now-Music__Title span {
+  font-size: 32px;
+  font-family: "Bebas Neue", cursive;
+  font-weight: 600;
+  color: var(--cont);
+  margin-left: 10px;
+  line-height: 1;
+}
+.Now-Music__Artist {
+  height: 30%;
+  width: 100%;
+}
+.Now-Music__Artist span {
+  font-family: "Bebas Neue", cursive;
+  color: var(--dark);
+  font-size: 20px;
+  margin-left: 10px;
+}
+.btn-Menu {
+  height: 7%;
+  margin-top: 5%;
+  margin-bottom: 6%;
+  display: flex;
+  justify-content: space-around;
+}
+.btn-Menu__column {
+  border-radius: 10%;
+  width: 33%;
+  box-sizing: border-box;
+  border: solid var(--dark);
+  border-width: 0.5px 1px 3.5px 1px;
+}
+.btn-Menu__column:first-child {
+  width: 38%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-Menu__column:first-child span {
+  font-size: 15px;
+  font-family: "Bebas Neue", cursive;
+  color: var(--cont);
+  margin-left: 10px;
+}
+.btn-Menu__column:first-child i {
+  color: var(--menu);
+}
+.btn-Menu__column:nth-child(2) {
+  width: 22%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-Menu__column:nth-child(2) i {
+  color: var(--menu);
+}
+.btn-Menu__column:last-child i {
+  color: var(--menu);
+}
+.btn-Menu__column:last-child {
+  width: 22%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playlist {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 20px;
+  font-family: "Bebas Neue", cursive;
+  color: var(--cont);
+}
+.playlist__box {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.playlist__box div {
+  width: 20%;
+}
+.playlist__box img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10%;
+}
+.playlist__items {
+  display: inline-block;
+  width: 70%;
+}
+.playlist__items li {
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  list-style: none;
+}
+.playlist__items li:first-child {
+  font-size: 20px;
+}
+.playlist__items li:last-child {
+  font-size: 13px;
+  color: var(--dark);
+}
+.playlist__items:first-child li:first-child {
+  font-size: 20px;
+}
