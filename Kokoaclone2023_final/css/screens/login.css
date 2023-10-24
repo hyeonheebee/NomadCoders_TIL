@@ -1,0 +1,65 @@
+.welcome-header {
+  margin: 0px 30px;
+  padding-top: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.welcome-header__title {
+  font-size: 40px;
+  margin-bottom: 30px;
+  font-weight: 800;
+}
+.welcome-header__text {
+  width: 50%;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 20px;
+}
+.login-form input::placeholder {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.login-form input {
+  opacity: 0.65;
+  border: none;
+}
+.login-user__id,
+.login-user__pw {
+  padding: 10px 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+  /* border-bottom: 1px solid aqua;
+  transition: border-color 0.1s ease-in-out; */
+  /* 구현이 잘 안되서 패스 */
+  font-size: 18px;
+}
+.login-form input:focus {
+  border-color: salmon;
+}
+
+.login-user__pw {
+  margin-bottom: 30px;
+}
+.btn__login,
+.btn__joinus {
+  position: relative;
+  font-size: 20px;
+  background-color: rgb(242, 145, 163);
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 15px 10px;
+}
+.btn__joinus {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+.account-link {
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}

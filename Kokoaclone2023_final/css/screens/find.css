@@ -1,0 +1,29 @@
+.user-component__avartar__xl {
+  margin-bottom: 30px;
+}
+.user-component__avartar__xl {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.user-component__text__xl h3 {
+  position: absolute;
+  top: 0px;
+  font-size: 38px;
+  opacity: 0.7;
+  font-weight: 800;
+}
+
+.user-component__text__xl h6 {
+  opacity: 0.7;
+  font-weight: 400;
+  font-size: 18px;
+}
+.more-screen__suggest span {
+  margin-bottom: 30px;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 400;
+}

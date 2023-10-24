@@ -1,0 +1,127 @@
+.chat-screen {
+  background-color: var(--font1);
+}
+
+.screen-header__column {
+  padding: 30px 15px;
+  margin-top: 20px;
+  align-items: center;
+  width: 33%;
+  display: flex;
+  font-weight: 800;
+  font-size: 30px;
+}
+.screen-header__column:nth-child(2) {
+  justify-content: center;
+}
+.screen-header__column:nth-child(3) {
+  justify-content: flex-end;
+}
+.screen-header__column:nth-child(3) i {
+  padding: 10px;
+}
+.com-header {
+  position: fixed;
+  top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.comomunicate-screen__time {
+  position: fixed;
+  top: 150px;
+  display: inline-block;
+  background: linear-gradient(0.25turn, var(--main), var(--btn), var(--main));
+  padding: 10px 40px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  color: var(--white);
+  z-index: 2;
+}
+.main-comm-screen {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -1;
+  position: absolute;
+  top: 250px;
+}
+.message-row {
+  animation: FadeIn 0.3s linear;
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 60px;
+}
+.message-row--own,
+.message__ballon--own {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.message-row__content {
+  margin: 0px 10px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.message-row img {
+  margin: 0px 10px;
+  width: 100px;
+  height: 100px;
+  border-radius: 40%;
+}
+.message__who {
+  padding-left: 5px;
+  font-size: 25px;
+  opacity: 0.7;
+  font-weight: 800;
+}
+.messsage__text {
+  opacity: 0.9;
+  font-size: 20px;
+  display: block;
+  padding: 12px 10px;
+  text-align: center;
+  border-radius: 20px;
+  border-top-left-radius: 0px;
+  background-color: var(--white);
+}
+
+.message_time {
+  font-size: 14px;
+  padding: 0px 10px;
+  padding-bottom: 3px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+.message__ballon {
+  display: flex;
+  position: relative;
+  align-items: flex-end;
+}
+.messsage__text--own {
+  background-color: var(--font2);
+  border-top-right-radius: 0px;
+  border-top-left-radius: 20px;
+  color: var(--white);
+}
+/* .message__ballon::after {
+  position: absolute;
+  bor
+  top: 0px;
+  background-color: var(--pink);
+} */
+@keyframes FadeIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}

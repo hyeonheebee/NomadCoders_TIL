@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="chat-screen">
+    <div class="background chat-back">
+      <div class="status-bar">
+        <div class="status-bar__column">
+          <span>On Service</span>
+          <i class="fas fa-wifi"></i>
+        </div>
+        <div class="status-bar__column">
+          <span>05:03</span>
+        </div>
+        <div class="status-bar__column">
+          <i class="fab fa-discord"></i>
+          <span>89%</span>
+          <i class="fas fa-battery-three-quarters"></i>
+          <i class="fas fa-bolt fa-xs"></i>
+        </div>
+      </div>
+
+      <header class="com-header">
+        <div class="screen-header__column">
+          <a href="chats.html">
+            <i class="fas fa-chevron-left"></i>
+          </a>
+        </div>
+        <div class="screen-header__column">Draw Andrew</div>
+        <div class="screen-header__column">
+          <!-- youtube link icon  -->
+          <!-- book icon  -->
+          <!-- find out job icon  -->
+          <!-- ★icon은 span안에 집어넣어야 margin등 적용이 쉽다 -->
+          <span>
+            <a href="find.html"> <i class="fas fa-search"></i></a>
+          </span>
+          <span><i class="fas fa-bars"></i></span>
+        </div>
+      </header>
+      <main class="main-comm-screen">
+        <div class="comomunicate-screen__time">Saturday, January 14, 2023</div>
+        <div class="message-row">
+          <img src="img/andrew.jpg" />
+          <div class="message-row__content">
+            <span class="message__who">Draw Andrew</span>
+            <div class="message__ballon">
+              <!-- <div class="message__tail"></div> -->
+              <span class="messsage__text">
+                Would you recommend color to me?</span
+              >
+
+              <span class="message_time">17:45</span>
+            </div>
+
+            <!-- 메시지모양을 만들기 위해 단순 span아닌 div를 활용함 -->
+            <!-- 또한 시간등도 넣어야 하기때문에 content라는 큰 div로 묶어줘야함을 잊지말것 -->
+          </div>
+        </div>
+        <div class="message-row message-row--own">
+          <div class="message-row__content">
+            <div class="message__ballon message__ballon--own">
+              <!-- <div class="message__tail"></div> -->
+              <span class="messsage__text messsage__text--own">
+                How about Tomato color?</span
+              >
+              <span class="message_time">17:46</span>
+            </div>
+
+            <!-- 메시지모양을 만들기 위해 단순 span아닌 div를 활용함 -->
+            <!-- 또한 시간등도 넣어야 하기때문에 content라는 큰 div로 묶어줘야함을 잊지말것 -->
+          </div>
+        </div>
+        <div class="message-row">
+          <img src="img/andrew.jpg" />
+          <div class="message-row__content">
+            <span class="message__who">Draw Andrew</span>
+            <div class="message__ballon">
+              <!-- <div class="message__tail"></div> -->
+              <span class="messsage__text">
+                Green is better than tomato, right?</span
+              >
+
+              <span class="message_time">17:48</span>
+            </div>
+
+            <!-- 메시지모양을 만들기 위해 단순 span아닌 div를 활용함 -->
+            <!-- 또한 시간등도 넣어야 하기때문에 content라는 큰 div로 묶어줘야함을 잊지말것 -->
+          </div>
+        </div>
+      </main>
+
+      <form action="" class="chat-keyboard" method="get" id="message-form">
+        <div class="keyboard-reply__column">
+          <i class="fas fa-plus-square fa-2x"></i>
+
+          <div class="keyboard-reply__input">
+            <input type="text" / placeholder="wirte your message">
+            <i class="fas fa-smile fa-2x"></i>
+          </div>
+          <button
+            class="message-form__submit"
+            type="submit"
+            form="message-form"
+          >
+            <i class="fas fa-arrow-up fa-2x"></i>
+          </button>
+        </div>
+      </form>
+      <!-- icons -->
+    </div>
+  </body>
+
+  <script
+    src="https://kit.fontawesome.com/6478f529f2.js"
+    ;
+    crossorigin="anonymous"
+  ></script>
+</html>

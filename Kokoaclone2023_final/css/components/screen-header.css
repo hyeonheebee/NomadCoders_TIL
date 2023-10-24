@@ -1,0 +1,33 @@
+.screen-header {
+  /* z-index: 2; */
+  display: flex;
+  font-size: 30px;
+  padding: 0px var(--horizontal-space);
+  /* ★screen을 만들어주면서 horizontal-space를 넣어준다 */
+  padding-top: 60px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.screen-header__title {
+  font-weight: 800;
+}
+.screen-header__icon span {
+  margin-left: 10px;
+}
+/* .screen-header__icon span i {
+  color: var(--dark);
+} */
+.header-display-link {
+  font-weight: 800;
+  background: linear-gradient(0.25turn, var(--main), var(--btn), var(--main));
+  padding: 15px 0px;
+  border-radius: 15px;
+  margin: 0px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+.header-display-link span {
+  margin: 0px 5px;
+}

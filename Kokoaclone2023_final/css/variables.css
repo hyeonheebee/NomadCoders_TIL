@@ -1,0 +1,11 @@
+:root {
+  --light: #f5b4c0;
+  --btn: rgb(242, 145, 163, 0.9);
+  --main: #f5738b;
+  --dark: rgb(168, 62, 82);
+  --font1: #728c8a;
+  --font2: #3a9d95;
+  --white: #f2f2f2;
+  --half_opacity: rgba(0, 0, 0, 0.5);
+  --horizontal-space: 20px;
+}
