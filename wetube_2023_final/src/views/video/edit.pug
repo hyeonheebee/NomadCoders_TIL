@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  if errorMessage 
+    h2 Please Upload Again
+    h3 ERROR | #{errorMessage} 
+  
+  div#edit__video__preview
+    video(src=`/${video.fileUrl}`,controls,width=400,height=400)
+  form(method="POST")
+    input(name="title", value=video.title,placeholder="Title of Video",type="text",required )
+    input(name="summary", value=video.summary, placeholder="Video Summary",type="text", required )
+    input(name="hashtags",value=video.hashtags.join(), placeholder="hashtags: divided by comma",type="text",required)
+    input(name="genres", value=video.genres.join(),placeholder="Genres: divided by comma",type="text",required)
+    input#video__uploadBtn(value="Update",type="submit")

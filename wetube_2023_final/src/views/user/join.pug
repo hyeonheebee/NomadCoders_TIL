@@ -1,0 +1,17 @@
+extends ../layout
+block content
+  if errorMessage 
+    h2 Please Join Again
+    h3 ERROR | #{errorMessage} 
+  form(method="POST")
+    input(name="username",type="text", placeholder="username")
+    input(name="password",placeholder="put your password",type="password")
+    input(name="validPassword",placeholder="put your password again",type="password")
+    input(name="email",placeholder="E-mail",type="email")
+    input(name="nickname",placeholder="nick-name",type="text")
+    input.social__btn(type="submit",value="Join")
+    include ../partials/social-login
+  div.auth-switch
+    span Already have an account? 
+    a(href="/login") 
+    | Log in now &rarr;

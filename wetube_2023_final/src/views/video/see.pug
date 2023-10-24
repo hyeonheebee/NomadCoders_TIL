@@ -1,0 +1,73 @@
+extends ../layout
+
+
+block content
+
+  div#videoContainer(data-id=video._id )
+    video(src=`${video.fileUrl}`)
+    div#videoControls.videoControls
+      div.videoControls__play
+        span#play.videoControls__playBtn
+           i.fas.fa-play
+        div.videoControls__time
+          span#currentTime 00:00 
+          span / 
+          span#wholeTime 00:00
+      input(type="range",value="0",min="0",step="0.5")#timeLine
+      div.videoControls__volume
+          input(type="range",value="0.5", min="0",max="1",step="0.01")#volume
+          span#mute
+            i.fas.fa-volume-up
+      div 
+        sapn#fullScreen 
+            i.fas.fa-expand
+  div.video__headline     
+    span.video__title #{video.title}
+    span.video__Sum #{video.summary}
+    small.video__views #{video.views} 회
+  if loggeduser._id  === String(video.owner.id)
+    div.video__modifybox2 
+      a(href=`${video.id}/delete`)  Delete Video  ⛔
+    div.video__modifybox1
+      a(href=`${video.id}/edit`) Edit Video  ✅ 
+
+  div.video__data        
+    div.video__metabox
+      span#genres Genres
+      span 📁  
+      each genre in video.genres 
+        span #{genre}
+        span            
+      br
+      span#hashtags Hashtags
+      span 🧡  
+      each tag in video.hashtags 
+        span #{tag}    
+    br
+    div.video__infobox
+      span.video__owner Creator |  
+        a(href=`/users/${video.owner._id}`) #{String(video.owner.username)} / 
+        a(href=`/users/${video.owner._id}`) #{String(video.owner.nickname)}
+      br
+      small.video__createdAt=new Date(video.createdDate).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+
+
+
+  if loggedIn          
+      div.video__post-comments
+          form.video__comment-form#commentForm(data-user=loggeduser._id)
+            textarea( cols="30", rows="10",placeholder="give some comments now ")
+            button#video__comment__postBtn Post Comment    
+  div.video__comments
+    ul 
+      each comment in video.comments.reverse()
+        li.video__comment(data-id=comment.id)
+          i.fas.fa-comment(data-id=comment.owner)
+          span #{comment.text}
+          if loggeduser._id  === String(comment.owner)
+             button.comment__delete ❌
+             
+
+block scripts 
+  script(src="/static/js/videoPlayer.js")
+  script(src="/static/js/comment.js")

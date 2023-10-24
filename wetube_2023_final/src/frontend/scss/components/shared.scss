@@ -1,0 +1,84 @@
+.empty__message {
+  margin-bottom: 50px;
+  font-size: 18px;
+}
+.video-grid,
+.comment-grid {
+  display: grid;
+  gap: 50px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.comment-grid {
+  margin-top: 10px;
+  padding-left: 10px;
+}
+.comment-grid span {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0px;
+}
+.video__comment-form {
+  display: flex;
+  justify-content: center;
+  max-width: none;
+  width: auto;
+  border-radius: 10px;
+}
+
+#commentForm {
+  display: flex;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: rgba($color: $bg, $alpha: 0.7);
+  border-radius: 10px;
+  border: 1px solid rgba($color: #fff, $alpha: 0.1);
+}
+
+.video__comment-form textarea {
+  height: 40px;
+  width: 60%;
+  opacity: 0.6;
+  border-radius: 10px;
+  padding-left: 20px;
+}
+.video__comment-form textarea::placeholder {
+  font-size: 15px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.video__comment-form button {
+  background-color: $hond;
+  width: 150px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.auth-switch {
+  text-align: center;
+  margin-top: 40px;
+  a {
+    text-decoration: underline;
+  }
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+#pwerror__message {
+  font-size: 15px;
+  opacity: 0.8;
+  font-weight: 500;
+}
+#comment-grid__title {
+  margin-left: 10px;
+  font-size: 20px;
+  color: $honl;
+}
+#uploading__link {
+  color: $hond;
+  position: absolute;
+  right: 50px;
+  margin-bottom: 4px;
+}

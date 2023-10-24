@@ -1,0 +1,16 @@
+extends ../layout
+block content 
+  if errorMessage 
+    h2 Please Login Again
+    h3 ERROR | #{errorMessage} 
+
+  form(method="POST")
+    input(name="username",type="text", placeholder="username")
+    input(name="password",placeholder="put your password",type="password")
+    input.social__btn(type="submit",value="Login")
+    include ../partials/social-login
+  div.auth-switch
+    span if you don't have account    
+    a(href="/join") 
+    | Join now &rarr;
+    //- a(href="/gitlogin") continue with github account &rarr;

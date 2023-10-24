@@ -1,0 +1,16 @@
+mixin video(item)
+    a(href=`/videos/${item.id}`).video-mixin
+        div.video-mixin__thumb
+        div.video-mixin__data
+            span.video-mixin__title=item.title
+            div.video-mixin__meta
+                span#summary  Summary 📌
+                span #{item.summary} 
+                br
+                small=new Date(item.createdDate).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}) 
+                small#views •  #{item.views} 회
+                br
+                if item.owner
+                    span#nickname #{item.owner.nickname} 
+                    //- a(href=`/users/${item.owner._id}`) 
+

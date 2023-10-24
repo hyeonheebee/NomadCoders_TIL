@@ -1,0 +1,11 @@
+extends layout
+include mixins/video
+
+block content 
+
+
+    div.video-grid
+      each video in videos  
+        +video(video)
+      else 
+        spa.empty__message sorry I can't find any video  

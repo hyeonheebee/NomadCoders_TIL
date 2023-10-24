@@ -1,0 +1,31 @@
+header
+    div#header__titlebox
+      a(href="/").header__logo
+        i.fab.fa-forumbee
+        span  
+        //- i.fab.fa-youtube
+        span=apptitle
+    nav   
+      ul 
+        if loggedIn
+          li
+            a(href=`/users/${loggeduser._id}`)
+                if loggeduser.avatarUrl === ""
+                    span 
+                      i.fas.fa-smile.fa-2x
+                else
+                    img.header__avatar(src=loggeduser.avatarUrl)
+          li
+          a(href=`/users/${loggeduser._id}`) #{loggeduser.nickname}'s Profile
+          li
+            a(href="/videos/upload") Upload Video
+        else
+          li 
+            a(href="/join").header__btn  Join
+          li 
+            a(href="/login") Login
+        li
+          a(href="/search") Search Video |  
+            i.fas.fa-search
+        li
+          a(href="/users/logout") Logout
