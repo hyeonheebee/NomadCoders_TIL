@@ -1,0 +1,82 @@
+@import "reset.css";
+@import "components/status-bar.css";
+@import url("https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap");
+@import "components/variable.css";
+@import "components/head.css";
+@import "login.css";
+@import "components/friend.css";
+
+.my-display {
+  height: 80px;
+  margin: var(--basic_margin);
+  display: flex;
+  align-items: center;
+}
+
+.my-display > div:first-child {
+  height: 60px;
+  width: 60px;
+  border-radius: 30%;
+  background-color: var(--dbasic);
+}
+.my-display div:first-child img {
+  height: 100%;
+  width: 100%;
+}
+.my-display_content {
+  margin-left: 15px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.my-display_content div {
+  width: 260px;
+  background-color: none;
+  display: flex;
+}
+.my-display_content div:first-child span:first-child {
+  font-size: var(--name_font);
+}
+.my-display_content div:last-child span {
+  font-size: 12px;
+}
+.my-display_content div:last-child i {
+  color: tomato;
+  margin-left: 5px;
+}
+.head-title div:last-child div {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: tomato;
+  position: relative;
+  bottom: 5px;
+}
+#more-content {
+  height: 90px;
+  margin: 0px 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+#more-content div {
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#more-content span {
+  font-size: 12px;
+  color: var(--purple);
+  opacity: 0.7;
+}
+#more-content i {
+  color: var(--purple);
+}
+#channel-text {
+  opacity: 0.8 !important;
+}
+#channel-text {
+  color: var(--purple);
+}

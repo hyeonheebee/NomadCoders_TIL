@@ -1,0 +1,8 @@
+@import "reset.css";
+@import "components/status-bar.css";
+@import url("https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&display=swap");
+@import "components/variable.css";
+@import "components/head.css";
+@import "login.css";
+@import "components/friend.css";
+@import "components/my_chat.css";

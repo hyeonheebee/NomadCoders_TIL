@@ -1,0 +1,16 @@
+.head-title {
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: var(--basic_margin);
+}
+.head-title div:nth-child(2) span {
+  font-size: 20px;
+  font-weight: 700;
+}
+.head-title div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
