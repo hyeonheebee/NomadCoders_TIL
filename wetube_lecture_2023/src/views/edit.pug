@@ -1,0 +1,11 @@
+extends base.pug
+//- block head 
+//-   title edit | wetube
+block content 
+  h4 Update Video
+  form(method="POST")
+    input(name="title", placeholder="Video Title", value=video.title, required)
+    input(placeholder="Desciption", required, type="text", value=video.description, name="description", minlenght=10)
+    input(placeholder="Hashtags, separated by comma", required,value=video.hashtags.join(),  type="text", name="hashtags")
+    input(value="save", type="submit")
+  

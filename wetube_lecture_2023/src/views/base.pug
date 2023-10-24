@@ -1,0 +1,43 @@
+doctype html 
+html(lang="ko")
+  head
+    title #{pageTitle} | #{siteName}
+    link(rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css")
+  body 
+    header 
+      h1=pageTitle
+      nav 
+        ul 
+
+          li 
+            a(href="/") Home
+          li 
+            a(href="/search") Search
+          if loggedIn
+            li  
+              a(href="/users/edit") Edit Profile
+            li 
+              a(href=`/users/${loggedInUser._id}`) #{loggedInUser.name}'s Profile
+            li 
+              a(href="/users/logout") Logout
+            li 
+              a(href="/videos/upload") upload Video
+          else
+            li 
+              a(href="/join") Join
+            li 
+              a(href="/login") Login            
+      //- if fakeUser.loggedIn
+      //-   small Hello #{fakeUser.username}
+      //- nav   
+      //-   ul 
+      //-     if fakeUser.loggedIn 
+      //-       li 
+      //-         a(href="/logout") logout
+      //-     else  
+      //-       li 
+      //-         a(href="/login") login
+    main 
+      block content
+  include partials/footer.pug
+    

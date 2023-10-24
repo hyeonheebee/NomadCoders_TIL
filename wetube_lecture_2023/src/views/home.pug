@@ -1,0 +1,15 @@
+extends base.pug
+include mixins/video
+//- block head 
+//-   title home | wetube
+
+
+block content 
+  h1 home
+  input(placeholder="what's your name?")
+  button submit
+  ul
+    each video in videos 
+      +video(video)
+    else 
+      li sorry noting found
