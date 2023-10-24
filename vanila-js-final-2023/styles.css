@@ -1,0 +1,229 @@
+@import "var.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+body {
+  font-family: "IBM Plex Mono", monospace;
+}
+.hidden,
+.hiddentitle {
+  /* display: none; */
+  visibility: hidden;
+}
+.login-form {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 300px;
+  left: 100px;
+}
+.login-form input {
+  padding: 15px 2px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  margin-bottom: 3px;
+  color: white;
+  font-size: 25px;
+}
+.login-form {
+  opacity: 0.5;
+}
+.login-form input::placeholder {
+  font-size: 20px;
+  color: var(--active);
+}
+.login-form input:focus-visible {
+  outline: 1px solid white;
+}
+
+.login-form input:focus {
+  background-color: var(--active);
+}
+.login-form button {
+  font-size: 20px;
+  color: var(--active);
+  width: 100%;
+  padding: 20px 0px;
+  border: solid 1px beige;
+  border-radius: 10px;
+}
+.login-form button:hover,
+.d-day-form button:hover {
+  color: white;
+  background-color: var(--active);
+}
+.background-img {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+}
+ul {
+  position: absolute;
+  top: 300px;
+  right: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 2;
+  border-radius: 20px;
+}
+.todo-section img {
+  width: 500px;
+  height: 600px;
+  top: 220px;
+  right: 30px;
+  position: absolute;
+}
+li {
+  font-size: 24px;
+  padding-top: 5px;
+  list-style: none;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.todo-form {
+  position: absolute;
+  top: 40px;
+}
+.todo-form input {
+  opacity: 0.7;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 25px;
+}
+.todo-form input:focus-visible {
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: whitesmoke;
+}
+.username-section {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 30px;
+  top: 200px;
+}
+.userNameText {
+  color: black;
+  font-size: 80px;
+  padding-left: 10px;
+  margin-top: 10px;
+}
+.username-section span:first-child {
+  color: black;
+  font-size: 40px;
+}
+.pic-section {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 600px;
+  left: 100px;
+}
+.pic-section img {
+  width: auto;
+  height: 100%;
+}
+
+/* figure {
+  border: thin #c0c0c0 solid;
+  display: flex;
+  flex-flow: column;
+  padding: 5px;
+  max-width: 220px;
+  margin: auto;
+}
+figcaption {
+  background-color: #222;
+  color: #fff;
+  font: italic smaller sans-serif;
+  padding: 3px;
+  text-align: center;
+} */
+.clock-section {
+  position: absolute;
+  right: 100px;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.clock-section span:first-child {
+  font-size: 30px;
+}
+.clock-section span:last-child {
+  font-size: 50px;
+}
+.weather-section {
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 20px;
+  position: absolute;
+  top: 0px;
+  right: 50px;
+}
+.weather-section span {
+  padding-left: 8px;
+}
+.todo-list li {
+  display: flex;
+  align-items: center;
+}
+.todo-list button {
+  background-color: transparent;
+  border: none;
+}
+.todo-list img {
+  width: 40px;
+}
+.todo-list img:hover {
+  cursor: pointer;
+}
+
+.d-day-form {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+.d-day-form input {
+  outline: none;
+  border: 0.1px;
+  border-radius: 10px;
+  padding: 8px 25px;
+  color: var(--active);
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.d-day-form input:focus {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-weight: 400;
+}
+.d-day-form button {
+  padding: 8px;
+  font-size: 15px;
+  border-radius: 10px;
+  color: aliceblue;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.clockTitle {
+  font-weight: 600;
+  font-size: 20px;
+  position: absolute;
+  top: 70px;
+  left: 120px;
+}
