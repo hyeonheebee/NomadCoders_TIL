@@ -1,0 +1,41 @@
+.status-bar {
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.status-bar__column {
+  display: flex;
+  width: 33%;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.status-bar__column:last-child {
+  display: flex;
+  justify-content: flex-end;
+}
+.status-bar__column:nth-child(2) {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 50px;
+}
+.status-bar__column span {
+  font-size: 20px;
+  color: rgb(0, 0, 0, 0.8);
+  font-family: var(--font);
+}
+.menu-bar {
+  position: sticky;
+  top: 700px;
+  height: 55px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--purple);
+}
+.menu-bar a i {
+  color: var(--dbasic);
+}
